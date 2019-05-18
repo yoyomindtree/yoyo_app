@@ -8,5 +8,6 @@ import { SearchComponent } from './components/search/search.component';
 @NgModule({
   declarations: [LoginComponent, FooterComponent, HeaderComponent, SearchComponent],
   imports: [CommonModule],
+  exports: [LoginComponent],
 })
 export class SharedModule {}
