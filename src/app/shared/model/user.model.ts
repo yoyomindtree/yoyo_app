@@ -5,10 +5,10 @@ export class UserModel {
     public passWord: string,
     public role: string,
     public refId: string,
-    public balence: Balance,
+    public balence: IBalance,
   ) {}
 }
-export interface Balance {
+export interface IBalance {
   forRedeem: number;
   forSending: number;
 }
