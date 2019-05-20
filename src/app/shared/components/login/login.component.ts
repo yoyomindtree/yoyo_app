@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import * as emailjs from 'emailjs-com';
 import { UserModel } from '../../model/user.model';
 import { FirebaseService } from '../../services/firebase.servce';
+import { ValidationService } from '../../services/validation.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,32 +14,9 @@ import { FirebaseService } from '../../services/firebase.servce';
 })
 export class LoginComponent implements OnInit {
   /**
-   *   VALIDATION ERROR MESSAGES
-   */
-  public account_validation_messages = {
-    username: [
-      { type: 'required', message: 'Username is required.' },
-      { type: 'minlength', message: 'Username must be at least 5 characters long.' },
-      { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
-      { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
-      // { type: 'validUsername', message: 'Your username has already been taken.' }
-    ],
-    email: [{ type: 'required', message: 'Email is required.' }, { type: 'pattern', message: 'Enter a valid email.' }],
-    confirm_password: [
-      { type: 'required', message: 'Confirm password is required.' },
-      // { type: 'areEqual', message: 'Password mismatch' }
-    ],
-    password: [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' },
-    ],
-    phone: [
-      { type: 'required', message: 'Your contact number is required.' },
-      { type: 'pattern', message: 'Your number should contain only digits.' },
-    ],
-  };
-
+  *   VALIDATION ERROR MESSAGES
+  */
+  public account_validation_messages = this.validService.account_validation_messages;
   /**
    * properties patterns
    */
@@ -50,7 +29,8 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private firebaseService: FirebaseService,
-  ) {}
+    private validService: ValidationService
+  ) { }
 
   signupForm = this.formBuilder.group({
     username: [
@@ -65,7 +45,7 @@ export class LoginComponent implements OnInit {
     phone: ['', [Validators.required, Validators.pattern(this.mobnumPattern)]],
   });
 
-  ngOnInit() {}
+  ngOnInit() { }
   /**
    * method to sign in with Google
    */
@@ -93,10 +73,10 @@ export class LoginComponent implements OnInit {
       to_name: 'Raghavendra',
     };
     emailjs.send('yoyo', 'template_5bhTnqFg', templateParams, 'user_LqyB0x9nwHbehnc2Fp7G1').then(
-      function(response) {
+      function (response) {
         console.log('SUCCESS!', response.status, response.text);
       },
-      function(err) {
+      function (err) {
         console.log('FAILED...', err);
       },
     );
