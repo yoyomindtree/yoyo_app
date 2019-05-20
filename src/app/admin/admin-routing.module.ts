@@ -1,4 +1,3 @@
-import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -9,7 +8,6 @@ import { AdminUserListComponent } from './admin-user-list/admin-user-list.compon
 const routes: Routes = [
     {
         path: 'dashboard',
-        canActivate: [AuthGuardService],
         component: AdminDashboardComponent
     },
     { path: 'gift-list', component: AdminGiftListComponent },

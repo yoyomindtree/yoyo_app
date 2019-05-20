@@ -1,4 +1,3 @@
-import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -9,7 +8,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 const routes: Routes = [
     {
         path: 'user-history',
-        canActivate: [AuthGuardService],
         component: UserHistoryComponent
     },
     { path: 'user-dashboard', component: UserDashboardComponent },

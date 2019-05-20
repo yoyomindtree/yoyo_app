@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+// firebase imports
 import { auth } from 'firebase';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
 
-  account_validation_messages = {
+  public account_validation_messages = {
     'username': [
       { type: 'required', message: 'Username is required' },
       { type: 'minlength', message: 'Username must be at least 5 characters long' },
@@ -33,21 +33,24 @@ export class LoginService {
     'terms': [
       { type: 'pattern', message: 'You must accept terms and conditions' }
     ]
-    }
-  constructor(private authService: AngularFireAuth) { }
+  };
 
-  LoginInWithGoogle() {
-    return this.authService.auth.signInWithPopup(new auth.GoogleAuthProvider());
-  }
-
-  isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null;
-  }
-
-  registerWithEmailAndPassword(credentials) {
+  public registerWithEmailAndPassword(credentials): Promise<auth.UserCredential> {
     const email = credentials.email;
     const password = credentials.password;
     return this.authService.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  constructor(private authService: AngularFireAuth, private angularFireDb: AngularFireDatabase) { }
+  /**
+   * method to login with google
+   */
+  public LoginInWithGoogle(): Promise<auth.UserCredential> {
+    return this.authService.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+  /**
+   * method to log out
+   */
+  public LogOut() {
   }
 }
