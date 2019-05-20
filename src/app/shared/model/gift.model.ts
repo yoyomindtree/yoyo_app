@@ -11,5 +11,6 @@ export class GiftModel {
     public category: string,
     public frequency: number,
     public discount: number,
+    public imagePath: string,
   ) {}
 }
