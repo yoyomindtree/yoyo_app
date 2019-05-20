@@ -1,5 +1,3 @@
-import { LoginService } from "./../../services/login.service";
-import { Component, OnInit } from "@angular/core";
 import {
   NgForm,
   FormGroup,
@@ -7,6 +5,9 @@ import {
   Validators,
   FormBuilder
 } from "@angular/forms";
+import { FirebaseService } from './../../services/firebase.servce';
+import { LoginService } from './../../services/login.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: "app-login",
@@ -14,7 +15,6 @@ import {
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-
   /**
    *   VALIDATION ERROR MESSAGES
    */
@@ -80,4 +80,5 @@ export class LoginComponent implements OnInit {
         console.log('Error : ', error);
       });
   }
+  CheckCon() {}
 }

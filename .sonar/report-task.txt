@@ -1,0 +1,6 @@
+projectKey=sleroy:yoyo-app
+serverUrl=http://localhost:4500
+serverVersion=7.0.0.36138
+dashboardUrl=http://localhost:4500/dashboard/index/sleroy:yoyo-app
+ceTaskId=AWrP16WWXIaMA6OBKTW_
+ceTaskUrl=http://localhost:4500/api/ce/task?id=AWrP16WWXIaMA6OBKTW_

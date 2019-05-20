@@ -1,19 +1,10 @@
-import { NgModule, Component } from '@angular/core';
-import { Routes, RouterModule, CanActivate } from '@angular/router';
-import { LoginComponent } from './shared/components/login/login.component';
-import { AuthGuardService } from './shared/services/auth-guard.service';
-
-const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login'},
-  { path: 'login', component: LoginComponent},
-  { path: 'user', loadChildren: './user/user.module#UserModule' },
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
-
-];
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ROUTES } from './app.routes';
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(ROUTES, { useHash: false })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
 
+export class AppRoutingModule { }
