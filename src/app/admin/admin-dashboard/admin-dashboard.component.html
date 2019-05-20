@@ -16,15 +16,10 @@
     <app-gift-card></app-gift-card>
   </div>
 </div>
-<p>
-  <ngb-progressbar type="success" [value]="25"></ngb-progressbar>
-</p>
-<p>
-  <ngb-progressbar type="info" [value]="50"></ngb-progressbar>
-</p>
-<p>
-  <ngb-progressbar type="warning" [value]="75"></ngb-progressbar>
-</p>
-<p>
-  <ngb-progressbar type="danger" [value]="100"></ngb-progressbar>
-</p>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel title="Simple">
+    <ng-template ngbPanelContent>
+      Hi
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
