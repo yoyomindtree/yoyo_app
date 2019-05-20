@@ -6,5 +6,6 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 export const ROUTES: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'test', canActivate: [AuthGuard], component: FooterComponent },
+  { path: 'user', loadChildren: './user/user.module#UserModule' },
+  { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
 ];

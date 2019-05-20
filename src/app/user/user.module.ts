@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { routingComponents } from './user-routing.module';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { UserHistoryComponent } from './user-history/user-history.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
-  declarations: [routingComponents],
-  imports: [
-    CommonModule
-  ]
+  declarations: [UserDashboardComponent, UserHistoryComponent, UserProfileComponent],
+  imports: [CommonModule],
 })
-export class UserModule { }
+export class UserModule {}
