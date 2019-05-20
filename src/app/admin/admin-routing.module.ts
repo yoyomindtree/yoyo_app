@@ -7,7 +7,7 @@ import { AdminUserListComponent } from './admin-user-list/admin-user-list.compon
 
 const routes: Routes = [
     {
-        path: 'dashboard',
+        path: '',
         component: AdminDashboardComponent
     },
     { path: 'gift-list', component: AdminGiftListComponent },
@@ -19,5 +19,5 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class AdminRoutingModule { }
-export const routingComponents = [AdminDashboardComponent, AdminGiftListComponent, AdminUserListComponent];
+export const adminComponents = [AdminDashboardComponent, AdminGiftListComponent, AdminUserListComponent];
 

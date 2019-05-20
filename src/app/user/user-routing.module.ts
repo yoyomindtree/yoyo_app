@@ -19,4 +19,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class UserRoutingModule {}
-export const routingComponents = [UserDashboardComponent, UserHistoryComponent, UserProfileComponent];
+export const userComponents = [UserDashboardComponent, UserHistoryComponent, UserProfileComponent];
