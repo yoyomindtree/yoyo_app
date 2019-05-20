@@ -1,0 +1,25 @@
+table {
+  width: 80%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 30%;
+}
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 0;
+}
+
+
+
+th {
+  text-align: center;
+  color: black;
+  background: rgb(189, 197, 73);
+  width: 25%;
+}

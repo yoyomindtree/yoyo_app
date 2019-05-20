@@ -5,7 +5,6 @@ export class GiftModel {
     public description: string,
     public rating: string,
     public points: number,
-    public price: number,
     public quantity: number,
     public vendor: string,
     public category: string,

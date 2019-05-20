@@ -1,3 +1,4 @@
+import { GiftModel } from './../model/gift.model';
 import { Injectable } from '@angular/core';
 
 // Firebase Imports
@@ -9,12 +10,17 @@ import { UserModel } from '../model/user.model';
   providedIn: 'root',
 })
 export class FirebaseService {
-  // creates the db path for the user list
+  // creates the db path for the user's
   private dbUsers = '/User-List';
-  // creates teh usersRefernce for the
+  // creates the usersRefernce for the
   public usersRef: AngularFireList<UserModel> = null;
+  // creates the db path for gift's
+  private dbGifts = '/Gift-List';
+  // creates the reference for the gift list
+  private giftRef: AngularFireList<GiftModel> = null;
   constructor(private db: AngularFireDatabase) {
     this.usersRef = db.list(this.dbUsers);
+    this.giftRef = db.list(this.dbGifts);
   }
   /**
    *
@@ -29,5 +35,19 @@ export class FirebaseService {
    */
   public getUserList(): AngularFireList<UserModel> {
     return this.usersRef;
+  }
+  /**
+   * method to get all the gifts
+   */
+  public getAllGifts(): AngularFireList<GiftModel> {
+    return this.giftRef;
+  }
+  /**
+   *
+   * @param gift ->GiftModel
+   * add the gift card to the list
+   */
+  public addGiftCard(gift: GiftModel) {
+    this.giftRef.push(gift);
   }
 }
