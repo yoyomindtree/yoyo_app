@@ -1,3 +1,5 @@
+import { ValidationService } from './../../services/validation.service';
+import { FormBuilder } from '@angular/forms';
 import { MockService } from '../../services/mock.service.spec';
 import { LoginService } from './../../services/login.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -13,7 +15,11 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: LoginService, useClass: MockService }],
+      providers: [
+        { provide: LoginService, useClass: MockService },
+        { provide: FormBuilder, useClass: MockService },
+        { provide: ValidationService, useClass: MockService }
+      ],
     }).compileComponents();
   }));
 

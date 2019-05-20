@@ -4,6 +4,9 @@ export class MockService {
   public LoginInWithGoogle(): string {
     return '';
   }
+  public group({}): any {
+    return '';
+  }
 }
 
 const authState = {

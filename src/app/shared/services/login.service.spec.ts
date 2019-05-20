@@ -1,4 +1,4 @@
-import { mockAngularFireAuth } from './mock.service';
+import { mockAngularFireAuth } from './mock.service.spec';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
