@@ -1,0 +1,15 @@
+mat-grid-tile {
+    /* background: rgb(138, 131, 131); */
+}
+mat-form-field {
+     width: 20rem;
+}
+.example-container {
+    display: flex;
+    flex-direction: column;
+    padding:30px;
+}
+  
+.example-container > * {
+    width: 100%;
+}

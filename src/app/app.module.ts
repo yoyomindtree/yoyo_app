@@ -3,7 +3,8 @@ import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+
+
 import { AppComponent } from './app.component';
 // Firebase imports
 import { AngularFireModule } from '@angular/fire';
@@ -11,6 +12,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
+import { AppRoutingModule } from './app-routing.module';
+
 
 @NgModule({
   declarations: [AppComponent],
