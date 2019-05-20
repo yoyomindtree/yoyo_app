@@ -1,22 +1,29 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { configureTestSuite } from './../../shared/utils/configureTestSuite';
+import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminDashboardComponent } from './admin-dashboard.component';
 
 describe('AdminDashboardComponent', () => {
+  configureTestSuite();
   let component: AdminDashboardComponent;
   let fixture: ComponentFixture<AdminDashboardComponent>;
 
-  beforeEach(async(() => {
+  beforeAll((done) => (async () => {
     TestBed.configureTestingModule({
-      declarations: [ AdminDashboardComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [AdminDashboardComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    });
+    await TestBed.compileComponents();
+  })().then(done).catch(done.fail));
 
-  beforeEach(() => {
+  beforeEach(fakeAsync(() => {
     fixture = TestBed.createComponent(AdminDashboardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+  }));
+
+  afterAll(() => {
+    component = null;
   });
 
   it('should create', () => {
