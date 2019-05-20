@@ -26,6 +26,7 @@
     "@angular/pwa": "^0.13.9",
     "@angular/router": "~7.2.0",
     "@angular/service-worker": "~7.2.0",
+    "@ng-bootstrap/ng-bootstrap": "^4.1.3",
     "core-js": "^2.5.4",
     "emailjs-com": "^2.3.2",
     "express": "^4.16.2",
