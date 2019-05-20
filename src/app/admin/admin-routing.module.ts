@@ -6,18 +6,17 @@ import { AdminGiftListComponent } from './admin-gift-list/admin-gift-list.compon
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: AdminDashboardComponent
-    },
-    { path: 'gift-list', component: AdminGiftListComponent },
-    { path: 'user-list', component: AdminUserListComponent  }
+  {
+    path: '',
+    component: AdminDashboardComponent,
+  },
+  { path: 'gift-list', component: AdminGiftListComponent },
+  { path: 'user-list', component: AdminUserListComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
 export const adminComponents = [AdminDashboardComponent, AdminGiftListComponent, AdminUserListComponent];
-
