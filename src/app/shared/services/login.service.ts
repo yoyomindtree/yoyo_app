@@ -41,7 +41,7 @@ export class LoginService {
     return this.authService.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  constructor(private authService: AngularFireAuth, private angularFireDb: AngularFireDatabase) { }
+  constructor(private authService: AngularFireAuth) { }
   /**
    * method to login with google
    */

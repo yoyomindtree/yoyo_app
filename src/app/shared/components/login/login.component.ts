@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private formBuilder: FormBuilder,
-    private firebaseService: FirebaseService,
     private validService: ValidationService
   ) { }
 
@@ -68,7 +67,7 @@ export class LoginComponent implements OnInit {
       });
   }
   CheckCon() {
-    var templateParams = {
+    const templateParams = {
       name: 'Testing123',
       to_name: 'Raghavendra',
     };
