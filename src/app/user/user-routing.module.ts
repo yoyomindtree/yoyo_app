@@ -6,18 +6,17 @@ import { UserHistoryComponent } from './user-history/user-history.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-    {
-        path: 'user-history',
-        component: UserHistoryComponent
-    },
-    { path: 'user-dashboard', component: UserDashboardComponent },
-    { path: 'user-profile', component: UserProfileComponent  }
+  { path: '', component: UserDashboardComponent },
+  {
+    path: 'history',
+    component: UserHistoryComponent,
+  },
+  { path: 'profile', component: UserProfileComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class UserRoutingModule { }
-export const routingComponents = [UserDashboardComponent, UserHistoryComponent, UserProfileComponent];
-
+export class UserRoutingModule {}
+export const userComponents = [UserDashboardComponent, UserHistoryComponent, UserProfileComponent];
