@@ -16,7 +16,7 @@ export class ValidationService {
       // { type: 'validUsername', message: 'Your username has already been taken.' }
     ],
     email: [{ type: 'required', message: 'Email is required.' }, { type: 'pattern', message: 'Enter a valid email.' }],
-    confirm_password: [
+    confirmPassword: [
       { type: 'required', message: 'Confirm password is required.' },
       // { type: 'areEqual', message: 'Password mismatch' }
     ],
