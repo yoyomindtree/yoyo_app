@@ -11,6 +11,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
+import { LoginService } from './shared/services/login.service';
 
 @NgModule({
   declarations: [AppComponent],

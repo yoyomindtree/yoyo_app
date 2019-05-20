@@ -24,4 +24,10 @@ export class FirebaseService {
   public createUser(user: UserModel): void {
     this.usersRef.push(user);
   }
+  /**
+   * method to get all the users in the db
+   */
+  public getUserList(): AngularFireList<UserModel> {
+    return this.usersRef;
+  }
 }

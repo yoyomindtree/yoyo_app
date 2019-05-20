@@ -1,15 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // firebase imports
-import { auth } from 'firebase';
+import { auth, User } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { UserModel } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private authService: AngularFireAuth) {}
+  // BehaviorSubject user
+  user = new BehaviorSubject(null);
+  constructor(private authService: AngularFireAuth, private angularFireDb: AngularFireDatabase) {
+    authService.authState
+      .pipe(
+        map((data) => {
+          if (data) {
+            return this.angularFireDb.object<UserModel>('/User-List');
+          } else {
+            return of(null);
+          }
+        }),
+      )
+      .subscribe((data) => this.user.next(data));
+  }
   /**
    * method to login with google
    */

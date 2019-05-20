@@ -1,7 +1,9 @@
+import { IBalance } from './../../model/user.model';
 import { FirebaseService } from './../../services/firebase.servce';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import * as emailjs from 'emailjs-com';
+import { UserModel } from '../../model/user.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,5 +29,10 @@ export class LoginComponent implements OnInit {
         console.log('FAILED...', err);
       },
     );
+  }
+  AddUser() {
+    let balence = { forRedeem: 10, forSending: 20 } as IBalance;
+    let userModel = new UserModel('yoyomindtree@gmail.com', 'yoyo', '12345', 'user', '1', balence);
+    this.firebaseService.createUser(userModel);
   }
 }
