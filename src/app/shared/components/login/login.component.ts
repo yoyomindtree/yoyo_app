@@ -13,6 +13,7 @@ import { ValidationService } from '../../services/validation.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  public pass: string;
   /**
   *   VALIDATION ERROR MESSAGES
   */
@@ -37,14 +38,18 @@ export class LoginComponent implements OnInit {
       [Validators.required, Validators.minLength(6), Validators.maxLength(25), Validators.pattern(this.unamePattern)],
     ],
     email: ['', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]],
-    // password: ['', [Validators.required, Validators.pattern(this.pwdPattern)]],
-    // confirmPassword: ['', [Validators.required, Validators.pattern(this.pwdPattern)]],
     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.pwdPattern)]],
-    confirmPassword: ['', [Validators.required]],
+    confirmPassword: ['', [Validators.required, this.mismatchPassword.bind(this)]],
+    // confirmPassword: ['', [Validators.required, this.validService.mismatch(this.signupForm.get('password'))]],
     phone: ['', [Validators.required, Validators.pattern(this.mobnumPattern)]],
   });
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.signupForm.get('password').valueChanges.subscribe(value => {
+      console.log("value =>", value);
+      this.pass = value;
+    });
+  }
   /**
    * method to sign in with Google
    */
@@ -79,5 +84,13 @@ export class LoginComponent implements OnInit {
         console.log('FAILED...', err);
       },
     );
+  }
+
+  mismatchPassword(control: FormControl): { [s: string]: boolean } {
+    // return this.validService.mismatch(this.pass, control.value);
+    if (this.pass !== '' && this.pass !== control.value) {
+      return { 'areEqual': true };
+    }
+    return null;
   }
 }
