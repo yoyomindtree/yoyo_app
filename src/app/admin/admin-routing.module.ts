@@ -1,9 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminGiftListComponent } from './admin-gift-list/admin-gift-list.component';
-import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminGiftListComponent } from './components/admin-gift-list/admin-gift-list.component';
+import { AdminUserListComponent } from './components/admin-user-list/admin-user-list.component';
 
 const routes: Routes = [
   {

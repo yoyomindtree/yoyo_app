@@ -1,4 +1,4 @@
-import { GiftModel } from './../../shared/model/gift.model';
+import { GiftModel } from './../../../shared/model/gift.model';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/shared/services/firebase.servce';
 import { map } from 'rxjs/operators';
