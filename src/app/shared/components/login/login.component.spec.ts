@@ -1,4 +1,4 @@
-import { MockService } from './../../services/mock.service';
+import { MockService } from '../../services/mock.service.spec';
 import { LoginService } from './../../services/login.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 

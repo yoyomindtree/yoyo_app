@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { MockService, mockAngularFireAuth } from './../services/mock.service';
+import { MockService, mockAngularFireAuth } from '../services/mock.service.spec';
 import { FirebaseService } from './../services/firebase.servce';
 import { TestBed, async, inject } from '@angular/core/testing';
 
@@ -12,9 +12,9 @@ describe('AuthGuard', () => {
       providers: [
         AuthGuard,
         { provide: FirebaseService, useClass: MockService },
-        { provide: AngularFireAuth,  useValue: mockAngularFireAuth},
-        { provide: Router, useClass: MockService}
-      ]
+        { provide: AngularFireAuth, useValue: mockAngularFireAuth },
+        { provide: Router, useClass: MockService },
+      ],
     });
   });
 
