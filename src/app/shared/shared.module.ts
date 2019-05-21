@@ -6,7 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FirebaseService } from './services/firebase.servce';
+import { FirebaseService } from './services/firebase.service';
 
 @NgModule({
   declarations: [LoginComponent, FooterComponent, HeaderComponent, SearchComponent],
