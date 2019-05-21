@@ -5,5 +5,12 @@ export class HistoryModel {
     public reciverEmail: string,
     public giftId: string,
     public transTime: string,
+    public reedemed: boolean,
+    public giftName: string,
+    public description: string,
+    public giftCode: string,
+    public rating: number,
+    public category: string,
+    public vendor: string
   ) {}
 }

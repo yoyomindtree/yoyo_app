@@ -11,5 +11,7 @@ export class GiftModel {
     public frequency: number,
     public discount: number,
     public imagePath: string,
+    public isActive: boolean,
+    public giftCode: string
   ) {}
 }
