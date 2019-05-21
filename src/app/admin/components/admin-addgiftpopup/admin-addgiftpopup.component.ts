@@ -1,3 +1,4 @@
+import { AdminFireService } from './../../services/admin-fire.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -11,8 +12,9 @@ export class AdminAddgiftpopupComponent implements OnInit {
     giftName: ['', Validators.required],
     discription: ['', Validators.required],
     category: ['', Validators.required],
-    vendor: [' ', Validators.required],
-    discount: ['', Validators.required],
+    vendor: ['', Validators.required],
+    points: ['', Validators.required],
+    discount: ['', Validators.required, Validators.min(1)],
     quantity: ['', [Validators.min(1), Validators.required]],
     imagePath: ['', [Validators.required]],
   });
@@ -20,6 +22,7 @@ export class AdminAddgiftpopupComponent implements OnInit {
     public dialogRef: MatDialogRef<AdminAddgiftpopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
+    private adminFireSerive: AdminFireService,
   ) {}
 
   ngOnInit() {}
