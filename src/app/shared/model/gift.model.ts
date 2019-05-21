@@ -12,6 +12,7 @@ export class GiftModel {
     public discount: number,
     public imagePath: string,
     public isActive: boolean,
-    public giftCode: string
+    public giftCode: string,
+    public numberOfRaters: number
   ) {}
 }
