@@ -6,6 +6,7 @@ import * as emailjs from 'emailjs-com';
 import { UserModel } from '../../model/user.model';
 import { FirebaseService } from '../../services/firebase.servce';
 import { ValidationService } from '../../services/validation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { ValidationService } from '../../services/validation.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  public newUser: UserModel;
   /**
   *   VALIDATION ERROR MESSAGES
   */
@@ -30,7 +32,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private formBuilder: FormBuilder,
-    private validService: ValidationService
+    private validService: ValidationService,
+    private router: Router
   ) { }
 
   signupForm = this.formBuilder.group({
@@ -57,27 +60,46 @@ export class LoginComponent implements OnInit {
     this.loginService.LoginInWithGoogle().then((data) => console.log(data));
   }
 
+  /**
+   * Method to either Register or Sign in
+   */
   public onSubmit() {
     if (this.toRegister) {
       this.onSubmitRegister();
     } else {
-      // this.onSubmitLogin();
+      this.onSubmitLogin();
     }
   }
   /**
-   * Method to register the user with username
-   * and password
+   * Method to register the user with username & password
    */
   onSubmitRegister() {
     this.loginService.registerWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
         console.log('response : ', data);
+        // this.user = {
+
+        // }
       })
       .catch((error) => {
-        console.log('Error : ', error);
+        console.log('Registeration Error : ', error);
       });
     // this.onRegister();
     this.signupForm.reset();
+  }
+
+   /**
+   * Method to sign in with username & password
+   */
+  public onSubmitLogin() {
+    this.loginService.loginWithEmailAndPassword(this.signupForm.value)
+      .then((data) => {
+        console.log('response : ', data);
+        this.router.navigate(['user']);
+      })
+      .catch((error) => {
+        console.log('Login Error: ', error);
+      })
   }
 
   CheckCon() {
@@ -95,12 +117,18 @@ export class LoginComponent implements OnInit {
     );
   }
 
+   /**
+   * Method to toggle between sign in and register
+   */
   public onRegister() {
     this.toRegister = !this.toRegister;
     this.signupForm.reset();
   }
 
-  mismatchPassword(control: FormControl): { [s: string]: boolean } {
+   /**
+   * Custom validator function to validate the passwords
+   */
+  mismatchPassword(control: FormControl): {[s: string]: boolean } {
     // return this.validService.mismatch(this.pass, control.value);
     if (this.pass !== '' && this.pass !== control.value) {
       return { 'areEqual': true };

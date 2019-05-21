@@ -1,95 +1,3 @@
-<!-- <mat-grid-list cols="10" rowHeight="1:1">
-  <mat-grid-tile colspan='6' rowspan='4'>
-    <img src="../../../../assets/images/gift-cards-pack_23-2147510447.jpg" alt="">
-  </mat-grid-tile>
-  <mat-grid-tile colspan='4' rowspan='4'>
-    <div class="example-container" [class.mat-elevation-z4]="true" id="loginForm">
-      <form (ngSubmit)="onRegister()" [formGroup]="signupForm">
-        <div>
-          <mat-form-field appearance="legacy" class="full-width">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="username">
-            <mat-error *ngFor="let validation of account_validation_messages.username">
-              <mat-error class="error-message"
-                *ngIf="signupForm.get('username').hasError(validation.type) && ((signupForm.get('username').dirty || signupForm.get('username').touched))">
-                {{validation.message}}</mat-error>
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field appearance="legacy">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Placeholder" formControlName="email">
-              <mat-error *ngFor="let validation of account_validation_messages.email">
-                <mat-error class="error-message"
-                  *ngIf="signupForm.get('email').hasError(validation.type) && ((signupForm.get('email').dirty || signupForm.get('email').touched))">
-                  {{validation.message}}
-                </mat-error>
-              </mat-error>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field appearance="legacy">
-              <mat-label>Password</mat-label>
-              <input type="password" matInput placeholder="Placeholder" formControlName="password">
-              <mat-error *ngFor="let validation of account_validation_messages.password">
-                <mat-error class="error-message"
-                  *ngIf="signupForm.get('password').hasError(validation.type) && ((signupForm.get('password').dirty || signupForm.get('password').touched))">
-                  {{validation.message}}
-                </mat-error>
-              </mat-error>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field appearance="legacy">
-              <mat-label>Confirm Password</mat-label>
-              <input type="password" matInput placeholder="Placeholder" formControlName="confirmPassword">
-              <mat-error *ngFor="let validation of account_validation_messages.confirmPassword">
-                <mat-error class="error-message"
-                  *ngIf="signupForm.get('confirmPassword').hasError(validation.type) && ((signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').touched))">
-                  {{validation.message}}
-                </mat-error>
-              </mat-error>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field appearance="legacy">
-              <mat-label>Phone</mat-label>
-              <input matInput placeholder="Placeholder" formControlName="phone">
-              <mat-error *ngFor="let validation of account_validation_messages.phone">
-                <mat-error class="error-message"
-                  *ngIf="signupForm.get('phone').hasError(validation.type) && ((signupForm.get('phone').dirty || signupForm.get('phone').touched))">
-                  {{validation.message}}
-                </mat-error>
-              </mat-error>
-            </mat-form-field>
-        </div>
-        <button mat-raised-button color="primary"
-          [disabled]="!signupForm.valid || !signupForm.touched">Register</button>
-      </form>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
-
-<div class="row">
-  <div class="col-md-6">
-    <button (click)="onLoginWithGoogle()">Login </button>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6">
-    <button (click)="CheckCon()">Check </button>
-  </div>
-</div> -->
-
-<!-- ngb-tabset -->
-<!-- <ngb-tabset>
-  <ngb-tab title="signIn"></ngb-tab>
-  <ngb-tab title="Register"></ngb-tab>
-</ngb-tabset> -->
-<!-- ngb-tabset ends -->
-
 <!-- Default form login -->
 <div class="container-fluid">
   <div class="row">
@@ -163,23 +71,9 @@
         </div>
         <!-- phone form field ends -->
         <br *ngIf="signupForm.get('phone').valid || !signupForm.get('phone').touched">
-        <!-- <span *ngIf="!signupForm.valid && signupForm.touched" id="errorMsg">Please fill in the right credentials</span> -->
-        <!-- Remember me and forgot password -->
-        <!-- <div class="d-flex justify-content-between">
-          <div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-              <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
-            </div>
-          </div>
-          <div>
-            <a href="">Forgot password?</a>
-          </div>
-        </div> -->
-
         <!-- Buttons -->
         <button *ngIf="!toRegister" class="btn btn-info btn-block my-4" id="signIn"
-          [disabled]="!signupForm.valid || !signupForm.touched">Sign in</button>
+          [disabled]="(!signupForm.get('email').valid && !signupForm.get('password').valid )|| !signupForm.touched">Sign in</button>
 
         <button *ngIf="toRegister" class="btn btn-info btn-block my-4" id="signIn"
           [disabled]="!signupForm.valid || !signupForm.touched">Register</button>
@@ -203,10 +97,6 @@
         <button mat-mini-fab (click)="onLoginWithGoogle()">
           <!-- <i class="fa fa-google" aria-hidden="true"></i> -->
         </button>
-        <span>&nbsp;&nbsp;</span>
-        <!-- <button mat-mini-fab (click)="onLoginWithFacebook()">
-          <i class="fa fa-facebook-f" aria-hidden="true"></i>
-        </button> -->
       </div>
     </div>
   </div>

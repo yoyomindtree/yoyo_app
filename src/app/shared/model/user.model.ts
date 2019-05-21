@@ -5,7 +5,7 @@ export class UserModel {
     public passWord: string,
     public role: string,
     public refId: string,
-    public balence: IBalance,
+    public balance: IBalance,
   ) {}
 }
 export interface IBalance {
