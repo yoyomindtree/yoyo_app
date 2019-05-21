@@ -1,4 +1,4 @@
-import { FirebaseService } from './../services/firebase.servce';
+import { FirebaseService } from '../services/firebase.service';
 import { map } from 'rxjs/operators';
 
 import { Injectable, OnInit } from '@angular/core';

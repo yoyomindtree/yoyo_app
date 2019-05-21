@@ -1,6 +1,6 @@
 import { GiftModel } from './../../../shared/model/gift.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FirebaseService } from 'src/app/shared/services/firebase.servce';
+import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { map } from 'rxjs/operators';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
