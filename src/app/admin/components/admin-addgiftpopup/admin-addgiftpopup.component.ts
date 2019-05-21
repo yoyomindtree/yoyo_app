@@ -66,7 +66,7 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
       Guid.create().toString(),
       0,
     );
-    console.log(gift);
+    this.adminFireSerive.addGift(gift);
   }
   /**
    *
