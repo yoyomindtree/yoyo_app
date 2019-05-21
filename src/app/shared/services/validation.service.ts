@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractControl, ValidatorFn, FormGroup } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidationService {
   /**
@@ -19,7 +19,7 @@ export class ValidationService {
     email: [{ type: 'required', message: 'Email is required.' }, { type: 'pattern', message: 'Enter a valid email.' }],
     confirmPassword: [
       { type: 'required', message: 'Confirm password is required.' },
-      { type: 'areEqual', message: 'Password mismatch' }
+      { type: 'areEqual', message: 'Password mismatch' },
     ],
     password: [
       { type: 'required', message: 'Password is required.' },
@@ -31,7 +31,7 @@ export class ValidationService {
       { type: 'pattern', message: 'Your number should contain only 10 digits.' },
     ],
   };
-  constructor() { }
+  constructor() {}
 
   // mismatch(otherInputControl: AbstractControl): ValidatorFn {
   //   return (inputControl: AbstractControl): { [key: string]: boolean } | null => {

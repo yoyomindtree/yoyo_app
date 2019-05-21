@@ -64,7 +64,9 @@
         <mat-form-field appearance="outline">
           <mat-label>Discount</mat-label>
           <input matInput formControlName="discount" type="number">
-          <mat-error> Please enter Discount</mat-error>
+          <mat-error *ngIf="giftForm.get('discount').hasError('required')"> Please enter Discount</mat-error>
+          <mat-error *ngIf="giftForm.get('discount').hasError('isSmaller')"> Please enter valid
+            discount</mat-error>
           <mat-icon matSuffix>local_offer
           </mat-icon>
         </mat-form-field>
@@ -76,12 +78,14 @@
           <mat-label>Discription</mat-label>
           <textarea matInput formControlName="discription"></textarea>
           <mat-error> Please enter Discription</mat-error>
+
           <mat-icon matSuffix>view_headline</mat-icon>
         </mat-form-field>
       </div>
     </div>
     <div class="row">
       <button mat-flat-button color="primary" [disabled]="!giftForm.valid">Add</button>
+      <!-- <button mat-flat-button color="primary">Add</button> -->
     </div>
   </form>
 </mat-dialog-content>
