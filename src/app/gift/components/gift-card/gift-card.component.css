@@ -1,5 +1,14 @@
-.giftcard {
-  width: 20rem;
-  height: 10rem;
-  background: azure;
+.example-card {
+  width: 400px;
+  height: 500px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.card-image {
+  width: 400px;
+  height: 250px;
 }
