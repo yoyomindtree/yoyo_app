@@ -64,6 +64,7 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
       this.giftForm.get('imagePath').value,
       true,
       Guid.create().toString(),
+      0,
     );
     console.log(gift);
   }
