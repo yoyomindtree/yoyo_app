@@ -11,6 +11,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatPaginatorModule,
+  MatDialogModule,
 } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,6 +37,7 @@ import { MatCardModule } from '@angular/material/card';
     MatTableModule,
     MatPaginatorModule,
     MatTooltipModule,
+    MatDialogModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -53,6 +55,7 @@ import { MatCardModule } from '@angular/material/card';
     MatTableModule,
     MatPaginatorModule,
     MatTooltipModule,
+    MatDialogModule,
   ],
 })
 export class AngularMaterialModule {}

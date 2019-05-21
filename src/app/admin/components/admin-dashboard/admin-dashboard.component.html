@@ -1,9 +1,23 @@
-<p>
-  admin-dashboard works!
-</p>
 <div class="row">
-  <div class="col-md-2 col-sm-6 col-xs-6">
-    <app-gift-card></app-gift-card>
+  <div class="col-md-6 col-xs-4 col-lg-6 ">
+    <button mat-fab color="primary" matTooltip="Click here to add GiftCard" (click)=" onGiftAddClick()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="col-md-6 col-sm-8 col-lg-6">
+    <app-admin-gift-list>
+    </app-admin-gift-list>
   </div>
 </div>
-<app-admin-gift-list></app-admin-gift-list>
+
+<!-- <mat-grid-list cols="6">
+  <mat-grid-tile colspan=1 rowspan=1 rowsheight="300px">
+    <button mat-fab color="primary" matTooltip="Click here to add GiftCard" (click)=" onGiftAddClick()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-grid-tile>
+  <mat-grid-tile colspan=3 rowspan=2>
+    <app-admin-gift-list>
+    </app-admin-gift-list>
+  </mat-grid-tile>
+</mat-grid-list> -->
