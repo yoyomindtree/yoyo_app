@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
    * properties patterns
    */
   private pass: string;
-  private toRegister = true;
+  public toRegister = true;
   private unamePattern = '^[a-z0-9_-]{8,15}$';
   private emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   private pwdPattern = '^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$';
