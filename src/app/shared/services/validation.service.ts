@@ -28,7 +28,7 @@ export class ValidationService {
     ],
     phone: [
       { type: 'required', message: 'Your contact number is required.' },
-      { type: 'pattern', message: 'Your number should contain only digits.' },
+      { type: 'pattern', message: 'Your number should contain only 10 digits.' },
     ],
   };
   constructor() { }

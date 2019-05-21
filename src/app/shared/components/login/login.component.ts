@@ -13,7 +13,6 @@ import { ValidationService } from '../../services/validation.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  public pass: string;
   /**
   *   VALIDATION ERROR MESSAGES
   */
@@ -21,6 +20,8 @@ export class LoginComponent implements OnInit {
   /**
    * properties patterns
    */
+  private pass: string;
+  private toRegister = true;
   private unamePattern = '^[a-z0-9_-]{8,15}$';
   private emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   private pwdPattern = '^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$';
@@ -46,7 +47,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm.get('password').valueChanges.subscribe(value => {
-      console.log("value =>", value);
       this.pass = value;
     });
   }
@@ -57,20 +57,29 @@ export class LoginComponent implements OnInit {
     this.loginService.LoginInWithGoogle().then((data) => console.log(data));
   }
 
+  public onSubmit() {
+    if (this.toRegister) {
+      this.onSubmitRegister();
+    } else {
+      // this.onSubmitLogin();
+    }
+  }
   /**
    * Method to register the user with username
    * and password
    */
-  onRegister() {
-    this.loginService
-      .registerWithEmailAndPassword(this.signupForm.value)
+  onSubmitRegister() {
+    this.loginService.registerWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
         console.log('response : ', data);
       })
       .catch((error) => {
         console.log('Error : ', error);
       });
+    // this.onRegister();
+    this.signupForm.reset();
   }
+
   CheckCon() {
     const templateParams = {
       name: 'Testing123',
@@ -84,6 +93,11 @@ export class LoginComponent implements OnInit {
         console.log('FAILED...', err);
       },
     );
+  }
+
+  public onRegister() {
+    this.toRegister = !this.toRegister;
+    this.signupForm.reset();
   }
 
   mismatchPassword(control: FormControl): { [s: string]: boolean } {

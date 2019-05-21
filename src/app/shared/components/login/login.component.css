@@ -1,6 +1,6 @@
-mat-grid-tile {
+/* mat-grid-tile { */
     /* background: rgb(138, 131, 131); */
-}
+/* }
 mat-form-field {
      width: 20rem;
 }
@@ -12,4 +12,48 @@ mat-form-field {
   
 .example-container > * {
     width: 100%;
+} */
+
+/* .container-fluid {
+    margin-top: 7rem;
+} */
+
+.img{
+    height: 100%;   
+    object-fit: cover;
+}
+
+@media (max-width: 1514px) {
+    .img {
+        object-fit: cover;
+        margin-top: 45px; 
+    }
+}
+
+.border {
+    border: 0px solid #dee2e6;
+}
+
+
+#signIn {
+    margin-top: 10rem;
+    border-radius: 10rem;
+    color: white;
+}
+
+#socialLogins {
+    margin-top: -50px;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+#errorMsg {
+    color: red;
+    size: 2rem;
+}
+
+#loginLink, #registerLink {
+    color: rgb(0, 170, 226);
 }
