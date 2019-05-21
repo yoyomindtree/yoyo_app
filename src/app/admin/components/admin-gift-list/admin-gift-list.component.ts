@@ -1,7 +1,8 @@
 import { GiftModel } from './../../../shared/model/gift.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/shared/services/firebase.servce';
 import { map } from 'rxjs/operators';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-admin-gift-list',
@@ -9,6 +10,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./admin-gift-list.component.css'],
 })
 export class AdminGiftListComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   // columns of matrial table
   displayedColumns: string[] = [
     'id',
@@ -22,20 +25,18 @@ export class AdminGiftListComponent implements OnInit {
     'image',
   ];
   // data source
-  gifts;
+  gifts = new MatTableDataSource();
   // filter -->Global filter
   globalFilter = '';
   // configuration for search bar
   filteredValues = {
     giftId: '',
+    name: '',
+    vendor: '',
+    category: '',
   };
   constructor(private fireService: FirebaseService) {}
-  applyFilter(filter) {
-    console.log(filter);
-    let filterValue = filter.trim(); // Remove whitespace
-    filterValue = filter.toLowerCase();
-    this.gifts.filter = filterValue;
-  }
+
   ngOnInit() {
     this.getGifts();
   }
@@ -48,27 +49,67 @@ export class AdminGiftListComponent implements OnInit {
       .snapshotChanges()
       .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
       .subscribe((data: GiftModel[]) => {
-        this.gifts = data;
-        this.gifts.filterPredicate = function(data, filter): boolean {
-          return data.giftId.toLowerCase().includes(filter);
-        };
+        this.gifts = new MatTableDataSource(data);
+        this.gifts.filterPredicate = this.customFilterPredicate();
+        this.gifts.paginator = this.paginator;
+        this.gifts.sort = this.sort;
       });
   }
-  // to be removed
-  AddGift() {
-    const gift = new GiftModel(
-      Math.floor(Math.random() * Math.floor(1000)).toString(),
-      'FlipCart',
-      'This is Awasome gift',
-      '5',
-      10,
-      30,
-      'Gift by yoyo',
-      'food',
-      5,
-      100,
-      '',
-    );
-    this.fireService.addGiftCard(gift);
+  /**
+   * Custom Filter Predicate
+   */
+  customFilterPredicate() {
+    const myFilterPredicate = (data: any, filter: string): boolean => {
+      let globalMatch = !this.globalFilter;
+
+      if (this.globalFilter) {
+        // search all text fields
+        globalMatch =
+          data.name
+            .toString()
+            .trim()
+            .toLowerCase()
+            .indexOf(this.globalFilter.toLowerCase()) !== -1 ||
+          data.category
+            .toString()
+            .trim()
+            .toLowerCase()
+            .indexOf(this.globalFilter.toLowerCase()) !== -1;
+      }
+
+      if (!globalMatch) {
+        return;
+      }
+
+      const searchString = JSON.parse(filter);
+      return (
+        data.giftId
+          .toString()
+          .trim()
+          .toLowerCase()
+          .indexOf(searchString.giftId.toLowerCase()) !== -1 &&
+        data.name
+          .toString()
+          .trim()
+          .toLowerCase()
+          .indexOf(searchString.name.toLowerCase()) !== -1 &&
+        data.vendor
+          .toString()
+          .trim()
+          .toLowerCase()
+          .indexOf(searchString.vendor.toLowerCase()) !== -1 &&
+        data.category
+          .toString()
+          .trim()
+          .toLowerCase()
+          .indexOf(searchString.category.toLowerCase()) !== -1
+      );
+    };
+    return myFilterPredicate;
+  }
+  /** method for global filter serach F */
+  applyFilter(filter) {
+    this.globalFilter = filter;
+    this.gifts.filter = JSON.stringify(this.filteredValues);
   }
 }
