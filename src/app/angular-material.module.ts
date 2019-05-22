@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { DynamicTableModule } from 'material-dynamic-table';
 @NgModule({
   declarations: [],
   imports: [
@@ -38,6 +39,7 @@ import { MatCardModule } from '@angular/material/card';
     MatPaginatorModule,
     MatTooltipModule,
     MatDialogModule,
+    DynamicTableModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -56,6 +58,7 @@ import { MatCardModule } from '@angular/material/card';
     MatPaginatorModule,
     MatTooltipModule,
     MatDialogModule,
+    DynamicTableModule,
   ],
 })
 export class AngularMaterialModule {}

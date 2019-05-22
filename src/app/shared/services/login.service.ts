@@ -8,31 +8,25 @@ import { AngularFireDatabase } from '@angular/fire/database';
   providedIn: 'root',
 })
 export class LoginService {
-
   public account_validation_messages = {
-    'username': [
+    username: [
       { type: 'required', message: 'Username is required' },
       { type: 'minlength', message: 'Username must be at least 5 characters long' },
       { type: 'maxlength', message: 'Username cannot be more than 25 characters long' },
       { type: 'pattern', message: 'Your username must contain only numbers and letters' },
-      { type: 'validUsername', message: 'Your username has already been taken' }
+      { type: 'validUsername', message: 'Your username has already been taken' },
     ],
-    'email': [
-      { type: 'required', message: 'Email is required' },
-      { type: 'pattern', message: 'Enter a valid email' }
-    ],
-    'confirm_password': [
+    email: [{ type: 'required', message: 'Email is required' }, { type: 'pattern', message: 'Enter a valid email' }],
+    confirm_password: [
       { type: 'required', message: 'Confirm password is required' },
-      { type: 'areEqual', message: 'Password mismatch' }
+      { type: 'areEqual', message: 'Password mismatch' },
     ],
-    'password': [
+    password: [
       { type: 'required', message: 'Password is required' },
       { type: 'minlength', message: 'Password must be at least 5 characters long' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number' }
+      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number' },
     ],
-    'terms': [
-      { type: 'pattern', message: 'You must accept terms and conditions' }
-    ]
+    terms: [{ type: 'pattern', message: 'You must accept terms and conditions' }],
   };
 
   public registerWithEmailAndPassword(credentials): Promise<auth.UserCredential> {
@@ -41,7 +35,7 @@ export class LoginService {
     return this.authService.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  constructor(private authService: AngularFireAuth) { }
+  constructor(private authService: AngularFireAuth) {}
   /**
    * method to login with google
    */
@@ -52,5 +46,6 @@ export class LoginService {
    * method to log out
    */
   public LogOut() {
+    this.authService.auth.signOut().then((data) => console.log());
   }
 }
