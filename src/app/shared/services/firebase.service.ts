@@ -1,4 +1,4 @@
-import { GiftModel } from './../model/gift.model';
+import { GiftModel } from '../model/gift.model';
 import { Injectable } from '@angular/core';
 
 // Firebase Imports

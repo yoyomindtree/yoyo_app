@@ -4,7 +4,7 @@ import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import * as emailjs from 'emailjs-com';
 import { UserModel } from '../../model/user.model';
-import { FirebaseService } from '../../services/firebase.servce';
+import { FirebaseService } from '../../services/firebase.service';
 import { ValidationService } from '../../services/validation.service';
 import { Router,  ActivatedRoute } from '@angular/router';
 

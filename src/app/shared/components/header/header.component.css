@@ -1,7 +1,13 @@
 .mat-toolbar-row {
-    /* background: rgb(253, 35, 126); */
-    background: rgba(250, 28, 113, 0.808);
-    color: white;
-    
+  /* background: rgb(253, 35, 126); */
+  background: rgba(250, 28, 113, 0.808);
+  color: white;
 
+
+}
+
+.fillSpace {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
 }

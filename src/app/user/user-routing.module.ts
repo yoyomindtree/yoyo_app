@@ -1,3 +1,4 @@
+import { UserGiftOrderComponent } from './components/user-gift-order/user-gift-order.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'history',
     component: UserHistoryComponent,
+  },
+  {
+    path: 'order',
+    component: UserGiftOrderComponent,
   },
   { path: 'profile', component: UserProfileComponent },
 ];

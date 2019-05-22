@@ -13,5 +13,13 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [LoginComponent, FooterComponent, HeaderComponent, SearchComponent],
   imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule, FormsModule, HttpClientModule],
   exports: [LoginComponent, HeaderComponent, FooterComponent]
+
+import { TableComponent } from './components/table/table.component';
+
+@NgModule({
+  declarations: [LoginComponent, FooterComponent, HeaderComponent, SearchComponent, TableComponent],
+  imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule, FormsModule],
+  exports: [LoginComponent, HeaderComponent, FooterComponent, TableComponent],
+
 })
 export class SharedModule {}

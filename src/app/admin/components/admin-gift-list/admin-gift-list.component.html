@@ -4,7 +4,7 @@
 </mat-form-field>
 <div>
   <table mat-table [dataSource]="gifts" class="mat-elevation-z8" matSort>
-    <!-- title Column -->
+
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Gift Id</th>
       <td mat-cell *matCellDef="let element" matTooltip="{{ element.description }}">{{ element.giftId }}</td>

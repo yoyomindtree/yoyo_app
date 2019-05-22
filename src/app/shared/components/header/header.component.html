@@ -1,4 +1,4 @@
-<mat-toolbar>  
+<mat-toolbar>
   <mat-toolbar-row>
     <span>Header</span>
     <span>
@@ -6,6 +6,12 @@
     </span>
     <span>
       <button (click)="onLogoutClicked()">Logout</button>
+
+    <span class="fillSpace"></span>
+    <span>
+      <button mat-icon-button (click)="onSignOutClicked()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
     </span>
   </mat-toolbar-row>
 </mat-toolbar>
