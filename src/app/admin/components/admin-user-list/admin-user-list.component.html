@@ -1,1 +1,3 @@
-<app-table [dataSource]="users" *ngIf="users"></app-table>
+<div *ngIf="users._data._value">
+    <app-table [dataSource]="users"></app-table>
+</div>
