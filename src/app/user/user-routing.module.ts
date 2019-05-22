@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { UserHistoryComponent } from './components/user-history/user-history.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: UserDashboardComponent },
+  { path: '', component: UserDashboardComponent},
   {
     path: 'history',
     component: UserHistoryComponent,

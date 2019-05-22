@@ -7,10 +7,11 @@ import { SearchComponent } from './components/search/search.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FirebaseService } from './services/firebase.servce';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [LoginComponent, FooterComponent, HeaderComponent, SearchComponent],
-  imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule, FormsModule],
-  exports: [LoginComponent, HeaderComponent, FooterComponent],
+  imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule, FormsModule, HttpClientModule],
+  exports: [LoginComponent, HeaderComponent, FooterComponent]
 })
 export class SharedModule {}

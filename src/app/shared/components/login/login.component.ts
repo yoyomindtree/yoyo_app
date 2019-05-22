@@ -6,7 +6,7 @@ import * as emailjs from 'emailjs-com';
 import { UserModel } from '../../model/user.model';
 import { FirebaseService } from '../../services/firebase.servce';
 import { ValidationService } from '../../services/validation.service';
-import { Router } from '@angular/router';
+import { Router,  ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,27 +15,33 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   public newUser: UserModel;
-  /**
-  *   VALIDATION ERROR MESSAGES
-  */
-  public account_validation_messages = this.validService.account_validation_messages;
+  public pass: string;
+  public toRegister = true;
+  public loginErrorCode: string;
+  public emailAlreadyExistsErrorCode: string;
+
   /**
    * properties patterns
    */
-  private pass: string;
-  public toRegister = true;
   private unamePattern = '^[a-z0-9_-]{8,15}$';
   private emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   private pwdPattern = '^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$';
   private mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
 
+  /**
+  *   VALIDATION ERROR MESSAGES
+  */
+  public account_validation_messages = this.validService.account_validation_messages;
+
   constructor(
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private validService: ValidationService,
-    private router: Router
+    private router: Router,
+    private fbService: FirebaseService,
+    private currentRoute: ActivatedRoute
   ) { }
-
+  private currentUser: UserModel;
   signupForm = this.formBuilder.group({
     username: [
       '',
@@ -53,13 +59,47 @@ export class LoginComponent implements OnInit {
       this.pass = value;
     });
   }
+
+  /**
+  * method to create & store registered user
+  */
+  public createNewuser(data) {
+    const balance = { forRedeem: 10, forSending: 20 } as IBalance;
+    this.newUser = {
+      balance: balance,
+      password: data.user.uid,
+      refId: '001',
+      role: 'user',
+      userId: '001',
+      userName: data.user.email
+    }
+    /**
+     * Add registered user in db
+     */
+    this.fbService.createUser(this.newUser);
+  }
+
   /**
    * method to sign in with Google
    */
-  onLoginWithGoogle() {
-    this.loginService.LoginInWithGoogle().then((data) => console.log(data));
+  public onLoginWithGoogle() {
+    this.loginService.loginInWithGoogle()
+      .then((data) => {
+        this.createNewuser(data);
+      })
+      .catch((error) => {
+        console.log('Registeration Error : ', error);
+        this.emailAlreadyExistsErrorCode = error.code;
+      });
   }
 
+  /**
+  * Method to toggle between sign in and register
+  */
+  public onRegister() {
+    this.toRegister = !this.toRegister;
+    this.signupForm.reset();
+  }
   /**
    * Method to either Register or Sign in
    */
@@ -73,33 +113,55 @@ export class LoginComponent implements OnInit {
   /**
    * Method to register the user with username & password
    */
-  onSubmitRegister() {
+  public onSubmitRegister() {
     this.loginService.registerWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
-        console.log('response : ', data);
-        // this.user = {
-
-        // }
+        this.createNewuser(data);
+        this.onRegister();
       })
       .catch((error) => {
         console.log('Registeration Error : ', error);
+        this.emailAlreadyExistsErrorCode = error.code;
       });
-    // this.onRegister();
     this.signupForm.reset();
   }
 
-   /**
-   * Method to sign in with username & password
-   */
+  /**
+  * Method to sign in with username & password
+  */
   public onSubmitLogin() {
     this.loginService.loginWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
-        console.log('response : ', data);
-        this.router.navigate(['user']);
+        console.log('logged in response : ', data);
+        this.fbService.getSingleUser(data.user.email).subscribe(value => {
+          const user: UserModel = Object.values(value)[0] as UserModel;
+          this.loginService.setUSer(user);
+          sessionStorage.setItem('userName', user.userName);
+          if (user.role === 'admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/user']);
+          }
+          this.signupForm.reset();
+        });
+
+        /**
+         * fetching single user
+         */
+        //this.getUserData(data.user.email);
       })
       .catch((error) => {
         console.log('Login Error: ', error);
+        this.loginErrorCode = error.code;
       })
+    
+  }
+
+  public getUserData(userName) {
+    this.loginService.getUserByUserName(userName).subscribe(data => {
+      //console.log(data);
+      this.currentUser = Object.values(data)[0];
+    });
   }
 
   CheckCon() {
@@ -117,19 +179,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
-   /**
-   * Method to toggle between sign in and register
-   */
-  public onRegister() {
-    this.toRegister = !this.toRegister;
-    this.signupForm.reset();
-  }
-
-   /**
-   * Custom validator function to validate the passwords
-   */
-  mismatchPassword(control: FormControl): {[s: string]: boolean } {
-    // return this.validService.mismatch(this.pass, control.value);
+  /**
+  * Custom validator function to validate the passwords
+  */
+  mismatchPassword(control: FormControl): { [s: string]: boolean } {
     if (this.pass !== '' && this.pass !== control.value) {
       return { 'areEqual': true };
     }

@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 // Model Imports
 import { UserModel } from '../model/user.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -49,5 +50,14 @@ export class FirebaseService {
    */
   public addGiftCard(gift: GiftModel) {
     this.giftRef.push(gift);
+  }
+/**
+ * @param email -->user email id
+ * gets the user based on the email id
+ */
+  public getSingleUser(email: string): Observable<any> {
+    return this.db.list('/User-List',  ref =>
+    ref.orderByChild('userName').equalTo(email))
+    .valueChanges();
   }
 }
