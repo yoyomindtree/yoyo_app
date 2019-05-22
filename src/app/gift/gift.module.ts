@@ -8,6 +8,6 @@ import { AngularMaterialModule } from '../angular-material.module';
 @NgModule({
   declarations: [GiftCardComponent, GiftReviewComponent],
   imports: [CommonModule, AngularMaterialModule, NgbModule],
-  exports: [GiftCardComponent],
+  exports: [GiftCardComponent, GiftReviewComponent],
 })
 export class GiftModule {}
