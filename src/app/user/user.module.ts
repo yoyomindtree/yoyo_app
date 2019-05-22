@@ -3,9 +3,10 @@ import { GiftModule } from './../gift/gift.module';
 import { UserRoutingModule, userComponents } from './user-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UserGiftOrderComponent } from './user-gift-order/user-gift-order.component';
 
 @NgModule({
-  declarations: [userComponents],
+  declarations: [userComponents, UserGiftOrderComponent],
   imports: [CommonModule, GiftModule, UserRoutingModule, NgbModule],
 })
 export class UserModule {}
