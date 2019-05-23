@@ -6,7 +6,9 @@ import * as emailjs from 'emailjs-com';
 import { UserModel } from '../../model/user.model';
 import { FirebaseService } from '../../services/firebase.service';
 import { ValidationService } from '../../services/validation.service';
-import { Router,  ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -69,7 +71,7 @@ export class LoginComponent implements OnInit {
       balance: balance,
       password: data.user.uid,
       refId: '001',
-      role: {admin: false, user: true},
+      role: 'user',
       userId: '001',
       userName: data.user.email
     };
@@ -85,6 +87,17 @@ export class LoginComponent implements OnInit {
   public onLoginWithGoogle() {
     this.loginService.loginInWithGoogle()
       .then((data) => {
+        // this.fbService.getSingleUser(data.user.email).subscribe((singleUser) => {
+        //   console.log('singleUser:- ', singleUser[0]);
+        //   // this.fbService.updateUser(singleUser);
+        // }, (error) => {
+        //   console.log(error);
+        // });
+        this.fetchUser(data.user.email).subscribe((userDetail) => {
+          console.log('userDetail:- ', userDetail);
+        }, (error) => {
+          console.log('userDetail error:- ', error);
+        });
         this.createNewuser(data);
       })
       .catch((error) => {
@@ -135,9 +148,8 @@ export class LoginComponent implements OnInit {
         console.log('logged in response : ', data);
         this.fbService.getSingleUser(data.user.email).subscribe(value => {
           const user: UserModel = Object.values(value)[0] as UserModel;
-          this.loginService.setUSer(user);
           sessionStorage.setItem('userName', user.userName);
-          if (user.role.admin) {
+          if (user.role === 'admin') {
             this.router.navigate(['/admin']);
           } else {
             this.router.navigate(['/user']);
@@ -153,6 +165,25 @@ export class LoginComponent implements OnInit {
         console.log('Login Error: ', error);
         this.loginErrorCode = error.code;
       });
+  }
+
+  public fetchUser(email: string): Observable<any> {
+    return Observable.create((observer: any) => {
+      this.fbService
+        .getUserList()
+        .snapshotChanges()
+        .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
+        .subscribe(
+          data => {
+            observer.next(data.filter(users => users.userName === email));
+            observer.complete();
+          },
+          (error) => {
+            observer.next(false);
+            observer.complete();
+          }
+        );
+    });
   }
 
   public getUserData(userName) {

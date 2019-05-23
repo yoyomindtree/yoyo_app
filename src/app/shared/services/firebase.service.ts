@@ -31,6 +31,15 @@ export class FirebaseService {
   public createUser(user: UserModel): void {
     this.usersRef.push(user);
   }
+
+  /**
+   *
+   * @param user : userParam
+   * this method update the user
+   */
+  public updateUser(key: any, value: any): void {
+    this.usersRef.update(key, value);
+  }
   /**
    * method to get all the users in the db
    */

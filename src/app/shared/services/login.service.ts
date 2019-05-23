@@ -60,14 +60,6 @@ export class LoginService {
     });
   }
 
-  public getUser(): UserModel {
-    return this.userDetails;
-  }
-
-  public setUSer(userDetails: UserModel): void {
-    this.userDetails = userDetails;
-  }
-
   /**
    * method to login with google
    */
