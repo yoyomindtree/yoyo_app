@@ -69,10 +69,10 @@ export class LoginComponent implements OnInit {
       balance: balance,
       password: data.user.uid,
       refId: '001',
-      role: 'user',
+      role: {admin: false, user: true},
       userId: '001',
       userName: data.user.email
-    }
+    };
     /**
      * Add registered user in db
      */
@@ -137,7 +137,7 @@ export class LoginComponent implements OnInit {
           const user: UserModel = Object.values(value)[0] as UserModel;
           this.loginService.setUSer(user);
           sessionStorage.setItem('userName', user.userName);
-          if (user.role === 'admin') {
+          if (user.role.admin) {
             this.router.navigate(['/admin']);
           } else {
             this.router.navigate(['/user']);
@@ -148,18 +148,15 @@ export class LoginComponent implements OnInit {
         /**
          * fetching single user
          */
-        //this.getUserData(data.user.email);
       })
       .catch((error) => {
         console.log('Login Error: ', error);
         this.loginErrorCode = error.code;
-      })
-    
+      });
   }
 
   public getUserData(userName) {
     this.loginService.getUserByUserName(userName).subscribe(data => {
-      //console.log(data);
       this.currentUser = Object.values(data)[0];
     });
   }

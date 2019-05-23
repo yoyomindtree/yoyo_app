@@ -3,7 +3,7 @@ export class UserModel {
     public userId: string,
     public userName: string,
     public password: string,
-    public role: string,
+    public role: Role,
     public refId: string,
     public balance: IBalance,
   ) {}
@@ -11,4 +11,8 @@ export class UserModel {
 export interface IBalance {
   forRedeem: number;
   forSending: number;
+}
+export interface Role {
+  user: boolean;
+  admin: boolean;
 }
