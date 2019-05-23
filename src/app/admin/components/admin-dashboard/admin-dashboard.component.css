@@ -12,7 +12,9 @@
 }
 
 .admin {
-  background: rgba(250, 28, 113, 0.808);
+  /* background: rgba(250, 28, 113, 0.808);
+   */
+  background: #FF324F;
   color: blanchedalmond
 }
 
@@ -22,4 +24,8 @@
 
 .active {
   background: rgba(1, 210, 247, 0.808);
+}
+
+mat-sidenav {
+  margin-top: 4rem;
 }
