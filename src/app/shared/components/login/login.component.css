@@ -1,5 +1,5 @@
 /* mat-grid-tile { */
-    /* background: rgb(138, 131, 131); */
+/* background: rgb(138, 131, 131); */
 /* }
 mat-form-field {
      width: 20rem;
@@ -9,51 +9,57 @@ mat-form-field {
     flex-direction: column;
     padding:30px;
 }
-  
+
 .example-container > * {
     width: 100%;
 } */
 
-/* .container-fluid {
-    margin-top: 7rem;
-} */
+.container-fluid {
+  overflow-y: auto;
+}
 
-.img{
-    height: 100%;   
-    object-fit: cover;
+.img {
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 1514px) {
-    .img {
-        object-fit: cover;
-        margin-top: 45px; 
-    }
+  .img {
+    object-fit: cover;
+    margin-top: 45px;
+  }
 }
 
 .border {
-    border: 0px solid #dee2e6;
+  border: 0px solid #0061c2;
 }
 
 
 #signIn {
-    margin-top: 10rem;
-    border-radius: 10rem;
-    color: white;
+  margin-top: 10rem;
+  border-radius: 10rem;
+  color: white;
 }
 
 #socialLogins {
-    margin-top: -50px;
+  margin-top: -50px;
 }
 
 input.ng-invalid.ng-touched {
-    border: 1px solid red;
+  border: 1px solid red;
 }
 
 #errorMsg {
-    color: red;
-    size: 2rem;
+  color: red;
+  size: 2rem;
 }
 
-#loginLink, #registerLink {
-    color: rgb(0, 170, 226);
+#loginLink,
+#registerLink {
+  color: rgb(0, 170, 226);
+}
+
+.googleSignin {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg");
+  background-size: cover
 }
