@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { UserModel } from 'src/app/shared/model/user.model';
+import { ColumnConfig } from 'material-dynamic-table';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -11,7 +12,12 @@ import { UserModel } from 'src/app/shared/model/user.model';
 })
 export class AdminUserListComponent implements OnInit {
   constructor(private fireService: FirebaseService) {}
+  // users list
   users = new MatTableDataSource(null);
+  // colums config for the userlist table
+  displayedColumns = ['userName', 'role', 'balance'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
     this.getUsers();
   }
@@ -25,3 +31,20 @@ export class AdminUserListComponent implements OnInit {
       });
   }
 }
+// columns: ColumnConfig[] = [
+//   {
+//     name: 'UserName',
+//     displayName: 'userName',
+//     type: 'string',
+//   },
+//   {
+//     name: 'RefernceId',
+//     displayName: 'refId',
+//     type: 'string',
+//   },
+//   {
+//     name: 'Role',
+//     displayName: 'role',
+//     type: 'string',
+//   },
+// ];

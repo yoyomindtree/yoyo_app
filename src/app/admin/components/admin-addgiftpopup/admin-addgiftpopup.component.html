@@ -84,8 +84,10 @@
       </div>
     </div>
     <div class="row">
-      <button mat-flat-button color="primary" [disabled]="!giftForm.valid">Add</button>
-      <!-- <button mat-flat-button color="primary">Add</button> -->
+      <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+        <button mat-raised-button color="accent" [disabled]="!giftForm.valid">Add</button>
+        <!-- <button mat-flat-button color="primary">Add</button> -->
+      </div>
     </div>
   </form>
 </mat-dialog-content>

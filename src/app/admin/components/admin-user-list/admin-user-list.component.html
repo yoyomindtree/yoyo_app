@@ -1,3 +1,34 @@
-<div *ngIf="users._data._value">
-    <app-table [dataSource]="users"></app-table>
+<!-- <div *ngIf=" users._data._value">
+  <app-table [dataSource]="users" [columns]="columns"></app-table>
+</div> -->
+
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="users" matSort>
+
+    <!-- name Column -->
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="id"> {{row.userName}} </mat-cell>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="progress"> {{row.role}} </mat-cell>
+    </ng-container>
+
+    <!-- balence Column -->
+    <ng-container matColumnDef="balance">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Balence </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="name"> {{row.forSending}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

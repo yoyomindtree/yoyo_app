@@ -13,6 +13,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     APP_ROUTING,
     NgbModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ScrollingModule,
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent],

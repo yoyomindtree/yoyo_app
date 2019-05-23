@@ -50,12 +50,15 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
    * Method will get called once admin submits form
    */
   onSubmit() {
+    let pointvalue = this.giftForm.get('points').value;
+    const dicountValue = this.giftForm.get('discount').value;
+    pointvalue = pointvalue - dicountValue;
     const gift = new GiftModel(
       Guid.create().toString(),
       this.giftForm.get('giftName').value,
       this.giftForm.get('discription').value,
       '0',
-      this.giftForm.get('points').value,
+      pointvalue,
       this.giftForm.get('quantity').value,
       this.giftForm.get('vendor').value,
       this.giftForm.get('category').value,
@@ -67,6 +70,8 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
       0,
     );
     this.adminFireSerive.addGift(gift);
+    alert('Gift added Sucessfully');
+    this.reset();
   }
   /**
    *
@@ -80,5 +85,16 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
       return null;
     }
     // return { isSmaller: true };
+  }
+  /**
+   * reset method for gift form
+   */
+  reset() {
+    for (const name in this.giftForm.controls) {
+      if (this.giftForm.controls.hasOwnProperty(name)) {
+        this.giftForm.controls[name].setValue('');
+        this.giftForm.controls[name].setErrors(null);
+      }
+    }
   }
 }

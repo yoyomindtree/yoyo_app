@@ -9,9 +9,11 @@ const routes: Routes = [
   {
     path: '',
     component: AdminDashboardComponent,
+    children: [
+      { path: 'gift-list', component: AdminGiftListComponent },
+      { path: 'user-list', component: AdminUserListComponent },
+    ],
   },
-  { path: 'gift-list', component: AdminGiftListComponent },
-  { path: 'user-list', component: AdminUserListComponent },
 ];
 
 @NgModule({

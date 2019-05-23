@@ -1,4 +1,18 @@
-<div *ngIf='dataSource' class="mat-elevation-z2">
-  <mdt-dynamic-table [columns]="columns" [dataSource]="dataSource" [showFilters]=false [pageSize]=5>
+<!-- <div *ngIf='dataSource' class="mat-elevation-z2">
+  <mdt-dynamic-table [columns]="columns" [dataSource]="dataSource" [paginator]=null>
   </mdt-dynamic-table>
-</div>
+</div> -->
+
+
+<cdk-virtual-scroll-viewport itemSize="2" class="example-viewport">
+
+  <table class="table-bordered table-hover">
+    <tbody>
+      <tr *cdkVirtualFor="let item of dataSource" class="example-item">
+        <td>{{item.userName}}</td>
+        <td>{{item.refId}}</td>
+        <td>{{item.role}}</td>
+      </tr>
+    </tbody>
+  </table>
+</cdk-virtual-scroll-viewport>

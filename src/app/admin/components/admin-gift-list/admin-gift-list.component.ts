@@ -11,19 +11,9 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 })
 export class AdminGiftListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) matSort: MatSort;
   // columns of matrial table
-  displayedColumns: string[] = [
-    'id',
-    'name',
-    'rating',
-    'points',
-    'quantity',
-    'vendor',
-    'category',
-    'discount',
-    'image',
-  ];
+  displayedColumns: string[] = ['name', 'rating', 'points', 'quantity', 'vendor', 'category', 'discount', 'image'];
   // data source
   gifts = new MatTableDataSource();
   // filter -->Global filter
@@ -52,7 +42,7 @@ export class AdminGiftListComponent implements OnInit {
         this.gifts = new MatTableDataSource(data);
         this.gifts.filterPredicate = this.customFilterPredicate();
         this.gifts.paginator = this.paginator;
-        this.gifts.sort = this.sort;
+        this.gifts.sort = this.matSort;
       });
   }
   /**

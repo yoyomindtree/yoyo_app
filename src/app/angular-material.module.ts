@@ -19,6 +19,9 @@ import { MatGridListModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { DynamicTableModule } from 'material-dynamic-table';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [],
   imports: [
@@ -40,6 +43,9 @@ import { DynamicTableModule } from 'material-dynamic-table';
     MatTooltipModule,
     MatDialogModule,
     DynamicTableModule,
+    ScrollingModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -59,6 +65,9 @@ import { DynamicTableModule } from 'material-dynamic-table';
     MatTooltipModule,
     MatDialogModule,
     DynamicTableModule,
+    ScrollingModule,
+    MatSidenavModule,
+    MatListModule,
   ],
 })
 export class AngularMaterialModule {}

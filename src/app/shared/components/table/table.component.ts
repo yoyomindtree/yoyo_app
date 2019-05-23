@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { ColumnConfig } from 'material-dynamic-table';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-table',
@@ -8,24 +9,10 @@ import { ColumnConfig } from 'material-dynamic-table';
 })
 export class TableComponent implements OnInit {
   @Input() dataSource;
+  simpletale = new MatTableDataSource(null);
+  @Input() columns: ColumnConfig[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  columns: ColumnConfig[] = [
-    {
-      name: 'userName',
-      displayName: 'userName',
-      type: 'string',
-    },
-    {
-      name: 'refId',
-      displayName: 'refId',
-      type: 'string',
-    },
-    {
-      name: 'role',
-      displayName: 'role',
-      type: 'string',
-    },
-  ];
   constructor() {}
 
   ngOnInit() {}

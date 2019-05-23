@@ -1,1 +1,25 @@
+.sidenav {
+  width: 200px;
+}
 
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.admin {
+  background: rgba(250, 28, 113, 0.808);
+  color: blanchedalmond
+}
+
+.mat-icon-button {
+  color: rgba(250, 28, 113, 0.808);
+}
+
+.active {
+  background: rgba(1, 210, 247, 0.808);
+}

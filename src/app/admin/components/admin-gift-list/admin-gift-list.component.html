@@ -2,13 +2,13 @@
   <input matInput [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)"
     placeholder="Search Gift Name  or Category " />
 </mat-form-field>
-<div>
+<div class="col-md-6 col-sm-6 col-lg-6 col-xs-8">
   <table mat-table [dataSource]="gifts" class="mat-elevation-z8" matSort>
 
-    <ng-container matColumnDef="id">
+    <!-- <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Gift Id</th>
       <td mat-cell *matCellDef="let element" matTooltip="{{ element.description }}">{{ element.giftId }}</td>
-    </ng-container>
+    </ng-container> -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Gift Name</th>
       <td mat-cell *matCellDef="let element" matTooltip="{{ element.description }}">{{ element.name }}</td>
@@ -23,7 +23,7 @@
     </ng-container>
     <ng-container matColumnDef="quantity">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
-      <td mat-cell *matCellDef="let element">{{ element.points }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
     </ng-container>
     <ng-container matColumnDef="vendor">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Vendor</th>
