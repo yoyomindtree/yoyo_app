@@ -10,6 +10,7 @@ const routes: Routes = [
     path: '',
     component: AdminDashboardComponent,
     children: [
+      { path: '', component: AdminGiftListComponent, pathMatch: 'full' },
       { path: 'gift-list', component: AdminGiftListComponent },
       { path: 'user-list', component: AdminUserListComponent },
     ],
