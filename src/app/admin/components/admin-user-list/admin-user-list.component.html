@@ -10,19 +10,19 @@
     <!-- name Column -->
     <ng-container matColumnDef="userName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell *matCellDef="let row" data-label="id"> {{row.userName}} </mat-cell>
+      <mat-cell *matCellDef="let row" data-label="Name"> {{row.userName}} </mat-cell>
     </ng-container>
 
     <!-- Role Column -->
     <ng-container matColumnDef="role">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
-      <mat-cell *matCellDef="let row" data-label="progress"> {{row.role}} </mat-cell>
+      <mat-cell *matCellDef="let row" data-label="Role"> {{row.role}} </mat-cell>
     </ng-container>
 
     <!-- balence Column -->
     <ng-container matColumnDef="balance">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Balence </mat-header-cell>
-      <mat-cell *matCellDef="let row" data-label="name"> {{row.forSending}} </mat-cell>
+      <mat-cell *matCellDef="let row" data-label="Balence"> {{row.forSending}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

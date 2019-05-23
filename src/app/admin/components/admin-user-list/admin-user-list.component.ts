@@ -28,6 +28,8 @@ export class AdminUserListComponent implements OnInit {
       .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
       .subscribe((data: UserModel[]) => {
         this.users = new MatTableDataSource(data);
+        this.users.sort = this.sort;
+        this.users.paginator = this.paginator;
       });
   }
 }

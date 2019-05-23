@@ -2,7 +2,7 @@
   <input matInput [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)"
     placeholder="Search Gift Name  or Category " />
 </mat-form-field>
-<div class="col-md-6 col-sm-6 col-lg-6 col-xs-8">
+<div class="example-container mat-elevation-z8">
   <table mat-table [dataSource]="gifts" class="mat-elevation-z8" matSort>
 
     <!-- <ng-container matColumnDef="id">
@@ -11,37 +11,38 @@
     </ng-container> -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Gift Name</th>
-      <td mat-cell *matCellDef="let element" matTooltip="{{ element.description }}">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let element" matTooltip="{{ element.description }}" data-label="Name">{{ element.name }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="rating">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
-      <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
+      <td mat-cell *matCellDef="let element" data-label="Rating">{{ element.rating }}</td>
     </ng-container>
     <ng-container matColumnDef="points">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Points</th>
-      <td mat-cell *matCellDef="let element">{{ element.points }}</td>
+      <td mat-cell *matCellDef="let element" data-label="Pooints">{{ element.points }}</td>
     </ng-container>
     <ng-container matColumnDef="quantity">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
-      <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+      <td mat-cell *matCellDef="let element" data-label="Quantity">{{ element.quantity }}</td>
     </ng-container>
     <ng-container matColumnDef="vendor">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Vendor</th>
-      <td mat-cell *matCellDef="let element">{{ element.vendor }}</td>
+      <td mat-cell *matCellDef="let element" data-label="Vendor">{{ element.vendor }}</td>
     </ng-container>
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-      <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+      <td mat-cell *matCellDef="let element" data-label="Category">{{ element.category }}</td>
     </ng-container>
     <ng-container matColumnDef="discount">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount</th>
-      <td mat-cell *matCellDef="let element">{{ element.discount }}</td>
+      <td mat-cell *matCellDef="let element" data-label="Discount">{{ element.discount }}</td>
     </ng-container>
     <ng-container matColumnDef="image">
-      <th mat-header-cell *matHeaderCellDef>Image</th>
+      <th mat-header-cell *matHeaderCellDef data-label="Image">Image</th>
       <td mat-cell *matCellDef="let element">
         <span>
-          <img [src]="element.imagePath" alt="{{ element.Name }}" class="img-responsive" style="max-height: 50px;" />
+          <img [src]="element.imagePath" alt="{{ element.Name }}" class="img-responsive" style="max-height: 2em;" />
         </span>
       </td>
     </ng-container>

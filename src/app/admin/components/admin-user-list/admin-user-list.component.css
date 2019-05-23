@@ -5,6 +5,7 @@ body {
 }
 
 
+
 @media screen and (max-width: 960px) {
   .mat-table {
     border: 0;
@@ -15,8 +16,8 @@ body {
     font-size: 1em;
   }
 
-  /*  Enable this to hide header
-  .mat-table .mat-header-cell {
+  /* Enable this to hide header */
+  /* .mat-table .mat-header-cell {
 
     border: 10px solid;
     clip: rect(0 0 0 0);
@@ -25,8 +26,9 @@ body {
     padding: 0;
     position: absolute;
     width: 1px;
-  }
-  */
+
+  } */
+
   .mat-table .mat-row {
     border-bottom: 5px solid #ddd;
     display: block;
@@ -66,4 +68,6 @@ body {
   .mat-table .mat-cell:first-child {
     margin-top: 4%;
   }
+
+
 }
