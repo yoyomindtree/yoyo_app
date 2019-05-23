@@ -9,20 +9,8 @@ import { LoginService } from '../../services/login.service';
 export class HeaderComponent implements OnInit {
   constructor(private loginService: LoginService) {}
 
-
-  constructor(private loginservice:LoginService) { }
-
-  ngOnInit() {
-  }
-  onLogoutClicked(){
-this.loginservice.logOut();
-  }
-}
   ngOnInit() {}
-  /**
-   * method will get called if user clicked on logout
-   */
-  onSignOutClicked() {
-    this.loginService.LogOut();
+  onLogoutClicked() {
+    this.loginService.logOut();
   }
 }

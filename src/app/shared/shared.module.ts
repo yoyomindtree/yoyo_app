@@ -6,20 +6,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FirebaseService } from './services/firebase.servce';
 import { HttpClientModule } from '@angular/common/http';
-
-@NgModule({
-  declarations: [LoginComponent, FooterComponent, HeaderComponent, SearchComponent],
-  imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule, FormsModule, HttpClientModule],
-  exports: [LoginComponent, HeaderComponent, FooterComponent]
 
 import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [LoginComponent, FooterComponent, HeaderComponent, SearchComponent, TableComponent],
-  imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule, FormsModule, HttpClientModule],
   exports: [LoginComponent, HeaderComponent, FooterComponent, TableComponent],
-
 })
 export class SharedModule {}
