@@ -73,13 +73,12 @@
         <br *ngIf="signupForm.get('phone').valid || !signupForm.get('phone').touched">
 
         <!-- other error messages -->
-        <mat-error class="error-message"
-          *ngIf="loginErrorCode === 'auth/user-not-found' && !toRegister">
+        <mat-error class="error-message" *ngIf="loginErrorCode === 'auth/user-not-found' && !toRegister">
           There is no user record corresponding to this email address. Please register first.
         </mat-error>
         <mat-error class="error-message"
           *ngIf="emailAlreadyExistsErrorCode === 'auth/email-already-in-use' && toRegister">
-            The email address is already in use by another account.
+          The email address is already in use by another account.
         </mat-error>
 
         <!-- Buttons -->
@@ -106,9 +105,10 @@
       </form>
       <!-- Social login -->
       <div class="text-center" id="socialLogins">
-        <button mat-mini-fab (click)="onLoginWithGoogle()">
-          <!-- <i class="fa fa-google" aria-hidden="true"></i> -->
+        <button mat-mini-fab (click)="onLoginWithGoogle()" class="googleSignin">
+
         </button>
+
       </div>
     </div>
   </div>
