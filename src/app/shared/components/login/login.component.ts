@@ -93,11 +93,11 @@ export class LoginComponent implements OnInit {
     this.loginService.loginInWithGoogle()
       .then((data) => {
         this.fetchUser(data.user.email).subscribe((userDetail) => {
-          if (userDetail && userDetail.key) {
-            userDetail.token = Guid.create().toString();
-            sessionStorage.setItem('token', userDetail.token);
-            sessionStorage.setItem('email', userDetail.userName);
-            this.fbService.updateUser(userDetail.key, userDetail);
+          if (userDetail[0] && userDetail[0].key) {
+            userDetail[0].token = Guid.create().toString();
+            sessionStorage.setItem('token', userDetail[0].token);
+            sessionStorage.setItem('email', userDetail[0].userName);
+            this.fbService.updateUser(userDetail[0].key, userDetail[0]);
             this.router.navigate(['/user']);
           } else {
             this.createNewuser(data);
@@ -151,9 +151,7 @@ export class LoginComponent implements OnInit {
   public onSubmitLogin() {
     this.loginService.loginWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
-        console.log('logged in response : ', data);
         this.fetchUser(data.user.email).subscribe((userDetail) => {
-          console.log('userDetails:- ', userDetail);
           if (userDetail && userDetail[0] && userDetail[0].key) {
             userDetail[0].token = Guid.create().toString();
             sessionStorage.setItem('token', userDetail[0].token);
@@ -167,16 +165,6 @@ export class LoginComponent implements OnInit {
           }
           this.signupForm.reset();
         });
-        // this.fbService.getSingleUser(data.user.email).subscribe(value => {
-        //   const user: UserModel = Object.values(value)[0] as UserModel;
-        //   sessionStorage.setItem('userName', user.userName);
-        //   if (user.role === 'admin') {
-        //     this.router.navigate(['/admin']);
-        //   } else {
-        //     this.router.navigate(['/user']);
-        //   }
-        //   this.signupForm.reset();
-        // });
 
         /**
          * fetching single user
