@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
   private mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
 
   /**
-  *   VALIDATION ERROR MESSAGES
-  */
+   *   VALIDATION ERROR MESSAGES
+   */
   public account_validation_messages = this.validService.account_validation_messages;
 
   constructor(
@@ -42,14 +42,11 @@ export class LoginComponent implements OnInit {
     private validService: ValidationService,
     private router: Router,
     private fbService: FirebaseService,
-    private currentRoute: ActivatedRoute
-  ) { }
+    private currentRoute: ActivatedRoute,
+  ) {}
   private currentUser: UserModel;
   signupForm = this.formBuilder.group({
-    username: [
-      '',
-      [Validators.required, Validators.minLength(6), Validators.maxLength(25), Validators.pattern(this.unamePattern)],
-    ],
+    username: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]],
     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.pwdPattern)]],
     confirmPassword: ['', [Validators.required, this.mismatchPassword.bind(this)]],
@@ -58,14 +55,14 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.signupForm.get('password').valueChanges.subscribe(value => {
+    this.signupForm.get('password').valueChanges.subscribe((value) => {
       this.pass = value;
     });
   }
 
   /**
-  * method to create & store registered user
-  */
+   * method to create & store registered user
+   */
   public createNewuser(data) {
     const balance = { forRedeem: 10, forSending: 20 } as IBalance;
     this.newUser = {
@@ -75,7 +72,7 @@ export class LoginComponent implements OnInit {
       role: 'user',
       userId: Guid.create().toString(),
       userName: data.user.email,
-      token: Guid.create().toString()
+      token: Guid.create().toString(),
     };
     /**
      * Add registered user in db
@@ -90,21 +87,25 @@ export class LoginComponent implements OnInit {
    * method to sign in with Google
    */
   public onLoginWithGoogle() {
-    this.loginService.loginInWithGoogle()
+    this.loginService
+      .loginInWithGoogle()
       .then((data) => {
-        this.fetchUser(data.user.email).subscribe((userDetail) => {
-          if (userDetail[0] && userDetail[0].key) {
-            userDetail[0].token = Guid.create().toString();
-            sessionStorage.setItem('token', userDetail[0].token);
-            sessionStorage.setItem('email', userDetail[0].userName);
-            this.fbService.updateUser(userDetail[0].key, userDetail[0]);
-            this.router.navigate(['/user']);
-          } else {
+        this.fetchUser(data.user.email).subscribe(
+          (userDetail) => {
+            if (userDetail[0] && userDetail[0].key) {
+              userDetail[0].token = Guid.create().toString();
+              sessionStorage.setItem('token', userDetail[0].token);
+              sessionStorage.setItem('email', userDetail[0].userName);
+              this.fbService.updateUser(userDetail[0].key, userDetail[0]);
+              this.router.navigate(['/user']);
+            } else {
+              this.createNewuser(data);
+            }
+          },
+          (error) => {
             this.createNewuser(data);
-          }
-        }, (error) => {
-          this.createNewuser(data);
-        });
+          },
+        );
       })
       .catch((error) => {
         console.log('Registeration Error : ', error);
@@ -113,8 +114,8 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-  * Method to toggle between sign in and register
-  */
+   * Method to toggle between sign in and register
+   */
   public onRegister() {
     this.toRegister = !this.toRegister;
     this.signupForm.reset();
@@ -133,7 +134,8 @@ export class LoginComponent implements OnInit {
    * Method to register the user with username & password
    */
   public onSubmitRegister() {
-    this.loginService.registerWithEmailAndPassword(this.signupForm.value)
+    this.loginService
+      .registerWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
         this.createNewuser(data);
         this.onRegister();
@@ -146,10 +148,11 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-  * Method to sign in with username & password
-  */
+   * Method to sign in with username & password
+   */
   public onSubmitLogin() {
-    this.loginService.loginWithEmailAndPassword(this.signupForm.value)
+    this.loginService
+      .loginWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
         this.fetchUser(data.user.email).subscribe((userDetail) => {
           if (userDetail && userDetail[0] && userDetail[0].key) {
@@ -181,22 +184,22 @@ export class LoginComponent implements OnInit {
       this.fbService
         .getUserList()
         .snapshotChanges()
-        .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
+        .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
         .subscribe(
-          data => {
-            observer.next(data.filter(users => users.userName === email));
+          (data) => {
+            observer.next(data.filter((users) => users.userName === email));
             observer.complete();
           },
           (error) => {
             observer.next(false);
             observer.complete();
-          }
+          },
         );
     });
   }
 
   public getUserData(userName) {
-    this.loginService.getUserByUserName(userName).subscribe(data => {
+    this.loginService.getUserByUserName(userName).subscribe((data) => {
       this.currentUser = Object.values(data)[0];
     });
   }
@@ -207,21 +210,21 @@ export class LoginComponent implements OnInit {
       to_name: 'Raghavendra',
     };
     emailjs.send('yoyo', 'template_5bhTnqFg', templateParams, 'user_LqyB0x9nwHbehnc2Fp7G1').then(
-      function (response) {
+      function(response) {
         console.log('SUCCESS!', response.status, response.text);
       },
-      function (err) {
+      function(err) {
         console.log('FAILED...', err);
       },
     );
   }
 
   /**
-  * Custom validator function to validate the passwords
-  */
+   * Custom validator function to validate the passwords
+   */
   public mismatchPassword(control: FormControl): { [s: string]: boolean } {
     if (this.pass !== '' && this.pass !== control.value) {
-      return { 'areEqual': true };
+      return { areEqual: true };
     }
     return null;
   }
