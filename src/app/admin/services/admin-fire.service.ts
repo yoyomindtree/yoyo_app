@@ -20,4 +20,10 @@ export class AdminFireService {
   public addGift(gift: GiftModel) {
     this.giftRef.push(gift);
   }
+  /**
+   * update the gift
+   */
+  public updateGift(key: string, value: any){
+    this.giftRef.update(key, value).catch(error => console.log(error));
+  }
 }
