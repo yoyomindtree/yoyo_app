@@ -15,9 +15,7 @@ export class AuthGuard implements CanActivate {
   user: UserModel;
   constructor(
     private firebaseService: FirebaseService,
-    private router: Router,
-    private angularFireAuth: AngularFireAuth,
-    private loginSerivce: LoginService,
+    private router: Router
   ) {
     /**
      * getting the currently logged in user from firebase
@@ -30,8 +28,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
+    next: ActivatedRouteSnapshot
   ): Observable<boolean> {
     // is user logged in and check for admin
     // is user logged in and check for user

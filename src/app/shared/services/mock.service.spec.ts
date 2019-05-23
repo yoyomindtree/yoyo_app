@@ -7,6 +7,9 @@ export class MockService {
   public group({}): any {
     return '';
   }
+  public getAllGifts(): any {
+    return '';
+  }
 }
 
 const authState = {
