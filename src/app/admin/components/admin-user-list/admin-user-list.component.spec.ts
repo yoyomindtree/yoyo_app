@@ -1,7 +1,11 @@
+import { FirebaseService } from './../../../shared/services/firebase.service';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { MockService } from './../../../shared/services/mock.service.spec';
 import { configureTestSuite } from './../../../shared/utils/configureTestSuite';
 import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AdminUserListComponent } from './admin-user-list.component';
+import { MatTableModule } from '@angular/material';
 
 describe('AdminUserListComponent', () => {
   configureTestSuite();
@@ -11,7 +15,12 @@ describe('AdminUserListComponent', () => {
   beforeAll((done) => (async () => {
     TestBed.configureTestingModule({
       declarations: [AdminUserListComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: AngularFireDatabase, useClass: MockService },
+        { provide: FirebaseService, useClass: MockService }
+      ],
+      imports: [ MatTableModule ]
     });
     await TestBed.compileComponents();
   })().then(done).catch(done.fail));

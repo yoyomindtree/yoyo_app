@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminGiftListComponent } from './admin-gift-list.component';
@@ -8,6 +9,9 @@ describe('AdminGiftListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule
+      ],
       declarations: [ AdminGiftListComponent ]
     })
     .compileComponents();

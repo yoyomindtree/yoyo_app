@@ -1,3 +1,7 @@
+import { AdminFireService } from './../../services/admin-fire.service';
+import { FormBuilder } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MockService } from './../../../shared/services/mock.service.spec';
 import { configureTestSuite } from './../../../shared/utils/configureTestSuite';
 import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -14,6 +18,10 @@ describe('AdminAddgiftpopupComponent', () => {
       declarations: [AdminAddgiftpopupComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
+        { provide: MatDialogRef, useClass: MockService},
+        { provide: MAT_DIALOG_DATA, useClass: MockService},
+        { provide: FormBuilder, useClass: MockService},
+        { provide: AdminFireService, useClass: MockService}
       ]
     });
     await TestBed.compileComponents();
