@@ -6,6 +6,7 @@ export class UserModel {
     public role: string,
     public refId: string,
     public balance: IBalance,
+    public token: string
   ) {}
 }
 export interface IBalance {

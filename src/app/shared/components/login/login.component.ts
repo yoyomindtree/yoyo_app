@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript';
 import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { IBalance } from './../../model/user.model';
 import { LoginService } from './../../services/login.service';
@@ -70,15 +71,19 @@ export class LoginComponent implements OnInit {
     this.newUser = {
       balance: balance,
       password: data.user.uid,
-      refId: '001',
+      refId: Guid.create().toString(),
       role: 'user',
-      userId: '001',
-      userName: data.user.email
+      userId: Guid.create().toString(),
+      userName: data.user.email,
+      token: Guid.create().toString()
     };
     /**
      * Add registered user in db
      */
     this.fbService.createUser(this.newUser);
+    sessionStorage.setItem('token', this.newUser.token);
+    sessionStorage.setItem('email', this.newUser.userName);
+    this.router.navigate(['/user']);
   }
 
   /**
@@ -87,18 +92,19 @@ export class LoginComponent implements OnInit {
   public onLoginWithGoogle() {
     this.loginService.loginInWithGoogle()
       .then((data) => {
-        // this.fbService.getSingleUser(data.user.email).subscribe((singleUser) => {
-        //   console.log('singleUser:- ', singleUser[0]);
-        //   // this.fbService.updateUser(singleUser);
-        // }, (error) => {
-        //   console.log(error);
-        // });
         this.fetchUser(data.user.email).subscribe((userDetail) => {
-          console.log('userDetail:- ', userDetail);
+          if (userDetail && userDetail.key) {
+            userDetail.token = Guid.create().toString();
+            sessionStorage.setItem('token', userDetail.token);
+            sessionStorage.setItem('email', userDetail.userName);
+            this.fbService.updateUser(userDetail.key, userDetail);
+            this.router.navigate(['/user']);
+          } else {
+            this.createNewuser(data);
+          }
         }, (error) => {
-          console.log('userDetail error:- ', error);
+          this.createNewuser(data);
         });
-        this.createNewuser(data);
       })
       .catch((error) => {
         console.log('Registeration Error : ', error);
@@ -146,16 +152,31 @@ export class LoginComponent implements OnInit {
     this.loginService.loginWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
         console.log('logged in response : ', data);
-        this.fbService.getSingleUser(data.user.email).subscribe(value => {
-          const user: UserModel = Object.values(value)[0] as UserModel;
-          sessionStorage.setItem('userName', user.userName);
-          if (user.role === 'admin') {
-            this.router.navigate(['/admin']);
-          } else {
-            this.router.navigate(['/user']);
+        this.fetchUser(data.user.email).subscribe((userDetail) => {
+          console.log('userDetails:- ', userDetail);
+          if (userDetail && userDetail[0] && userDetail[0].key) {
+            userDetail[0].token = Guid.create().toString();
+            sessionStorage.setItem('token', userDetail[0].token);
+            sessionStorage.setItem('email', userDetail[0].userName);
+            this.fbService.updateUser(userDetail[0].key, userDetail[0]);
+            if (userDetail[0].role === 'admin') {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/user']);
+            }
           }
           this.signupForm.reset();
         });
+        // this.fbService.getSingleUser(data.user.email).subscribe(value => {
+        //   const user: UserModel = Object.values(value)[0] as UserModel;
+        //   sessionStorage.setItem('userName', user.userName);
+        //   if (user.role === 'admin') {
+        //     this.router.navigate(['/admin']);
+        //   } else {
+        //     this.router.navigate(['/user']);
+        //   }
+        //   this.signupForm.reset();
+        // });
 
         /**
          * fetching single user
@@ -192,7 +213,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  CheckCon() {
+  public CheckCon() {
     const templateParams = {
       name: 'Testing123',
       to_name: 'Raghavendra',
@@ -210,7 +231,7 @@ export class LoginComponent implements OnInit {
   /**
   * Custom validator function to validate the passwords
   */
-  mismatchPassword(control: FormControl): { [s: string]: boolean } {
+  public mismatchPassword(control: FormControl): { [s: string]: boolean } {
     if (this.pass !== '' && this.pass !== control.value) {
       return { 'areEqual': true };
     }

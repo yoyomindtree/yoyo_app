@@ -32,20 +32,61 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
-  ): Observable<boolean> | Promise<boolean> | boolean {
+  ): Observable<boolean> {
     // is user logged in and check for admin
     // is user logged in and check for user
     // is user logged in
-    return this.angularFireAuth.authState.pipe(
-      take(1),
-      map((user) => {
-        return !!user;
-      }),
-      tap((loggedin) => {
-        if (!loggedin) {
+    return Observable.create((observer: any) => {
+      if (sessionStorage.getItem('email') && sessionStorage.getItem('token')) {
+        this.fetchUser(sessionStorage.getItem('email')).subscribe((userDetail) => {
+          if (userDetail && userDetail[0] && userDetail[0].token === sessionStorage.getItem('token')) {
+            if (((next.routeConfig.path === 'admin') && (userDetail[0].role === 'admin')) ||
+              ((next.routeConfig.path === 'user') && (userDetail[0].role === 'user'))) {
+              observer.next(true);
+              observer.complete();
+            } else {
+              this.router.navigate(['/login']);
+              sessionStorage.clear();
+              observer.next(false);
+              observer.complete();
+            }
+          } else {
+            this.router.navigate(['/login']);
+            sessionStorage.clear();
+            observer.next(false);
+            observer.complete();
+          }
+        }, (error) => {
           this.router.navigate(['/login']);
-        }
-      }),
-    );
+          sessionStorage.clear();
+          observer.next(false);
+          observer.complete();
+        });
+      } else {
+        this.router.navigate(['/login']);
+        sessionStorage.clear();
+        observer.next(false);
+        observer.complete();
+      }
+    });
+  }
+
+  public fetchUser(email: string): Observable<any> {
+    return Observable.create((observer: any) => {
+      this.firebaseService
+        .getUserList()
+        .snapshotChanges()
+        .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
+        .subscribe(
+          data => {
+            observer.next(data.filter(users => users.userName === email));
+            observer.complete();
+          },
+          (error) => {
+            observer.next(false);
+            observer.complete();
+          }
+        );
+    });
   }
 }

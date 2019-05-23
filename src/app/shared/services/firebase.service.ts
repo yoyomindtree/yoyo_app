@@ -38,7 +38,9 @@ export class FirebaseService {
    * this method update the user
    */
   public updateUser(key: any, value: any): void {
-    this.usersRef.update(key, value);
+    this.usersRef.update(key, value).catch((error) => {
+      console.log(error);
+    });
   }
   /**
    * method to get all the users in the db
