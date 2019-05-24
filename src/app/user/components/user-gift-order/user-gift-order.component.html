@@ -1,3 +1,25 @@
 <div class="container">
-  <app-gift-review></app-gift-review>
+  <div class="row">
+    <div class="col-md-7">
+      <app-gift-card [gift]="gift"></app-gift-card>
+    </div>
+    <div class="col-md-5">
+      <input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+      <h3>Reviews:- </h3>
+    </div>
+    <div class="col-md-2">
+        <button mat-mini-fab color="primary" id="addBtn" matTooltip="Click here to give your valuable feedback" (click)="addFeedback()">
+            <mat-icon>add</mat-icon>
+          </button>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <app-gift-review></app-gift-review>
+    </div>
+  </div>
 </div>
