@@ -36,6 +36,9 @@ export class UserGiftOrderComponent implements OnInit, OnDestroy {
     // method for opening the dialog
     const dialogRef = this.dialog.open(UserFeedbackComponent, dialogConfig);
     this.subscription = dialogRef.afterClosed().subscribe((result) => { });
+    dialogConfig.data = {
+      giftId: this.gift.giftId
+    };
   }
 
   public ngOnDestroy(): void {
