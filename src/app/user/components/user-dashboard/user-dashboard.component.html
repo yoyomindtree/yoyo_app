@@ -1,9 +1,11 @@
-<app-user-search></app-user-search>
-
-
+<div class="row">
+  <app-user-search></app-user-search>
+</div>
 
 <div class="row">
-  <div *ngFor="let gift of giftsForSending" class="col-md-4">
-    <app-gift-card [gift]="gift"></app-gift-card>
+  <div class="row card-list">
+    <div *ngFor="let gift of giftsForSending" class="col-md-3">
+      <app-gift-card [gift]="gift"></app-gift-card>
+    </div>
   </div>
 </div>

@@ -21,8 +21,20 @@
 
     <!-- balence Column -->
     <ng-container matColumnDef="balance">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Balence </mat-header-cell>
-      <mat-cell *matCellDef="let row" data-label="Balence"> {{row.forSending}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Balance </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Balance">
+        <input class="form-control round  col-md-3 col-lg-4" name="input" type="number" min="1"
+          [(ngModel)]="row.balance.forSending" />
+      </mat-cell>
+
+    </ng-container>
+    <!-- action column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+      <td mat-cell *matCellDef="let element" data-label="Action">
+        <button class="btn btn-primary" (click)="onUpdateBalence(element.key,element)">Update Balence</button>
+
+      </td>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

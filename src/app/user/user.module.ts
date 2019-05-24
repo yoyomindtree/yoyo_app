@@ -1,3 +1,4 @@
+import { GiftResolverService } from './../shared/services/gift-resolver.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GiftModule } from './../gift/gift.module';
 import { UserRoutingModule, userComponents } from './user-routing.module';
@@ -9,9 +10,10 @@ import { UserSearchComponent } from './components/user-search/user-search.compon
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../shared/components/header/header.component';
 
+import { UserFeedbackComponent } from './components/user-feedback/user-feedback.component';
 
 @NgModule({
-  declarations: [userComponents, UserGiftOrderComponent, UserSearchComponent],
+  declarations: [userComponents, UserGiftOrderComponent, UserSearchComponent, UserFeedbackComponent],
   imports: [
     CommonModule,
     GiftModule,
@@ -21,6 +23,7 @@ import { HeaderComponent } from '../shared/components/header/header.component';
     ReactiveFormsModule,
     FormsModule,
   ],
- 
+  providers: [GiftResolverService],
+  entryComponents: [UserFeedbackComponent]
 })
-export class UserModule {}
+export class UserModule { }

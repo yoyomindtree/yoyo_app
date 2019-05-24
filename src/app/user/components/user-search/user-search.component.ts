@@ -31,14 +31,19 @@ export class UserSearchComponent implements OnInit {
 
   /**
    *
-   * @param val :input value from input field
+   * @param value :input value from input field
    * method will return the search result
    */
-  public filter(val: string): Observable<any[]> {
-    return this.fireBaseSerive.getGiftSearchResult(val).pipe(
+  public filter(value: string): Observable<any[]> {
+    return this.fireBaseSerive.getGiftSearchResult(value).pipe(
       map((response) =>
         response.filter((option: GiftModel) => {
-          return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+          return (
+            option.name.toLowerCase().indexOf(value.toLowerCase()) === 0 ||
+            option.vendor.toLowerCase().indexOf(value.toLowerCase()) === 0 ||
+            option.category.toLowerCase().indexOf(value.toLowerCase()) === 0 ||
+            option.points.toString().indexOf(value) === 0
+          );
         }),
       ),
     );
