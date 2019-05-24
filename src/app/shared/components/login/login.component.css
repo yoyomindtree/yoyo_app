@@ -13,13 +13,15 @@ mat-form-field {
 .example-container > * {
     width: 100%;
 } */
-
-.container-fluid {
-  overflow-y: auto;
+.loginComp {
+  height: 80%;
+  width: 101%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .img {
-  height: 100%;
+  height: 90%;
   object-fit: cover;
 }
 

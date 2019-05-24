@@ -1,5 +1,14 @@
-<app-header></app-header>
+<!-- <app-header></app-header>
 
-<router-outlet></router-outlet>
+<div class='mainClass container-fluid'>
+  <router-outlet></router-outlet>
+</div>
 
+<app-footer></app-footer> -->
+<div>
+  <app-header></app-header>
+  <ngx-spinner bdColor="rgba(255,255,255,0.8)" size="medium" color="#ff1818" type="ball-scale-ripple"></ngx-spinner>
+
+  <router-outlet></router-outlet>
+</div>
 <app-footer></app-footer>

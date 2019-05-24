@@ -1,24 +1,27 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>{{gift.name}}
-        <div><ng-template #t let-fill="fill">
-            <span class="star" [class.full]="fill === 100">
-              <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
-            </span>
-       </ng-template>
-        <ngb-rating [(rate)]="gift.frequency" [starTemplate]="t" [readonly]="true" max="1"></ngb-rating></div>
-    </mat-card-title>
-    <mat-card-subtitle>{{gift.vendor}}</mat-card-subtitle>
-  </mat-card-header>
-  <img class="card-image" mat-card-image src="{{gift.imagePath}}" alt="Gift Coupon Image">
-  <mat-card-content>
-    <p>
-      {{gift.description}}
-    </p>
-  </mat-card-content>
-  <ngb-rating [(rate)]="gift.rating"></ngb-rating>
-  <mat-card-actions>
-    <!-- <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button> -->
-  </mat-card-actions>
-</mat-card>
+ <mat-card class="example-card">
+   <mat-card-header>
+     <mat-card-title>{{gift.name}}
+       <div>
+         <ng-template #t let-fill="fill">
+           <span class="star" [class.full]="fill === 100">
+             <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+           </span>
+         </ng-template>
+         <ngb-rating [(rate)]="gift.frequency" [starTemplate]="t" [readonly]="true" max="1"></ngb-rating>
+       </div>
+     </mat-card-title>
+     <mat-card-subtitle>{{gift.vendor}}</mat-card-subtitle>
+   </mat-card-header>
+   <img class="card-image" mat-card-lg-image src="{{gift.imagePath}}" alt="Gift Coupon Image" class="img-responsive"
+     style="max-height: 3em;">
+   <mat-card-content>
+     <p>
+       {{gift.description}}
+     </p>
+   </mat-card-content>
+   <ngb-rating [(rate)]=" gift.rating"></ngb-rating>
+   <!-- <mat-card-actions>
+     <button mat-button>LIKE</button>
+     <button mat-button>SHARE</button>
+   </mat-card-actions> -->
+ </mat-card>

@@ -22,6 +22,7 @@ import { DynamicTableModule } from 'material-dynamic-table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [],
   imports: [
@@ -46,6 +47,7 @@ import { MatListModule } from '@angular/material/list';
     ScrollingModule,
     MatSidenavModule,
     MatListModule,
+    MatAutocompleteModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -68,6 +70,7 @@ import { MatListModule } from '@angular/material/list';
     ScrollingModule,
     MatSidenavModule,
     MatListModule,
+    MatAutocompleteModule,
   ],
 })
 export class AngularMaterialModule {}

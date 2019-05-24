@@ -14,6 +14,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,6 +23,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     SharedModule,
+    NgxSpinnerModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     APP_ROUTING,

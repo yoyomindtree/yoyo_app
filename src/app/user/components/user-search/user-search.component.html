@@ -1,0 +1,10 @@
+<form>
+  <mat-form-field>
+    <input matInput [matAutocomplete]="auto" [formControl]="giftControl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let gift of filteredOptions | async" [value]="gift.name">
+        <span>{{ gift.name }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

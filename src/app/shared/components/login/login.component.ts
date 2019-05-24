@@ -10,6 +10,7 @@ import { ValidationService } from '../../services/validation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fbService: FirebaseService,
     private currentRoute: ActivatedRoute,
+    private spinner: NgxSpinnerService,
   ) {}
   private currentUser: UserModel;
   signupForm = this.formBuilder.group({
@@ -151,6 +153,7 @@ export class LoginComponent implements OnInit {
    * Method to sign in with username & password
    */
   public onSubmitLogin() {
+    this.spinner.show();
     this.loginService
       .loginWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
@@ -166,6 +169,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/user']);
             }
           }
+          this.spinner.hide();
           this.signupForm.reset();
         });
 
@@ -176,6 +180,7 @@ export class LoginComponent implements OnInit {
       .catch((error) => {
         console.log('Login Error: ', error);
         this.loginErrorCode = error.code;
+        this.spinner.hide();
       });
   }
 

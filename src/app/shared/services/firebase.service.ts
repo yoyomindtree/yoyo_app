@@ -62,13 +62,15 @@ export class FirebaseService {
   public addGiftCard(gift: GiftModel) {
     this.giftRef.push(gift);
   }
-/**
- * @param email -->user email id
- * gets the user based on the email id
- */
+  /**
+   * @param email -->user email id
+   * gets the user based on the email id
+   */
   public getSingleUser(email: string): Observable<any> {
-    return this.db.list('/User-List',  ref =>
-    ref.orderByChild('userName').equalTo(email))
-    .valueChanges();
+    return this.db.list('/User-List', (ref) => ref.orderByChild('userName').equalTo(email)).valueChanges();
+  }
+
+  public getGiftSearchResult(giftName: string): Observable<any> {
+    return this.db.list(this.dbGifts).valueChanges();
   }
 }
