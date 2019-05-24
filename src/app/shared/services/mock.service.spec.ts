@@ -5,8 +5,15 @@ export class MockService {
     return '';
   }
   public group({ }): any {
-    return '';
+    return {
+      get: () => {
+        return {
+          value: 'string' 
+        };
+      }
+    }
   }
+  
   public getAllGifts(): any {
     return {
       snapshotChanges: () => {
@@ -27,11 +34,7 @@ export class MockService {
     }
   }
 
-  public get(string: string): any {
-    return {value: string};
-  }
-
-  public list({}): any {
+  public list({ }): any {
     return '';
   }
 }
