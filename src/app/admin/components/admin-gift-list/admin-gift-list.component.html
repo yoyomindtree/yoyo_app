@@ -1,6 +1,6 @@
 <mat-form-field>
   <input matInput [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)"
-    placeholder="Search Gift Name  or Category " />
+    placeholder="Search Gift Name  or Category  or discounts" />
 </mat-form-field>
 <div class="example-container mat-elevation-z8">
   <table mat-table [dataSource]="gifts" class="mat-elevation-z8" matSort>
@@ -11,7 +11,8 @@
     </ng-container> -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Gift Name</th>
-      <td mat-cell *matCellDef="let element" matTooltip="{{ element.description }}" data-label="Name">{{ element.name }}
+      <td mat-cell *matCellDef="let element" matTooltip="{{ element.description }}" data-label="Gift Name">
+        {{ element.name }}
       </td>
     </ng-container>
     <ng-container matColumnDef="rating">
@@ -48,10 +49,12 @@
     </ng-container>
     <ng-container matColumnDef="Action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
-      <td mat-cell *matCellDef="let element" data-label="Deactivate" >
-        <button mat-flat-button color="primary" *ngIf="!element.isActive" (click)="onDeactivate(element.key,element.isActive)">Deactivate</button>
-        <button mat-flat-button color="primary" *ngIf="element.isActive" (click)="onDeactivate(element.key,element.isActive)">Activate </button>
-      
+      <td mat-cell *matCellDef="let element" data-label="Deactivate">
+        <button mat-flat-button color="primary" *ngIf="!element.isActive"
+          (click)="onDeactivate(element.key,element.isActive)">Deactivate</button>
+        <button mat-flat-button color="primary" *ngIf="element.isActive"
+          (click)="onDeactivate(element.key,element.isActive)">Activate </button>
+
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

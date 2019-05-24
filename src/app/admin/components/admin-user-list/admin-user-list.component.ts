@@ -4,6 +4,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { UserModel } from 'src/app/shared/model/user.model';
 import { ColumnConfig } from 'material-dynamic-table';
+import { AdminFireService } from '../../services/admin-fire.service';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -11,17 +12,22 @@ import { ColumnConfig } from 'material-dynamic-table';
   styleUrls: ['./admin-user-list.component.css'],
 })
 export class AdminUserListComponent implements OnInit {
-  constructor(private fireService: FirebaseService) {}
+  constructor(private fireService: AdminFireService) {}
   // users list
   users = new MatTableDataSource(null);
   // colums config for the userlist table
-  displayedColumns = ['userName', 'role', 'balance'];
+  displayedColumns = ['userName', 'role', 'balance', 'action'];
+  // param to get or sets the paginator
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  // param to gets or sets the sort
   @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
     this.getUsers();
   }
-  getUsers() {
+  /**
+   * method to get the user list
+   */
+  public getUsers(): void {
     this.fireService
       .getUserList()
       .snapshotChanges()
@@ -32,21 +38,13 @@ export class AdminUserListComponent implements OnInit {
         this.users.paginator = this.paginator;
       });
   }
+  /**
+   * method to update the balence of the user.
+   * @param key key of user in firebase.
+   * @param value updating value.
+   */
+  public onUpdateBalence(key: string, value: number): void {
+    this.fireService.updateUser(key, value);
+    alert('Balence Updated!!!.');
+  }
 }
-// columns: ColumnConfig[] = [
-//   {
-//     name: 'UserName',
-//     displayName: 'userName',
-//     type: 'string',
-//   },
-//   {
-//     name: 'RefernceId',
-//     displayName: 'refId',
-//     type: 'string',
-//   },
-//   {
-//     name: 'Role',
-//     displayName: 'role',
-//     type: 'string',
-//   },
-// ];

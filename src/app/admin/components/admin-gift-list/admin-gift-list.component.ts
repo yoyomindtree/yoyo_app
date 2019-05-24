@@ -14,7 +14,17 @@ export class AdminGiftListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) matSort: MatSort;
   // columns of matrial table
-  displayedColumns: string[] = ['name', 'rating', 'points', 'quantity', 'vendor', 'category', 'discount', 'image', 'Action'];
+  displayedColumns: string[] = [
+    'name',
+    'rating',
+    'points',
+    'quantity',
+    'vendor',
+    'category',
+    'discount',
+    'image',
+    'Action',
+  ];
   // data source
   gifts = new MatTableDataSource();
   // filter -->Global filter
@@ -26,7 +36,7 @@ export class AdminGiftListComponent implements OnInit {
     vendor: '',
     category: '',
   };
-  constructor(private fireService: FirebaseService, private adminFireSerive: AdminFireService,) {}
+  constructor(private fireService: FirebaseService, private adminFireSerive: AdminFireService) {}
 
   ngOnInit() {
     this.getGifts();
@@ -62,6 +72,11 @@ export class AdminGiftListComponent implements OnInit {
             .toLowerCase()
             .indexOf(this.globalFilter.toLowerCase()) !== -1 ||
           data.category
+            .toString()
+            .trim()
+            .toLowerCase()
+            .indexOf(this.globalFilter.toLowerCase()) !== -1 ||
+          data.discount
             .toString()
             .trim()
             .toLowerCase()
@@ -106,7 +121,7 @@ export class AdminGiftListComponent implements OnInit {
   /**
    * onclick of deactive
    */
-  onDeactivate(key, isActive ) {
-    this.adminFireSerive.updateGift(key, {isActive: !isActive});
+  onDeactivate(key, isActive) {
+    this.adminFireSerive.updateGift(key, { isActive: !isActive });
   }
 }

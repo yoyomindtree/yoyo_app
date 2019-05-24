@@ -16,16 +16,18 @@ export class AdminDashboardComponent implements OnInit {
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
   ngOnInit() {}
-  onGiftAddClick() {
+  /**
+   * method will get called on click on gift add button
+   */
+  public onGiftAddClick() {
+    // dialog configuration
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.height = '400px';
     dialogConfig.width = '600px';
-
+    // method for opening the dialog
     const dialogRef = this.dialog.open(AdminAddgiftpopupComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

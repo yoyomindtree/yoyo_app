@@ -69,7 +69,11 @@ export class FirebaseService {
   public getSingleUser(email: string): Observable<any> {
     return this.db.list('/User-List', (ref) => ref.orderByChild('userName').equalTo(email)).valueChanges();
   }
-
+  /**
+   *
+   * @param giftName
+   * method to  get the serach results
+   */
   public getGiftSearchResult(giftName: string): Observable<any> {
     return this.db.list(this.dbGifts).valueChanges();
   }
