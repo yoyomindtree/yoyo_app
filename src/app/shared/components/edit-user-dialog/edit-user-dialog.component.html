@@ -1,0 +1,38 @@
+<!-- <div class="example-container">
+  <mat-form-field>
+    <input matInput placeholder="Input">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Textarea"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Select">
+      <mat-option value="option">Option</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div> -->
+
+<div>
+  <form (ngSubmit)="onEditSubmit()" [formGroup]="editDetailsForm">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+          <mat-error> Please enter the name</mat-error>
+          <mat-icon matSuffix>card_giftcard</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <input type="text">
+      </div>
+      <div class="col-md-6">
+        <input type="text">
+      </div>
+    </div>
+  </form>
+</div>

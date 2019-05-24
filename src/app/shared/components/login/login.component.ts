@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   public toRegister = true;
   public loginErrorCode: string;
   public emailAlreadyExistsErrorCode: string;
+  private isLoggedIn = false;
 
   /**
    * properties patterns
@@ -45,7 +46,9 @@ export class LoginComponent implements OnInit {
     private fbService: FirebaseService,
     private currentRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
-  ) {}
+  ) {
+      
+  }
   private currentUser: UserModel;
   signupForm = this.formBuilder.group({
     username: ['', [Validators.required]],
@@ -92,6 +95,7 @@ export class LoginComponent implements OnInit {
     this.loginService
       .loginInWithGoogle()
       .then((data) => {
+        this.loginService.getLoggedInName.next(data.user.email);
         this.fetchUser(data.user.email).subscribe(
           (userDetail) => {
             if (userDetail[0] && userDetail[0].key) {
@@ -157,6 +161,8 @@ export class LoginComponent implements OnInit {
     this.loginService
       .loginWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
+        // this.loginService.getLoggedInName.emit(data.user.email);
+        this.loginService.getLoggedInName.next(data.user.email);
         this.fetchUser(data.user.email).subscribe((userDetail) => {
           if (userDetail && userDetail[0] && userDetail[0].key) {
             userDetail[0].token = Guid.create().toString();
@@ -203,22 +209,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public getUserData(userName) {
-    this.loginService.getUserByUserName(userName).subscribe((data) => {
-      this.currentUser = Object.values(data)[0];
-    });
-  }
-
   public CheckCon() {
     const templateParams = {
       name: 'Testing123',
       to_name: 'Raghavendra',
     };
     emailjs.send('yoyo', 'template_5bhTnqFg', templateParams, 'user_LqyB0x9nwHbehnc2Fp7G1').then(
-      function(response) {
+      function (response) {
         console.log('SUCCESS!', response.status, response.text);
       },
-      function(err) {
+      function (err) {
         console.log('FAILED...', err);
       },
     );

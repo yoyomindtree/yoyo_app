@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { HeaderComponent } from './shared/components/header/header.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [

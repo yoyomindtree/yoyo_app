@@ -7,6 +7,8 @@ import { UserGiftOrderComponent } from './components/user-gift-order/user-gift-o
 import { AngularMaterialModule } from '../angular-material.module';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../shared/components/header/header.component';
+
 
 @NgModule({
   declarations: [userComponents, UserGiftOrderComponent, UserSearchComponent],
@@ -19,5 +21,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
   ],
+ 
 })
 export class UserModule {}

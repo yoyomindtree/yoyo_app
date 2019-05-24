@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // firebase imports
 import { auth, User } from 'firebase';
@@ -6,13 +6,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { UserModel } from '../model/user.model';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, Event } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
+  public getLoggedInName = new BehaviorSubject(null);
   private user: User;
   private userDetails: UserModel;
 
@@ -50,14 +51,11 @@ export class LoginService {
   }
 
   constructor(private authService: AngularFireAuth, private httpClient: HttpClient, private router: Router) {
-    this.authService.authState.subscribe((user) => {
-      if (user) {
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user));
-      } else {
-        localStorage.setItem('user', null);
-      }
-    });
+    const userEmail = sessionStorage.getItem('email');
+    console.log("inside service:::::", userEmail);
+    if (userEmail) {
+      this.getLoggedInName.next(userEmail);
+    }
   }
 
   /**
@@ -73,11 +71,5 @@ export class LoginService {
   public logOut() {
     this.authService.auth.signOut();
     this.router.navigate(['/login']);
-  }
-  // tobe removed
-  public getUserByUserName(userName) {
-    return this.httpClient.get(
-      environment.firebaseConfig.databaseURL + '/User-List.json/?orderBy="userName"&equalTo="' + userName + '"',
-    );
   }
 }

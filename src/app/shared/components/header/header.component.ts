@@ -1,8 +1,11 @@
 import { Observable } from 'rxjs';
 import { FirebaseService } from './../../services/firebase.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { map } from 'rxjs/operators';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+
 
 @Component({
   selector: 'app-header',
@@ -10,9 +13,20 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private fbService: FirebaseService, private loginService: LoginService) { }
+  private isLoggedIn = false;
+  private loggedInUsername: string;
+  constructor(private fbService: FirebaseService, private loginService: LoginService, private cdr: ChangeDetectorRef,
+              private dialog: MatDialog) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.loginService.getLoggedInName.subscribe(email => {
+      if (email) {
+        this.isLoggedIn = true;
+        this.loggedInUsername = email;
+      }
+    });
+  }
   onLogoutClicked() {
     this.fetchUser(sessionStorage.getItem('email')).subscribe((userDetail) => {
       if (userDetail && userDetail.key) {
@@ -25,6 +39,7 @@ export class HeaderComponent implements OnInit {
     }, (error) => {
       sessionStorage.clear();
     });
+    this.isLoggedIn = false;
     this.loginService.logOut();
   }
 
@@ -44,6 +59,19 @@ export class HeaderComponent implements OnInit {
             observer.complete();
           }
         );
+    });
+  }
+
+  public openEditDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px';
+    dialogConfig.width = '600px';
+
+    const dialogRef = this.dialog.open(EditUserDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("result from dialog ::: ", result);
     });
   }
 }

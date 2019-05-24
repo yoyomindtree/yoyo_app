@@ -12,6 +12,7 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatDialogModule,
+  MatMenuModule,
 } from '@angular/material';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +24,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+
 @NgModule({
   declarations: [],
   imports: [
@@ -48,6 +51,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSidenavModule,
     MatListModule,
     MatAutocompleteModule,
+    MatMenuModule
   ],
   exports: [
     MatCheckboxModule,
@@ -71,6 +75,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSidenavModule,
     MatListModule,
     MatAutocompleteModule,
+    MatMenuModule
   ],
 })
 export class AngularMaterialModule {}
