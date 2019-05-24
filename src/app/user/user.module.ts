@@ -8,9 +8,10 @@ import { UserGiftOrderComponent } from './components/user-gift-order/user-gift-o
 import { AngularMaterialModule } from '../angular-material.module';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UserFeedbackComponent } from './components/user-feedback/user-feedback.component';
 
 @NgModule({
-  declarations: [userComponents, UserGiftOrderComponent, UserSearchComponent],
+  declarations: [userComponents, UserGiftOrderComponent, UserSearchComponent, UserFeedbackComponent],
   imports: [
     CommonModule,
     GiftModule,
@@ -20,6 +21,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [GiftResolverService]
+  providers: [GiftResolverService],
+  entryComponents: [UserFeedbackComponent]
 })
 export class UserModule { }
