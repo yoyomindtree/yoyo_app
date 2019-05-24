@@ -34,13 +34,23 @@ export class FirebaseService {
 
   /**
    *
-   * @param user : userParam
+   * @param key : User Record Key
+   * @param value : User complete detail which need to update
    * this method update the user
    */
   public updateUser(key: any, value: any): void {
     this.usersRef.update(key, value).catch((error) => {
       console.log(error);
     });
+  }
+
+  /**
+   *
+   * @param key : Gift Record Key
+   * this method update the user
+   */
+  public getGiftByKey(key: string): Observable<any> {
+    return this.db.list('/Gift-List', (ref) => ref.orderByKey().equalTo(key)).valueChanges();
   }
   /**
    * method to get all the users in the db

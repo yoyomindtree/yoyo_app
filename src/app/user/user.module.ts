@@ -1,3 +1,4 @@
+import { GiftResolverService } from './../shared/services/gift-resolver.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GiftModule } from './../gift/gift.module';
 import { UserRoutingModule, userComponents } from './user-routing.module';
@@ -19,5 +20,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
   ],
+  providers: [GiftResolverService]
 })
-export class UserModule {}
+export class UserModule { }

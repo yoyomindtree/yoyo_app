@@ -1,3 +1,4 @@
+import { GiftResolverService } from './../shared/services/gift-resolver.service';
 import { UserGiftOrderComponent } from './components/user-gift-order/user-gift-order.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,9 @@ const routes: Routes = [
   {
     path: 'order',
     component: UserGiftOrderComponent,
+    resolve: {
+      gift: GiftResolverService
+    }
   },
   { path: 'profile', component: UserProfileComponent },
 ];
