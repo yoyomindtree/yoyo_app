@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { UserModel } from 'src/app/shared/model/user.model';
-import { ColumnConfig } from 'material-dynamic-table';
 import { AdminFireService } from '../../services/admin-fire.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -12,9 +11,6 @@ import { AdminFireService } from '../../services/admin-fire.service';
   styleUrls: ['./admin-user-list.component.css'],
 })
 export class AdminUserListComponent implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
   constructor(private fireService: AdminFireService) {}
   // users list
   users = new MatTableDataSource(null);
@@ -24,6 +20,8 @@ export class AdminUserListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // param to gets or sets the sort
   @ViewChild(MatSort) sort: MatSort;
+  // subscription variable
+  private subscription: Subscription;
   ngOnInit() {
     this.getUsers();
   }
@@ -31,7 +29,7 @@ export class AdminUserListComponent implements OnInit, OnDestroy {
    * method to get the user list
    */
   public getUsers(): void {
-    this.fireService
+    this.subscription = this.fireService
       .getUserList()
       .snapshotChanges()
       .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
@@ -49,5 +47,9 @@ export class AdminUserListComponent implements OnInit, OnDestroy {
   public onUpdateBalence(key: string, value: number): void {
     this.fireService.updateUser(key, value);
     alert('Balence Updated!!!.');
+  }
+  // on destroy for clean up
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

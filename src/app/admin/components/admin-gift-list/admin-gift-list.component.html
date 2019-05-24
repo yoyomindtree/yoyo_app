@@ -2,6 +2,9 @@
   <input matInput [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)"
     placeholder="Search Gift Name  or Category  or discounts" />
 </mat-form-field>
+<button mat-mini-fab color="primary" id="addBtn" matTooltip="Click here to add GiftCard" (click)=" onGiftAddClick()">
+  <mat-icon>add</mat-icon>
+</button>
 <div class="example-container mat-elevation-z8">
   <table mat-table [dataSource]="gifts" class="mat-elevation-z8" matSort>
 
