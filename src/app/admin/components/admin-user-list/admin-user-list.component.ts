@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
@@ -11,7 +11,10 @@ import { AdminFireService } from '../../services/admin-fire.service';
   templateUrl: './admin-user-list.component.html',
   styleUrls: ['./admin-user-list.component.css'],
 })
-export class AdminUserListComponent implements OnInit {
+export class AdminUserListComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
   constructor(private fireService: AdminFireService) {}
   // users list
   users = new MatTableDataSource(null);
