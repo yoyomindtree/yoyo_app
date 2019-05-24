@@ -1,6 +1,5 @@
 .example-card {
-  width: 400px;
-  height: 500px;
+  margin-top: 30px;
 }
 
 .example-header-image {
@@ -8,10 +7,16 @@
   background-size: cover;
 }
 
-.card-image {
+.discription{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* .card-image {
   width: 400px;
   height: 250px;
-}
+} */
 .star {
   position: relative;
   display: inline-block;
