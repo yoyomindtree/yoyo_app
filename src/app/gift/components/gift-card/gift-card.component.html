@@ -1,13 +1,16 @@
  <mat-card class="example-card">
    <mat-card-header>
-     <mat-card-title>{{gift.name}}
-       <div>
-         <ng-template #t let-fill="fill">
-           <span class="star" [class.full]="fill === 100">
-             <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
-           </span>
-         </ng-template>
-         <ngb-rating [(rate)]="gift.frequency" [starTemplate]="t" [readonly]="true" max="1"></ngb-rating>
+     <mat-card-title>
+       <div class="gift-title">
+         <div class="gift-name">{{gift.name}}</div>
+         <div class="gift-frequency">
+           <ng-template #t let-fill="fill">
+             <span class="star" [class.full]="fill === 100">
+               <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+             </span>
+           </ng-template>
+           <ngb-rating [(rate)]="gift.frequency" [starTemplate]="t" [readonly]="true" max="1"></ngb-rating>
+         </div>
        </div>
      </mat-card-title>
      <mat-card-subtitle>{{gift.vendor}}</mat-card-subtitle>

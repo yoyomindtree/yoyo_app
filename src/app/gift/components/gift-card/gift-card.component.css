@@ -2,13 +2,30 @@
   margin-top: 30px;
 }
 
+.gift-name {
+  float: left;
+  width: 95%;
+}
+
+.gift-title{
+  width: 250px;
+  height: 50px;
+}
+
+.gift-frequency{
+  margin-top: -1em;
+  margin-right: -2em;
+  float: right;
+  width: 5%;
+}
+
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
 
-.discription{
-  white-space: nowrap; 
+.discription {
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -23,9 +40,11 @@
   font-size: 3rem;
   color: #d3d3d3;
 }
+
 .full {
   color: red;
 }
+
 .half {
   position: absolute;
   display: inline-block;
