@@ -49,5 +49,5 @@ export class UserSearchComponent implements OnInit {
     );
   }
 
-  public 
+  
 }
