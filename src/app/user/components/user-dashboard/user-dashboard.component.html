@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="row card-list">
-    <div *ngFor="let gift of giftsForSending" class="col-md-3">
+    <div *ngFor="let gift of gifts$ | async" class="col-md-3">
       <app-gift-card [gift]="gift"></app-gift-card>
     </div>
   </div>

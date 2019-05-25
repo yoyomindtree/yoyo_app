@@ -15,6 +15,13 @@ import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+
+import { appReducers } from './shared/store/reducers/app.reducers';
+import { GiftEffects } from './shared/store/effects/gift.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +36,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AngularMaterialModule,
     APP_ROUTING,
     NgbModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([GiftEffects]),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ScrollingModule,
   ],
