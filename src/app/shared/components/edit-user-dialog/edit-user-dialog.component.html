@@ -14,25 +14,82 @@
   </mat-form-field>
 </div> -->
 
-<div>
-  <form (ngSubmit)="onEditSubmit()" [formGroup]="editDetailsForm">
-    <div class="row">
-      <div class="col-md-6">
-        <mat-form-field appearance="outline">
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username" />
-          <mat-error> Please enter the name</mat-error>
-          <mat-icon matSuffix>card_giftcard</mat-icon>
-        </mat-form-field>
-      </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <form (ngSubmit)="onEditSubmit()" [formGroup]="editDetailsForm">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="legacy">
+              <mat-label>Edit email</mat-label>
+              <input matInput formControlName="email" id="editUsername" />
+              <mat-error *ngFor="let validation of account_validation_messages.email">
+                <mat-error
+                  *ngIf="editDetailsForm.get('email').hasError(validation.type) && (editDetailsForm.get('email').dirty || editDetailsForm.get('email').touched)">
+                  {{validation.message}} </mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="legacy">
+              <mat-label>New password</mat-label>
+              <input type="password" matInput formControlName="password" id="editPassword" />
+              <mat-error *ngFor="let validation of account_validation_messages.password">
+                <mat-error
+                  *ngIf="editDetailsForm.get('password').hasError(validation.type) && (editDetailsForm.get('password').dirty || editDetailsForm.get('password').touched)">
+                  {{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="legacy">
+              <mat-label>Confirm new password</mat-label>
+              <input type="password" matInput formControlName="confirmPassword" id="editConfirmPassword" />
+              <mat-error *ngFor="let validation of account_validation_messages.confirm_password">
+                <mat-error
+                  *ngIf="editDetailsForm.get('confirmPassword').hasError(validation.type) && (editDetailsForm.get('confirmPassword').dirty || editDetailsForm.get('confirmPassword').touched)">
+                  {{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="legacy">
+              <mat-label>Edit phone</mat-label>
+              <input matInput formControlName="phone" id="editPhone" />
+              <mat-error *ngFor="let validation of account_validation_messages.phone">
+                <mat-error
+                  *ngIf="editDetailsForm.get('phone').hasError(validation.type) && (editDetailsForm.get('phone').dirty || editDetailsForm.get('phone').touched)">
+                  {{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="form-inline">
+            <div class="col-md-5">
+              <button mat-raised-button color="primary" class="form-control" [disabled]="!editDetailsForm.valid || (!editDetailsForm.touched)">
+                <span>&nbsp;&nbsp;</span> SAVE <span>&nbsp;&nbsp;</span> </button>
+            </div>
+            <div class="col-md-4">
+              <button mat-raised-button class="form-control" (click)="onCancel()"> CANCEL</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <input type="text">
-      </div>
-      <div class="col-md-6">
-        <input type="text">
-      </div>
+    <div class="col-md-5" id="image">
+      <img src="../../../../assets/images/ezgif.com-resize (7).gif" alt="">
     </div>
-  </form>
+  </div>
 </div>

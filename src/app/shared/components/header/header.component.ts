@@ -66,12 +66,12 @@ export class HeaderComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '400px';
+    dialogConfig.height = '470px';
     dialogConfig.width = '600px';
 
     const dialogRef = this.dialog.open(EditUserDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log("result from dialog ::: ", result);
+      console.log("result from dialog : ", result);
     });
   }
 }

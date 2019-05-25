@@ -1,0 +1,14 @@
+@media (max-width: 346px) {
+    /* .img {
+        object-fit: cover;
+        margin-top: 45px; 
+    } */
+    .container {
+        padding: 2rem;
+    }
+}
+
+
+   ::ng-deep .mat-input-wrapper{
+    width:400px !important;
+  }

@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   public loginErrorCode: string;
   public emailAlreadyExistsErrorCode: string;
   private isLoggedIn = false;
+  private phoneNumber: number;
 
   /**
    * properties patterns
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit {
     username: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]],
     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.pwdPattern)]],
-    confirmPassword: ['', [Validators.required, this.mismatchPassword.bind(this)]],
+    confirmPassword: ['', [this.mismatchPassword.bind(this)]],
     // confirmPassword: ['', [Validators.required, this.validService.mismatch(this.signupForm.get('password'))]],
     phone: ['', [Validators.required, Validators.pattern(this.mobnumPattern)]],
   });
@@ -62,6 +63,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.signupForm.get('password').valueChanges.subscribe((value) => {
       this.pass = value;
+    });
+    this.signupForm.get('phone').valueChanges.subscribe((value)=> {
+      this.phoneNumber = value;
     });
   }
 
@@ -78,6 +82,7 @@ export class LoginComponent implements OnInit {
       userId: Guid.create().toString(),
       userName: data.user.email,
       token: Guid.create().toString(),
+      phone: this.phoneNumber
     };
     /**
      * Add registered user in db
