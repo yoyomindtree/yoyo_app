@@ -25,7 +25,6 @@ export class UserFeedbackComponent implements OnInit {
    * On click of form submit it will submit the record in db.
    */
   public onSubmit(): void {
-    debugger;
     this.ratingByUser = new ReviewModel(
       sessionStorage.getItem('email'),
       this.data.giftId,
