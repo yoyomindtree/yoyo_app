@@ -24,8 +24,20 @@ export class GiftsService {
     });
   }
 
+  public getAllRecievedGifts(): Observable<GiftModel[]> {
+    return Observable.create((observer: any) => {
+      this.firebaseService
+        .getAllGifts()
+        .snapshotChanges()
+        .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
+        .subscribe((data: GiftModel[]) => {
+          observer.next(data);
+          observer.complete();
+        });
+    });
+  }
+
   public getSearchedGifts(searchKey: string): Observable<GiftModel[]> {
-    console.log('searchKey:- ', searchKey);
     return Observable.create((observer: any) => {
       const subcription = this.firebaseService.getGiftSearchResult().pipe(
         map((response) =>

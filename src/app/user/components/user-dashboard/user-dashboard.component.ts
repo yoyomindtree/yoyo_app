@@ -1,4 +1,4 @@
-import { GetGiftsDetails, GetSearchedGiftDetails } from './../../../shared/store/actions/gift.actions';
+import { GetGiftsDetails, GetSearchedGiftDetails, GetReceivedGiftDetails } from './../../../shared/store/actions/gift.actions';
 import { GetGiftsDetailsSuccess } from '../../../shared/store/actions/gift.actions';
 import { AppState } from './../../../shared/store/state/app.state';
 import { GiftModel } from './../../../shared/model/gift.model';
@@ -28,5 +28,15 @@ export class UserDashboardComponent implements OnInit {
   public getGifts(): void {
     this._store.dispatch(new GetGiftsDetails());
   }
-  public onUserSelect(): void {}
+
+  /**
+   * method to get the gifts.
+   */
+  public onToggle(key: string): void {
+    if (key === 'R') {
+      this._store.dispatch(new GetReceivedGiftDetails());
+    } else {
+      this._store.dispatch(new GetGiftsDetails());
+    }
+  }
 }

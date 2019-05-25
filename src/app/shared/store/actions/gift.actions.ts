@@ -3,9 +3,9 @@ import { Action } from '@ngrx/store';
 
 export enum GiftActionsEnum {
     GetGiftsDetails = '[Gift] Get Gifts',
-    GetGiftDetailsSuccess = '[Gift] Get Gifts Success',
+    GetGiftsDetailsSuccess = '[Gift] Get Gifts Success',
     GetSearchedGiftDetails = '[Gift]  Searched Gift',
-    GetGiftsDetailsSuccess = '[Gift] Get Gift Success',
+    GetReceivedGiftDetails = '[Gift] Get Received Gift Success',
 }
 
 export class GetGiftsDetails implements Action {
@@ -22,9 +22,13 @@ export class GetSearchedGiftDetails implements Action {
     constructor(public payload: string) { }
 }
 
+export class GetReceivedGiftDetails implements Action {
+    public readonly type = GiftActionsEnum.GetReceivedGiftDetails;
+}
+
 // export class GetGiftDetailsSuccess implements Action {
 //     public readonly type = GiftActionsEnum.GetGiftDetailsSuccess;
 //     constructor(public payload: GiftModel) { }
 // }
 
-export type GiftActions = GetGiftsDetails | GetGiftsDetailsSuccess | GetSearchedGiftDetails;
+export type GiftActions = GetGiftsDetails | GetGiftsDetailsSuccess | GetSearchedGiftDetails | GetReceivedGiftDetails;

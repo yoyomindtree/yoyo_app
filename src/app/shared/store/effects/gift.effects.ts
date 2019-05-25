@@ -1,4 +1,4 @@
-import { GetSearchedGiftDetails } from './../actions/gift.actions';
+import { GetSearchedGiftDetails, GetReceivedGiftDetails } from './../actions/gift.actions';
 import { GiftsService } from './../../../gift/services/gifts.service';
 import { GiftModel } from 'src/app/shared/model/gift.model';
 import { GiftActionsEnum, GetGiftsDetails, GetGiftsDetailsSuccess } from '../actions/gift.actions';
@@ -31,8 +31,13 @@ export class GiftEffects {
             map(gifts => new GetGiftsDetailsSuccess(gifts)))
     ));
 
-    // switchMap((gifts: GiftModel[]) => of(new GetGiftsDetailsSuccess(gifts)))
-    //
+    @Effect()
+    getReceivedGifts$ = this._actions$.pipe(
+        ofType<GetReceivedGiftDetails>(GiftActionsEnum.GetReceivedGiftDetails),
+        switchMap(() => this._giftsService.getAllRecievedGifts()
+        .pipe(
+            map(gifts => new GetGiftsDetailsSuccess(gifts)))
+    ));
 
     constructor(
         private _giftsService: GiftsService,
