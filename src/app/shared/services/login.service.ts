@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { UserModel } from '../model/user.model';
 import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class LoginService {
   public getLoggedInName = new BehaviorSubject(null);
   private user: User;
   private userDetails: UserModel;
-  constructor(private authService: AngularFireAuth, private router: Router) {
+  constructor(private authService: AngularFireAuth, private router: Router, private currentRoute: ActivatedRoute) {
     const userEmail = sessionStorage.getItem('email');
     if (userEmail) {
       this.getLoggedInName.next(userEmail);
@@ -34,18 +34,14 @@ export class LoginService {
       { type: 'validUsername', message: 'Your username has already been taken' },
     ],
     email: [{ type: 'required', message: 'Email is required' }, { type: 'pattern', message: 'Enter a valid email' }],
-    confirm_password: [
-      { type: 'areEqual', message: 'Password mismatch' },
-    ],
+    confirm_password: [{ type: 'areEqual', message: 'Password mismatch' }],
     password: [
       { type: 'required', message: 'Password is required' },
       { type: 'minLength', message: 'Password must be at least 5 characters long' },
       { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number' },
     ],
     terms: [{ type: 'pattern', message: 'You must accept terms and conditions' }],
-    phone: [
-      { type: 'required', message: 'phone is required'},
-      { type: 'minLength', message: 'Should be 10 digits'}        ]
+    phone: [{ type: 'required', message: 'phone is required' }, { type: 'minLength', message: 'Should be 10 digits' }],
   };
 
   /**
@@ -80,6 +76,6 @@ export class LoginService {
 
   public logOut(): void {
     this.authService.auth.signOut();
-    this.router.navigate(['/login']);
+    this.router.navigate(['../../login'], { relativeTo: this.currentRoute });
   }
 }

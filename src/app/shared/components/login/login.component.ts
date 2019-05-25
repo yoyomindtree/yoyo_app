@@ -38,7 +38,9 @@ export class LoginComponent implements OnInit {
    *   VALIDATION ERROR MESSAGES
    */
   public account_validation_messages = this.validService.account_validation_messages;
-
+  private currentUser: UserModel;
+  // gets or sets the signup farm.
+  public signupForm: FormGroup;
   constructor(
     private loginService: LoginService,
     private formBuilder: FormBuilder,
@@ -47,17 +49,16 @@ export class LoginComponent implements OnInit {
     private fbService: FirebaseService,
     private currentRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
-  ) {}
-  private currentUser: UserModel;
-  signupForm = this.formBuilder.group({
-    username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]],
-    password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.pwdPattern)]],
-    confirmPassword: ['', [this.mismatchPassword.bind(this)]],
-    // confirmPassword: ['', [Validators.required, this.validService.mismatch(this.signupForm.get('password'))]],
-    phone: ['', [Validators.required, Validators.pattern(this.mobnumPattern)]],
-  });
-
+  ) {
+    this.signupForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.pwdPattern)]],
+      confirmPassword: ['', [this.mismatchPassword.bind(this)]],
+      // confirmPassword: ['', [Validators.required, this.validService.mismatch(this.signupForm.get('password'))]],
+      phone: ['', [Validators.required, Validators.pattern(this.mobnumPattern)]],
+    });
+  }
   ngOnInit() {
     this.signupForm.get('password').valueChanges.subscribe((value) => {
       this.pass = value;
@@ -70,16 +71,17 @@ export class LoginComponent implements OnInit {
   /**
    * method to create & store registered user
    */
-  public createNewuser(data) {
-    const balance = { forRedeem: 100, forSending: 100 } as IBalance;
+  public createNewuser(data): void {
+    const balance = { forRedeem: 0, forSending: 1000 } as IBalance;
     this.newUser = {
       balance: balance,
-      password: data.user.uid,
+      password: this.signupForm.get('password').value ? this.signupForm.get('password').value : data.user.uid,
       refId: Guid.create().toString(),
       role: 'user',
       userId: Guid.create().toString(),
       userName: data.user.email,
       token: data.user.uid,
+      mobNo: this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
     };
     /**
      * Add registered user in db
@@ -87,6 +89,7 @@ export class LoginComponent implements OnInit {
     this.fbService.createUser(this.newUser);
     sessionStorage.setItem('token', this.newUser.token);
     sessionStorage.setItem('email', this.newUser.userName);
+    this.signupForm.reset();
     this.router.navigate(['/login']);
   }
 
@@ -124,14 +127,14 @@ export class LoginComponent implements OnInit {
   /**
    * Method to toggle between sign in and register
    */
-  public onRegister() {
+  public onRegister(): void {
     this.toRegister = !this.toRegister;
     this.signupForm.reset();
   }
   /**
    * Method to either Register or Sign in
    */
-  public onSubmit() {
+  public onSubmit(): void {
     if (this.toRegister) {
       this.onSubmitRegister();
     } else {
@@ -141,7 +144,7 @@ export class LoginComponent implements OnInit {
   /**
    * Method to register the user with username & password
    */
-  public onSubmitRegister() {
+  public onSubmitRegister(): void {
     this.loginService
       .registerWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
@@ -152,13 +155,12 @@ export class LoginComponent implements OnInit {
         console.log('Registeration Error : ', error);
         this.emailAlreadyExistsErrorCode = error.code;
       });
-    this.signupForm.reset();
   }
 
   /**
    * Method to sign in with username & password
    */
-  public onSubmitLogin() {
+  public onSubmitLogin(): void {
     this.spinner.show();
     this.loginService
       .loginWithEmailAndPassword(this.signupForm.value)
@@ -187,7 +189,10 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
       });
   }
-
+  /**
+   * method to fetch the user based on the email id
+   * @param email --> user email id
+   */
   public fetchUser(email: string): Observable<any> {
     return Observable.create((observer: any) => {
       this.fbService.getSingleUser(email).subscribe(

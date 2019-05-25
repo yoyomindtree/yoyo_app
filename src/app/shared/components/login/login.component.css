@@ -65,3 +65,6 @@ input.ng-invalid.ng-touched {
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg");
   background-size: cover
 }
+a#loginLink, a#registerLink, #signIn{
+  cursor: pointer;
+}

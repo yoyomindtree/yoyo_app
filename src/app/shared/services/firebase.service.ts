@@ -89,7 +89,7 @@ export class FirebaseService {
    * @param giftName
    * method to  get the serach results
    */
-  public getGiftSearchResult(giftName: string): Observable<any> {
+  public getGiftSearchResult(): Observable<any> {
     return this.db.list(this.dbGifts).valueChanges();
   }
 }

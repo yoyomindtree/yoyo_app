@@ -11,7 +11,7 @@ import { selectGiftList } from 'src/app/shared/store/selectors/gift.selector';
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  styleUrls: ['./user-dashboard.component.css'],
 })
 export class UserDashboardComponent implements OnInit {
   public gifts$ = this._store.pipe(select(selectGiftList));
@@ -21,9 +21,12 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit() {
     this.getGifts();
   }
-  getGifts() {
-    console.log(this.gifts$);
+
+  /**
+   * method to get the gifts.
+   */
+  public getGifts(): void {
     this._store.dispatch(new GetGiftsDetails());
   }
-
+  public onUserSelect(): void {}
 }

@@ -5,7 +5,7 @@
     </span>
     <span class="fillSpace"></span>
     <span *ngIf="isLoggedIn">
-      <button mat-mini-fab [matMenuTriggerFor]="account" class="defaultProfileImage"></button>
+      <button mat-mini-fab color="warn" [matMenuTriggerFor]="account" class="defaultProfileImage"></button>
       <mat-menu #account="matMenu">
         <button mat-menu-item> {{ loggedInUsername }}</button>
         <button mat-menu-item (click)="openEditDialog()">Edit profile</button>
@@ -14,8 +14,10 @@
       </mat-menu>
     </span>
     <span *ngIf="isLoggedIn">
-      <button mat-icon-button (click)="onLogoutClicked()">
+      <button mat-icon-button (click)="onLogoutClicked()" matTooltip="Logout">
+
         <mat-icon>exit_to_app</mat-icon>
+
       </button>
     </span>
   </mat-toolbar-row>
