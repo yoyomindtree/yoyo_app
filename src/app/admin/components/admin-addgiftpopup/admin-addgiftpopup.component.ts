@@ -31,7 +31,7 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
       discription: ['', [Validators.required]],
       category: ['', [Validators.required]],
       vendor: ['', [Validators.required]],
-      points: ['', [Validators.required]],
+      points: ['', [Validators.required, Validators.min(0)]],
       discount: ['', [Validators.required, Validators.min(0), this.validateDiscount.bind(this)]],
       quantity: ['', [Validators.min(1), Validators.required]],
       imagePath: ['', [Validators.required]],
