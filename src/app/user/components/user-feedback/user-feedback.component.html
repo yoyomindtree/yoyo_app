@@ -4,16 +4,16 @@
   <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4">
-          <span style="color: purple">UserRating</span>
-          <!-- <bar-rating [(rate)]="cssRate" [max]="5"></bar-rating> -->
-          <div class="col-md-4 col-xs-4 col-lg-6 col-sm-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Rating</mat-label>
-              <input matInput formControlName="rating" />
-              <mat-error> Please enter your rating</mat-error>
-              <mat-icon matSuffix>card_giftcard</mat-icon>
-            </mat-form-field>
-          </div>
+        <span style="color: purple">UserRating</span>
+
+        <div class="col-md-4 col-xs-4 col-lg-6 col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Rating</mat-label>
+            <input matInput formControlName="rating" />
+            <mat-error> Please enter your rating</mat-error>
+            <mat-icon matSuffix>card_giftcard</mat-icon>
+          </mat-form-field>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -34,6 +34,14 @@
   </form>
 </mat-dialog-content>
 
+<div class="row">
+  <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4">
+    <span>
+      <p>Rate this Book</p>
+      <bar-rating [(rate)]="cssRate" [max]="5"></bar-rating>
+    </span>
+  </div>
+</div>
 <mat-dialog-actions align="center" mat-dialog-title>
   <button mat-mini-fab mat-dialog-close matTooltip="Close">
     <mat-icon>clear</mat-icon>

@@ -46,9 +46,7 @@ export class LoginComponent implements OnInit {
     private fbService: FirebaseService,
     private currentRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
-  ) {
-      
-  }
+  ) {}
   private currentUser: UserModel;
   signupForm = this.formBuilder.group({
     username: ['', [Validators.required]],
@@ -69,7 +67,7 @@ export class LoginComponent implements OnInit {
    * method to create & store registered user
    */
   public createNewuser(data) {
-    const balance = { forRedeem: 10, forSending: 20 } as IBalance;
+    const balance = { forRedeem: 100, forSending: 100 } as IBalance;
     this.newUser = {
       balance: balance,
       password: data.user.uid,
@@ -77,7 +75,7 @@ export class LoginComponent implements OnInit {
       role: 'user',
       userId: Guid.create().toString(),
       userName: data.user.email,
-      token: Guid.create().toString(),
+      token: data.user.uid,
     };
     /**
      * Add registered user in db
@@ -85,24 +83,24 @@ export class LoginComponent implements OnInit {
     this.fbService.createUser(this.newUser);
     sessionStorage.setItem('token', this.newUser.token);
     sessionStorage.setItem('email', this.newUser.userName);
-    this.router.navigate(['/user']);
+    this.router.navigate(['/login']);
   }
 
   /**
    * method to sign in with Google
    */
-  public onLoginWithGoogle() {
+  public onLoginWithGoogle(): void {
     this.loginService
       .loginInWithGoogle()
       .then((data) => {
         this.loginService.getLoggedInName.next(data.user.email);
         this.fetchUser(data.user.email).subscribe(
           (userDetail) => {
-            if (userDetail[0] && userDetail[0].key) {
-              userDetail[0].token = Guid.create().toString();
-              sessionStorage.setItem('token', userDetail[0].token);
-              sessionStorage.setItem('email', userDetail[0].userName);
-              this.fbService.updateUser(userDetail[0].key, userDetail[0]);
+            if (userDetail && userDetail.key) {
+              userDetail.token = data.user.uid.toString();
+              sessionStorage.setItem('token', userDetail.token);
+              sessionStorage.setItem('email', userDetail.userName);
+              this.fbService.updateUser(userDetail.key, userDetail);
               this.router.navigate(['/user']);
             } else {
               this.createNewuser(data);
@@ -164,12 +162,12 @@ export class LoginComponent implements OnInit {
         // this.loginService.getLoggedInName.emit(data.user.email);
         this.loginService.getLoggedInName.next(data.user.email);
         this.fetchUser(data.user.email).subscribe((userDetail) => {
-          if (userDetail && userDetail[0] && userDetail[0].key) {
-            userDetail[0].token = Guid.create().toString();
-            sessionStorage.setItem('token', userDetail[0].token);
-            sessionStorage.setItem('email', userDetail[0].userName);
-            this.fbService.updateUser(userDetail[0].key, userDetail[0]);
-            if (userDetail[0].role === 'admin') {
+          if (userDetail && userDetail.key) {
+            userDetail.token = data.user.uid.toString();
+            sessionStorage.setItem('token', userDetail.token);
+            sessionStorage.setItem('email', userDetail.userName);
+            this.fbService.updateUser(userDetail.key, userDetail);
+            if (userDetail.role === 'admin') {
               this.router.navigate(['/admin']);
             } else {
               this.router.navigate(['/user']);
@@ -178,10 +176,6 @@ export class LoginComponent implements OnInit {
           this.spinner.hide();
           this.signupForm.reset();
         });
-
-        /**
-         * fetching single user
-         */
       })
       .catch((error) => {
         console.log('Login Error: ', error);
@@ -192,20 +186,16 @@ export class LoginComponent implements OnInit {
 
   public fetchUser(email: string): Observable<any> {
     return Observable.create((observer: any) => {
-      this.fbService
-        .getUserList()
-        .snapshotChanges()
-        .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
-        .subscribe(
-          (data) => {
-            observer.next(data.filter((users) => users.userName === email));
-            observer.complete();
-          },
-          (error) => {
-            observer.next(false);
-            observer.complete();
-          },
-        );
+      this.fbService.getSingleUser(email).subscribe(
+        (data) => {
+          observer.next(data[0]);
+          observer.complete();
+        },
+        (error) => {
+          observer.next(false);
+          observer.complete();
+        },
+      );
     });
   }
 
@@ -215,10 +205,10 @@ export class LoginComponent implements OnInit {
       to_name: 'Raghavendra',
     };
     emailjs.send('yoyo', 'template_5bhTnqFg', templateParams, 'user_LqyB0x9nwHbehnc2Fp7G1').then(
-      function (response) {
+      function(response) {
         console.log('SUCCESS!', response.status, response.text);
       },
-      function (err) {
+      function(err) {
         console.log('FAILED...', err);
       },
     );

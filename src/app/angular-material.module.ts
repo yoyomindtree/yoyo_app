@@ -24,7 +24,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { BarRatingModule } from 'ngx-bar-rating';
 @NgModule({
   declarations: [],
   imports: [
@@ -50,7 +50,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSidenavModule,
     MatListModule,
     MatAutocompleteModule,
-    MatMenuModule
+    MatMenuModule,
+    BarRatingModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -74,7 +75,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSidenavModule,
     MatListModule,
     MatAutocompleteModule,
-    MatMenuModule
+    MatMenuModule,
+    BarRatingModule,
   ],
 })
 export class AngularMaterialModule {}
