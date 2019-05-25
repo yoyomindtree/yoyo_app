@@ -1,16 +1,16 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <span>
-      <img src="../../../../assets/images/logo.png" alt="">
+      <img src="../../../../assets/images/logo.png" alt="" (clcik)="onLogoClciked()">
     </span>
     <span class="fillSpace"></span>
     <span *ngIf="isLoggedIn">
-      <button mat-mini-fab  [matMenuTriggerFor]="account" class="defaultProfileImage"></button>
+      <button mat-mini-fab [matMenuTriggerFor]="account" class="defaultProfileImage"></button>
       <mat-menu #account="matMenu">
-          <button mat-menu-item>{{loggedInUsername}}</button>
+        <button mat-menu-item> {{ loggedInUsername }}</button>
         <button mat-menu-item (click)="openEditDialog()">Edit profile</button>
         <button mat-menu-item>History</button>
-        <button mat-menu-item (click)="onLogoutClicked()" >Logout</button>
+        <button mat-menu-item (click)="onLogoutClicked()">Logout</button>
       </mat-menu>
     </span>
     <span *ngIf="isLoggedIn">

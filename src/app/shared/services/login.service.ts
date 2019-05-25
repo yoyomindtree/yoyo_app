@@ -1,13 +1,12 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
 // firebase imports
 import { auth, User } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
+
 import { UserModel } from '../model/user.model';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { Router, Event } from '@angular/router';
-import { environment } from 'src/environments/environment.prod';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,16 @@ export class LoginService {
   public getLoggedInName = new BehaviorSubject(null);
   private user: User;
   private userDetails: UserModel;
+  constructor(private authService: AngularFireAuth, private router: Router) {
+    const userEmail = sessionStorage.getItem('email');
+    if (userEmail) {
+      this.getLoggedInName.next(userEmail);
+    }
+  }
 
+  /**
+   * property validation messgaes.
+   */
   public account_validation_messages = {
     username: [
       { type: 'required', message: 'Username is required' },
@@ -40,24 +48,24 @@ export class LoginService {
       { type: 'minLength', message: 'Should be 10 digits'}        ]
   };
 
-  public registerWithEmailAndPassword(credentials): Promise<auth.UserCredential> {
+  /**
+   * method to register the user with email and passweord.
+   * @param credentials :credentials provided by the user form
+   */
+  public registerWithEmailAndPassword(credentials: any): Promise<auth.UserCredential> {
     const email = credentials.email;
     const password = credentials.password;
     return this.authService.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  public loginWithEmailAndPassword(credentials): Promise<auth.UserCredential> {
+  /**
+   * method to sign in with the email and password
+   * @param credentials ->credentials provided by the user on form
+   */
+  public loginWithEmailAndPassword(credentials: any): Promise<auth.UserCredential> {
     const email = credentials.email;
     const password = credentials.password;
     return this.authService.auth.signInWithEmailAndPassword(email, password);
-  }
-
-  constructor(private authService: AngularFireAuth, private httpClient: HttpClient, private router: Router) {
-    const userEmail = sessionStorage.getItem('email');
-    console.log("inside service:::::", userEmail);
-    if (userEmail) {
-      this.getLoggedInName.next(userEmail);
-    }
   }
 
   /**
@@ -70,7 +78,7 @@ export class LoginService {
    * method to log out
    */
 
-  public logOut() {
+  public logOut(): void {
     this.authService.auth.signOut();
     this.router.navigate(['/login']);
   }

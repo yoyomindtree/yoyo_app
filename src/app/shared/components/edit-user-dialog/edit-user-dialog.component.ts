@@ -61,7 +61,7 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
     // subscription to get the property whenever the input point filed will change.
     this.subscription = this.fbService.getSingleUser(this.getCurrentUserEmail).subscribe(data => {
       this.getCurrentUserDetails = data;
-      console.log("currentuser::::", this.getCurrentUserDetails);
+      // console.log("currentuser::::", this.getCurrentUserDetails);
       // to pre-populate the form
       this.editDetailsForm.patchValue({
         'email': this.getCurrentUserDetails.userName,
@@ -98,7 +98,7 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
     this.updatedUserDetails = {
       'userName': this.editDetailsForm.value.email,
       'phone': this.editDetailsForm.value.phone
-    }
+    };
     // console.log("edited form:::::", this.editDetailsForm)
     this.fbService.updateUser(this.getCurrentUserDetails[0].key, this.updatedUserDetails);
     this.onCancel();
