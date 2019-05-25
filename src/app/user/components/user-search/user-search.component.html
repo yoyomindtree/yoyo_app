@@ -1,13 +1,15 @@
 <div class="container">
-
-  <input type="search" class="mat-elevation-z2" [matAutocomplete]="auto" [formControl]="giftControl" />
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let gift of filteredOptions | async" [value]="gift.name">
-      <span>{{ gift?.name }}</span>
-      <span>||</span>
-      <span>
-        {{ gift?.category }}
-      </span>
-    </mat-option>
-  </mat-autocomplete>
+  <form (ngSubmit)="onSubmit()">
+    <input type="search" class="mat-elevation-z2" [matAutocomplete]="auto" placeholder="Search here... "
+      [formControl]="giftControl" />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let gift of filteredOptions | async" [value]="gift.name">
+        <span>{{ gift?.name }}</span>
+        <span>||</span>
+        <span>
+          {{ gift?.category }}
+        </span>
+      </mat-option>
+    </mat-autocomplete>
+  </form>
 </div>

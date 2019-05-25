@@ -6,24 +6,26 @@ import { map } from 'rxjs/internal/operators/map';
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  styleUrls: ['./user-dashboard.component.css'],
 })
 export class UserDashboardComponent implements OnInit {
-
   public giftsForSending: GiftModel[];
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit() {
     this.getGifts();
   }
-  getGifts() {
+  /**
+   * method to get the gifts.
+   */
+  public getGifts(): void {
     this.firebaseService
-    .getAllGifts()
-    .snapshotChanges()
-    .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
-    .subscribe((data: GiftModel[]) => {
-this.giftsForSending = data;
-    });
+      .getAllGifts()
+      .snapshotChanges()
+      .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
+      .subscribe((data: GiftModel[]) => {
+        this.giftsForSending = data;
+      });
   }
-
+  public onUserSelect(): void {}
 }
