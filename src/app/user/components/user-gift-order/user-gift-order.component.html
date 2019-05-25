@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-7">
       <app-gift-card [gift]="gift"></app-gift-card>
@@ -19,6 +19,40 @@
   </div>
   <div class="row">
     <div class="col-md-12">
+      <app-gift-review></app-gift-review>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-sm-8 col-xs-8 col-lg-8">
+      <app-gift-card [gift]="gift"></app-gift-card>
+    </div>
+    <div class="col-md-4 col-sm-8 col-xs-8 col-lg-4 padtop">
+      <div class="row">
+        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+          <input class="form-control round" name="input" type="number" min="1" [(ngModel)]="quantity">
+        </div>
+        <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
+          <button mat-mini-fab color="primary" id="addBtn" matTooltip="Click here to give your valuable feedback"
+            (click)="addFeedback()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="spacer">
+
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-8 col-xs-8 col-lg-6 ">
       <app-gift-review></app-gift-review>
     </div>
   </div>

@@ -12,8 +12,12 @@ import { UserFeedbackComponent } from '../user-feedback/user-feedback.component'
   styleUrls: ['./user-gift-order.component.css'],
 })
 export class UserGiftOrderComponent implements OnInit, OnDestroy {
+  // gets or sets the gift model
   public gift: GiftModel;
+  // property subscription used for cleanup.
   private subscription: Subscription;
+  // quantity
+  quantity = 1;
   constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.data.pipe(map((data: any) => data.gift[0])).subscribe((res) => {
       this.gift = res;
@@ -39,6 +43,8 @@ export class UserGiftOrderComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     // unsubscription
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
