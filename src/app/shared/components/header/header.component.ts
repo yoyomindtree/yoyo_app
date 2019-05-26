@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     private loginService: LoginService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
-    private route: Router,
+    private router: Router,
     private currentRoute: ActivatedRoute,
   ) {}
 
@@ -54,7 +54,9 @@ export class HeaderComponent implements OnInit {
     this.loginService.logOut();
   }
   public onLogoClicked(): void {
-    this.route.navigate(['/user'], { relativeTo: this.currentRoute });
+    if (this.router.url.indexOf('/user') >= 0) {
+      this.router.navigate(['/user'], { relativeTo: this.currentRoute });
+    }
   }
 
   /**
@@ -95,6 +97,6 @@ export class HeaderComponent implements OnInit {
    * method will get called on click of history.
    */
   public onHistoryClicked(): void {
-    this.route.navigate(['/user/history'], { relativeTo: this.currentRoute });
+    this.router.navigate(['/user/history'], { relativeTo: this.currentRoute });
   }
 }
