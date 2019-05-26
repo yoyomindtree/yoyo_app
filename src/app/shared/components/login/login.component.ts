@@ -104,10 +104,16 @@ export class LoginComponent implements OnInit, OnDestroy {
         'user',
         Guid.create().toString(),
         balance,
-        data.user.uid,
+        data.user.uid ? data.user.uid : Guid.create().toString(),
         data.user.displayName ? data.user.displayName : this.signupForm.get('username').value,
         this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
       );
+      this.fbService.createUser(this.newUser);
+      sessionStorage.setItem('token', this.newUser.token);
+      sessionStorage.setItem('email', this.newUser.userName);
+      sessionStorage.setItem('displayName', this.newUser.displyName);
+      this.signupForm.reset();
+      this.router.navigate(['/login']);
     }, (error) => {
       balance = { forRedeem: 0, forSending: 1000 };
       this.newUser = new UserModel(
@@ -117,20 +123,21 @@ export class LoginComponent implements OnInit, OnDestroy {
         'user',
         Guid.create().toString(),
         balance,
-        data.user.uid,
+        data.user.uid ? data.user.uid : Guid.create().toString(),
         data.user.displayName ? data.user.displayName : this.signupForm.get('username').value,
         this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
       );
+      this.fbService.createUser(this.newUser);
+      sessionStorage.setItem('token', this.newUser.token);
+      sessionStorage.setItem('email', this.newUser.userName);
+      sessionStorage.setItem('displayName', this.newUser.displyName);
+      this.signupForm.reset();
+      this.router.navigate(['/login']);
     });
     /**
      * Add registered user in db
      */
-    this.fbService.createUser(this.newUser);
-    sessionStorage.setItem('token', this.newUser.token);
-    sessionStorage.setItem('email', this.newUser.userName);
-    sessionStorage.setItem('displayName', this.newUser.displyName);
-    this.signupForm.reset();
-    this.router.navigate(['/login']);
+
   }
 
   /**
