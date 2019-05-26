@@ -103,3 +103,7 @@ p{
   height: 15vw;
   object-fit: cover;
 } */
+
+#dashed {
+  border: 1px dashed pink;
+}
