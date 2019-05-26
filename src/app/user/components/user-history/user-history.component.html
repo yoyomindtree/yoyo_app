@@ -1,3 +1,47 @@
-<p>
-  user-history works!
-</p>
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- name Column -->
+    <ng-container matColumnDef="giftName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> GiftName </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Name"> {{row.gift.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="points">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Points </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Points"> {{row.gift.points}} </mat-cell>
+    </ng-container>
+
+    <!-- balence Column -->
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Category">
+        {{ row.gift.category }}
+      </mat-cell>
+
+    </ng-container>
+    <!-- action column -->
+    <ng-container matColumnDef="vendor">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Vendor </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Vendor">
+        {{row.gift.vendor}}
+      </mat-cell>
+
+    </ng-container>
+    <ng-container matColumnDef="dateofissue">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> IssueDate </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="IssueDate">
+        {{row.transTime | date}}
+      </mat-cell>
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

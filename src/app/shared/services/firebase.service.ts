@@ -137,8 +137,14 @@ export class FirebaseService {
    */
   public getHistoryForReciever(email: string): Observable<any> {
     return this.db
-      .list('/Gift-History',  (ref) => ref.orderByChild('reciverEmail').equalTo(email))
+      .list('/Gift-History', (ref) => ref.orderByChild('reciverEmail').equalTo(email))
       .snapshotChanges()
       .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))));
+  }
+  /**
+   * method to get the history.
+   */
+  public getHistory(): AngularFireList<HistoryModel> {
+    return this.giftHistoryRef;
   }
 }
