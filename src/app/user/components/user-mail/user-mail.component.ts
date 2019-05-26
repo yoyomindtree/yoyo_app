@@ -54,7 +54,7 @@ export class UserMailComponent implements OnInit {
     let transaction: HistoryModel = null;
     transaction = new HistoryModel(
       Guid.create().toString(),
-      sessionStorage.getItem('eamil'),
+      sessionStorage.getItem('email'),
       this.mailForm.get('to').value,
       new Date().toString(),
       false,
