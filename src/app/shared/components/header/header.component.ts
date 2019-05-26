@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from './../../services/firebase.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
@@ -21,6 +22,8 @@ export class HeaderComponent implements OnInit {
     private loginService: LoginService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
+    private route: Router,
+    private currentRoute: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -85,5 +88,8 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       // console.log("result from dialog : ", result);
     });
+  }
+  public onHistoryClicked(): void {
+    this.route.navigate(['/user/history'], { relativeTo: this.currentRoute });
   }
 }

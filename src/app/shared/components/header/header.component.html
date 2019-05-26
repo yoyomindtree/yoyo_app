@@ -9,7 +9,7 @@
       <mat-menu #account="matMenu">
         <button mat-menu-item> {{ loggedInUsername }}</button>
         <button mat-menu-item (click)="openEditDialog()">Edit profile</button>
-        <button mat-menu-item>History</button>
+        <button mat-menu-item (click)="onHistoryClicked()">History</button>
         <button mat-menu-item (click)="onLogoutClicked()">Logout</button>
       </mat-menu>
     </span>
