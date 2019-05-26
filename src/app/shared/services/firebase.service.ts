@@ -131,4 +131,14 @@ export class FirebaseService {
   public addGiftHistory(transaction: HistoryModel): void {
     this.giftHistoryRef.push(transaction).catch((error) => console.log(error));
   }
+
+  /**
+   * @param email : email id of reciever
+   */
+  public getHistoryForReciever(email: string): Observable<any> {
+    return this.db
+      .list('/Gift-History',  (ref) => ref.orderByChild('reciverEmail').equalTo(email))
+      .snapshotChanges()
+      .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))));
+  }
 }

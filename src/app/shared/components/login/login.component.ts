@@ -1,15 +1,16 @@
+import { HistoryModel } from './../../model/history.model';
 import { Guid } from 'guid-typescript';
 import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { IBalance } from './../../model/user.model';
 import { LoginService } from './../../services/login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { UserModel } from '../../model/user.model';
 import { FirebaseService } from '../../services/firebase.service';
 import { ValidationService } from '../../services/validation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -17,7 +18,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public newUser: UserModel;
   public pass: string;
   public toRegister = true;
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
   private emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   private pwdPattern = '^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$';
   private mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
-
+  private subscription: Subscription;
   /**
    *   VALIDATION ERROR MESSAGES
    */
@@ -69,21 +70,58 @@ export class LoginComponent implements OnInit {
   }
 
   /**
+   * method to get the total point recieved by new user
+   * @param email : new users email address
+   */
+  private getRecievedPoints(email: string): Observable<number> {
+    return Observable.create((observer: any) => {
+      this.subscription = this.fbService.getHistoryForReciever(email).subscribe((data: HistoryModel[]) => {
+        let count = 0;
+        for (let i = 0; i < data.length; i++) {
+          count = count + data[i].totalPoints;
+        }
+        observer.next(count);
+        observer.complete();
+      },
+        (error) => {
+          observer.next(0);
+          observer.complete();
+        });
+    });
+  }
+
+  /**
    * method to create & store registered user
    */
   public createNewuser(data: any): void {
-    const balance = { forRedeem: 0, forSending: 1000 } as IBalance;
-    this.newUser = new UserModel(
-      Guid.create().toString(),
-      data.user.email,
-      this.signupForm.get('password').value ? this.signupForm.get('password').value : data.user.uid,
-      'user',
-      Guid.create().toString(),
-      balance,
-      data.user.uid,
-      data.user.displayName ? data.user.displayName : this.signupForm.get('username').value,
-      this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
-    );
+    let balance: IBalance;
+    this.getRecievedPoints(data.user.email).subscribe((points) => {
+      balance = { forRedeem: points, forSending: 1000 };
+      this.newUser = new UserModel(
+        Guid.create().toString(),
+        data.user.email,
+        this.signupForm.get('password').value ? this.signupForm.get('password').value : data.user.uid,
+        'user',
+        Guid.create().toString(),
+        balance,
+        data.user.uid,
+        data.user.displayName ? data.user.displayName : this.signupForm.get('username').value,
+        this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
+      );
+    }, (error) => {
+      balance = { forRedeem: 0, forSending: 1000 };
+      this.newUser = new UserModel(
+        Guid.create().toString(),
+        data.user.email,
+        this.signupForm.get('password').value ? this.signupForm.get('password').value : data.user.uid,
+        'user',
+        Guid.create().toString(),
+        balance,
+        data.user.uid,
+        data.user.displayName ? data.user.displayName : this.signupForm.get('username').value,
+        this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
+      );
+    });
     /**
      * Add registered user in db
      */
@@ -168,7 +206,6 @@ export class LoginComponent implements OnInit {
     this.loginService
       .loginWithEmailAndPassword(this.signupForm.value)
       .then((data) => {
-        // this.loginService.getLoggedInName.emit(data.user.email);
         this.loginService.getLoggedInName.next(data.user.email);
         this.fetchUser(data.user.email).subscribe((userDetail) => {
           if (userDetail && userDetail.key) {
@@ -220,5 +257,10 @@ export class LoginComponent implements OnInit {
       return { areEqual: true };
     }
     return null;
+  }
+
+  ngOnDestroy(): void {
+    // unsubscription.
+    this.subscription.unsubscribe();
   }
 }
