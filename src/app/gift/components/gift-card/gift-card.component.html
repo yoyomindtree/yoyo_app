@@ -19,7 +19,7 @@
       <ngb-rating [(rate)]="gift.rating"></ngb-rating>
     </p>   
     <p id="gift-frequency" class="text-muted"><strong>{{gift.frequency}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-views"></button></p>
-    <p class="text-muted"><strong>250</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
+    <p class="text-muted"><strong>{{gift.points}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
   </div>
   <div *ngIf='gift.gift' class="card-body card-body-cascade text-center">
     <!-- Title -->
@@ -32,6 +32,6 @@
       <ngb-rating [(rate)]="gift.gift.rating"></ngb-rating>
     </p>   
     <p id="gift-frequency" class="text-muted"><strong>{{gift.gift.frequency}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-views"></button></p>
-    <p class="text-muted"><strong>250</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
+    <p class="text-muted"><strong>{{gift.gift.points}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
   </div>
 </div>
