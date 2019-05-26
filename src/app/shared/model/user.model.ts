@@ -8,6 +8,7 @@ export class UserModel {
     public balance: IBalance,
     public token: string,
     public mobNo: number,
+    public displyName: string,
   ) {}
 }
 export interface IBalance {

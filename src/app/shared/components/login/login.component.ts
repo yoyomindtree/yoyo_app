@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
   /**
    * method to create & store registered user
    */
-  public createNewuser(data): void {
+  public createNewuser(data: any): void {
     const balance = { forRedeem: 0, forSending: 1000 } as IBalance;
     this.newUser = {
       balance: balance,
@@ -82,6 +82,7 @@ export class LoginComponent implements OnInit {
       userName: data.user.email,
       token: data.user.uid,
       mobNo: this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
+      displayName: data.user.displayName ? data.user.displayName : this.signupForm.get('username').value,
     };
     /**
      * Add registered user in db
@@ -89,6 +90,7 @@ export class LoginComponent implements OnInit {
     this.fbService.createUser(this.newUser);
     sessionStorage.setItem('token', this.newUser.token);
     sessionStorage.setItem('email', this.newUser.userName);
+    sessionStorage.setItem('displayName', this.newUser.displyName);
     this.signupForm.reset();
     this.router.navigate(['/login']);
   }
@@ -107,6 +109,7 @@ export class LoginComponent implements OnInit {
               userDetail.token = data.user.uid.toString();
               sessionStorage.setItem('token', userDetail.token);
               sessionStorage.setItem('email', userDetail.userName);
+              sessionStorage.setItem('displayName', userDetail.displyName);
               this.fbService.updateUser(userDetail.key, userDetail);
               this.router.navigate(['/user']);
             } else {
@@ -172,6 +175,7 @@ export class LoginComponent implements OnInit {
             userDetail.token = data.user.uid.toString();
             sessionStorage.setItem('token', userDetail.token);
             sessionStorage.setItem('email', userDetail.userName);
+            sessionStorage.setItem('displayName', userDetail.displayName);
             this.fbService.updateUser(userDetail.key, userDetail);
             if (userDetail.role === 'admin') {
               this.router.navigate(['/admin']);

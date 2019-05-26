@@ -25,14 +25,14 @@ export class UserGiftOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {}
-
+  // method will get called after clciking on the + icon
   public addFeedback(): void {
-    // console.log('');
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '55%';
-    dialogConfig.width = '40%';
+    dialogConfig.height = '350px';
+    dialogConfig.width = '500px';
+    dialogConfig.disableClose = false;
     dialogConfig.data = {
       giftId: this.gift.giftId,
     };

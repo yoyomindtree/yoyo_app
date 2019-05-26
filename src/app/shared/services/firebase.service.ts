@@ -7,6 +7,7 @@ import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { UserModel } from '../model/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ReviewModel } from '../model/review.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +21,14 @@ export class FirebaseService {
   private dbGifts = '/Gift-List';
   // creates the reference for the gift list
   private giftRef: AngularFireList<GiftModel> = null;
+  // creates the db path for the reviewmodel.
+  private dbGiftReviews = '/Gift-Reviews';
+  // creates the refernce for the giftReview list
+  private giftReviewRef: AngularFireList<ReviewModel> = null;
   constructor(private db: AngularFireDatabase) {
     this.usersRef = db.list(this.dbUsers);
     this.giftRef = db.list(this.dbGifts);
+    this.giftReviewRef = db.list(this.dbGiftReviews);
   }
   /**
    *
@@ -91,5 +97,12 @@ export class FirebaseService {
    */
   public getGiftSearchResult(): Observable<any> {
     return this.db.list(this.dbGifts).valueChanges();
+  }
+  /**
+   * method to add gift review
+   * @param review:review input
+   */
+  public addGiftReview(review: ReviewModel): void {
+    this.giftReviewRef.push(review).catch((error) => console.log(error));
   }
 }
