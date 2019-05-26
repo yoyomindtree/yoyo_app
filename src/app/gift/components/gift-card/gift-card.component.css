@@ -105,5 +105,6 @@ p{
 } */
 
 #dashed {
-  border: 1px dashed pink;
+  border: 1px dashed rgb(248, 99, 161);
 }
+
