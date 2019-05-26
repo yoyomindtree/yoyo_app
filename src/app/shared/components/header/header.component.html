@@ -1,7 +1,7 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>
-      <img src="../../../../assets/images/logo.png" alt="" (clcik)="onLogoClciked()">
+    <span (click)="onLogoClicked()">
+      <img src="../../../../assets/images/logo.png" alt="Logo">
     </span>
     <span class="fillSpace"></span>
     <span *ngIf="isLoggedIn">

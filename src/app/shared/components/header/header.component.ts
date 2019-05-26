@@ -53,7 +53,9 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = false;
     this.loginService.logOut();
   }
-  onLogoClciked() {}
+  public onLogoClicked(): void {
+    this.route.navigate(['/user'], { relativeTo: this.currentRoute });
+  }
 
   /**
    * method to fetch the user based on the email
@@ -89,6 +91,9 @@ export class HeaderComponent implements OnInit {
       // console.log("result from dialog : ", result);
     });
   }
+  /**
+   * method will get called on click of history.
+   */
   public onHistoryClicked(): void {
     this.route.navigate(['/user/history'], { relativeTo: this.currentRoute });
   }

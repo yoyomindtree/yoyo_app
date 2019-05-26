@@ -1,44 +1,14 @@
-<!-- <mat-card class="example-card" (click)="routingToOrder(gift.key)">
-  <mat-card-header>
-    <mat-card-title>
-      <div class="gift-title">
-        <div class="gift-name">{{gift.name}}</div>
-        <div class="gift-frequency">
-          <mat-icon>group</mat-icon>{{gift.frequency}}
-        </div>
-      </div>
-    </mat-card-title>
-    <mat-card-subtitle>{{gift.vendor}}</mat-card-subtitle>
-  </mat-card-header>
-  <img class="card-image" mat-card-lg-image src="{{gift.imagePath}}" alt="Gift Coupon Image" class="img-responsive"
-    style="max-height: 3em;">
-  <mat-card-content>
-    <div class="discription">
-      {{gift.description}}
-    </div>
-  </mat-card-content>
-  <ngb-rating [(rate)]=" gift.rating"></ngb-rating> -->
-  <!-- <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions> -->
-<!-- </mat-card> -->
-
 <div class="card card-cascade p-2" (click)="routingToOrder(gift.key)">
 
   <!-- Card image -->
   <div class="view view-cascade overlay">
-    <!-- <img class="card-img-top" src="../../../../assets//images/41Nnk7HbyuL.jpg" alt="Card image cap"> -->
-    <!-- <img src="../../../../assets/images/generic_icons_15_noto_email_v2016_us-main._CB277123353_.png" class="card-img-top img-fluid" alt=""> -->
     <img src="../../../../assets/images/55319431812T1MYN01_bg_1_1.jpg" class="card-img-top img-fluid" alt="">
     <a>
       <div class="mask rgba-white-slight"></div>
     </a>
   </div>
-
   <!-- Card content -->
-  <div class="card-body card-body-cascade text-center">
-
+  <div *ngIf='gift.giftId' class="card-body card-body-cascade text-center">
     <!-- Title -->
     <h4 class="card-title">{{gift.name}}</h4>
     <!-- Subtitle -->
@@ -46,12 +16,22 @@
     <!-- Text -->
     <p class="card-text">{{gift.description}}</p>
     <p id="gift-rating">
-      <ngb-rating [(rate)]=" gift.rating"></ngb-rating>
+      <ngb-rating [(rate)]="gift.rating"></ngb-rating>
     </p>   
     <p id="gift-frequency" class="text-muted"><strong>{{gift.frequency}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-views"></button></p>
-    <p class="text-muted"><strong>250</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
-    <hr>
-
+    <p class="text-muted"><strong>{{gift.points}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
   </div>
-
+  <div *ngIf='gift.gift' class="card-body card-body-cascade text-center">
+    <!-- Title -->
+    <h4 class="card-title">{{gift.gift.name}}</h4>
+    <!-- Subtitle -->
+    <h6 class=" py-2">{{gift.gift.vendor}}</h6>
+    <!-- Text -->
+    <p class="card-text">{{gift.gift.description}}</p>
+    <p id="gift-rating">
+      <ngb-rating [(rate)]="gift.gift.rating"></ngb-rating>
+    </p>   
+    <p id="gift-frequency" class="text-muted"><strong>{{gift.gift.frequency}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-views"></button></p>
+    <p class="text-muted"><strong>{{gift.gift.points}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
+  </div>
 </div>
