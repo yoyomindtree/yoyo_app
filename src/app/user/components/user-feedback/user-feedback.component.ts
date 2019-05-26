@@ -10,8 +10,11 @@ import { ReviewModel } from 'src/app/shared/model/review.model';
   styleUrls: ['./user-feedback.component.css'],
 })
 export class UserFeedbackComponent implements OnInit {
+  // gets or sets the feedbackform.
   public feedbackForm: FormGroup;
-  public cssRate;
+  // gets or sets the rating.
+  public cssRate: number;
+  // gets or sets the reviewmodel.
   public ratingByUser: ReviewModel;
   constructor(
     private formBuilder: FormBuilder,
@@ -37,8 +40,6 @@ export class UserFeedbackComponent implements OnInit {
       new Date().toString(),
       sessionStorage.getItem('displayName'),
     );
-    debugger;
-    console.log(this.ratingByUser);
     alert('Thnaks !..');
     this.firebaseService.addGiftReview(this.ratingByUser);
     this.feedbackForm.reset();

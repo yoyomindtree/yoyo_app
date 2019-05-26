@@ -6,6 +6,12 @@
     <div class="col-md-4 col-sm-8 col-xs-8 col-lg-4 padtop">
       <div class="row">
         <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
+          <button type="button" class="btn btn-primary" (click)=" sendMail()" matTooltip="Send Gift card">Send
+            Gift</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
           <input class="form-control round" name="input" type="number" min="1" [(ngModel)]="quantity"
             matTooltip="select how many quantities you want">
         </div>
@@ -38,7 +44,9 @@
   <div class="row">
     <div class="col-md-6 col-sm-8 col-xs-8 col-lg-6 ">
       <h4> Reviews:</h4>
-      <app-gift-review></app-gift-review>
+      <div *ngFor="let giftReview of reviewList">
+        <app-gift-review [review]="giftReview"></app-gift-review>
+      </div>
     </div>
   </div>
 </div>

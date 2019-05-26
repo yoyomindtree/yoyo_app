@@ -3,7 +3,7 @@ import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angula
 import { IBalance } from './../../model/user.model';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
-import * as emailjs from 'emailjs-com';
+
 import { UserModel } from '../../model/user.model';
 import { FirebaseService } from '../../services/firebase.service';
 import { ValidationService } from '../../services/validation.service';
@@ -73,17 +73,17 @@ export class LoginComponent implements OnInit {
    */
   public createNewuser(data: any): void {
     const balance = { forRedeem: 0, forSending: 1000 } as IBalance;
-    this.newUser = {
-      balance: balance,
-      password: this.signupForm.get('password').value ? this.signupForm.get('password').value : data.user.uid,
-      refId: Guid.create().toString(),
-      role: 'user',
-      userId: Guid.create().toString(),
-      userName: data.user.email,
-      token: data.user.uid,
-      mobNo: this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
-      displayName: data.user.displayName ? data.user.displayName : this.signupForm.get('username').value,
-    };
+    this.newUser = new UserModel(
+      Guid.create().toString(),
+      data.user.email,
+      this.signupForm.get('password').value ? this.signupForm.get('password').value : data.user.uid,
+      'user',
+      Guid.create().toString(),
+      balance,
+      data.user.uid,
+      data.user.displayName ? data.user.displayName : this.signupForm.get('username').value,
+      this.signupForm.get('phone').value ? this.signupForm.get('phone').value : 0,
+    );
     /**
      * Add registered user in db
      */
@@ -210,21 +210,6 @@ export class LoginComponent implements OnInit {
         },
       );
     });
-  }
-
-  public CheckCon() {
-    const templateParams = {
-      name: 'Testing123',
-      to_name: 'Raghavendra',
-    };
-    emailjs.send('yoyo', 'template_5bhTnqFg', templateParams, 'user_LqyB0x9nwHbehnc2Fp7G1').then(
-      function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-      },
-      function(err) {
-        console.log('FAILED...', err);
-      },
-    );
   }
 
   /**

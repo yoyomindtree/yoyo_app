@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <form [formGroup]=" mailForm" (ngSubmit)="onSubmit()">
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+        <mat-form-field appearance="outline">
+          <mat-label>To Name:</mat-label>
+          <textarea matInput formControlName="toName"></textarea>
+          <mat-error> To name field is required.</mat-error>
+          <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+        <mat-form-field appearance="outline">
+          <mat-label>To Email:</mat-label>
+          <textarea matInput formControlName="to"></textarea>
+          <mat-error> To Email field is mandatory.</mat-error>
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Message:</mat-label>
+          <textarea matInput formControlName="message"></textarea>
+          <mat-error> Please enter your mail body.</mat-error>
+          <mat-icon matSuffix>view_headline</mat-icon>
+        </mat-form-field>
+      </div>
+
+    </form>
+  </div>
+</div>
+<mat-dialog-actions align="center" mat-dialog-title>
+  <button mat-mini-fab mat-dialog-close matTooltip="Close">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-dialog-actions>

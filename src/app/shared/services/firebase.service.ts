@@ -8,6 +8,7 @@ import { UserModel } from '../model/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ReviewModel } from '../model/review.model';
+import { HistoryModel } from '../model/history.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,18 +18,27 @@ export class FirebaseService {
   private dbUsers = '/User-List';
   // creates the usersRefernce for the
   public usersRef: AngularFireList<UserModel> = null;
+
   // creates the db path for gift's
   private dbGifts = '/Gift-List';
   // creates the reference for the gift list
   private giftRef: AngularFireList<GiftModel> = null;
+
   // creates the db path for the reviewmodel.
   private dbGiftReviews = '/Gift-Reviews';
   // creates the refernce for the giftReview list
   private giftReviewRef: AngularFireList<ReviewModel> = null;
+
+  // creates the db path for the history.
+  private dbGiftHistory = '/Gift-History';
+  // creates the reference for the gift history.
+  private giftHistoryRef: AngularFireList<HistoryModel> = null;
+
   constructor(private db: AngularFireDatabase) {
     this.usersRef = db.list(this.dbUsers);
     this.giftRef = db.list(this.dbGifts);
     this.giftReviewRef = db.list(this.dbGiftReviews);
+    this.giftHistoryRef = db.list(this.dbGiftHistory);
   }
   /**
    *
@@ -84,7 +94,6 @@ export class FirebaseService {
    * gets the user based on the email id
    */
   public getSingleUser(email: string): Observable<any> {
-    //return this.db.list('/User-List', (ref) => ref.orderByChild('userName').equalTo(email)).valueChanges();
     return this.db
       .list('/User-List', (ref) => ref.orderByChild('userName').equalTo(email))
       .snapshotChanges()
@@ -100,9 +109,26 @@ export class FirebaseService {
   }
   /**
    * method to add gift review
-   * @param review:review input
+   * @param review:review input.
    */
   public addGiftReview(review: ReviewModel): void {
     this.giftReviewRef.push(review).catch((error) => console.log(error));
+  }
+  /**
+   *  method to get the reviews of the gift.
+   * @param giftId -->Id of te gift.
+   */
+  public getGiftReviews(giftId: string): Observable<any> {
+    return this.db
+      .list('/Gift-Reviews', (ref) => ref.orderByChild('giftId').equalTo(giftId))
+      .snapshotChanges()
+      .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))));
+  }
+  /**
+   * method to add the transaction to history table.
+   * @param transaction: historyModel.
+   */
+  public addGiftHistory(transaction: HistoryModel): void {
+    this.giftHistoryRef.push(transaction).catch((error) => console.log(error));
   }
 }
