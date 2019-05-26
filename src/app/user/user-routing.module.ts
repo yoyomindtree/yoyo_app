@@ -26,6 +26,10 @@ const routes: Routes = [
     component: UserHistoryComponent,
   },
   { path: 'profile', component: UserProfileComponent },
+  {
+    path: '**',
+    component: UserDashboardComponent,
+  },
 ];
 
 @NgModule({
