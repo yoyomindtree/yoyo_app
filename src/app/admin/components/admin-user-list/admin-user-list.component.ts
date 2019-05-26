@@ -44,7 +44,7 @@ export class AdminUserListComponent implements OnInit, OnDestroy {
    * @param key key of user in firebase.
    * @param value updating value.
    */
-  public onUpdateBalence(key: string, value: number): void {
+  public onUpdateBalence(key: string, value: any): void {
     this.fireService.updateUser(key, value);
     alert('Balence Updated!!!.');
   }
