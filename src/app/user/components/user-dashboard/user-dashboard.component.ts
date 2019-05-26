@@ -41,10 +41,10 @@ export class UserDashboardComponent implements OnInit {
   }
   public onUserSelect(): void {}
 
-  public onClickActivateSend() {
+  // public onClickActivateSend() {
     
-  }
-  public onClickActivateReceived() {
+  // }
+  // public onClickActivateReceived() {
 
-  }
+  // }
 }
