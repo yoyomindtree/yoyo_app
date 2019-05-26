@@ -1,4 +1,5 @@
 <div class="container">
+  <h3>Send Mail</h3>
   <div class="row">
     <form [formGroup]=" mailForm" (ngSubmit)="onSubmit()">
       <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
@@ -25,7 +26,14 @@
           <mat-icon matSuffix>view_headline</mat-icon>
         </mat-form-field>
       </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-8 col-lg-6 col-xs-8">
 
+        </div>
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+          <button mat-raised-button color="accent" [disabled]="!mailForm.valid">Send</button>
+        </div>
+      </div>
     </form>
   </div>
 </div>

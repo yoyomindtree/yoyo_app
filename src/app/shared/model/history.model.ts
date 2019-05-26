@@ -10,5 +10,6 @@ export class HistoryModel {
     public giftCode: string,
     public gift: GiftModel,
     public user: UserModel,
+    public totalPoints: number,
   ) {}
 }

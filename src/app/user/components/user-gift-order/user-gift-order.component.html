@@ -3,8 +3,10 @@
     <div class="col-md-8 col-sm-8 col-xs-8 col-lg-8">
       <app-gift-card [gift]="gift"></app-gift-card>
     </div>
+
+
     <div class="col-md-4 col-sm-8 col-xs-8 col-lg-4 padtop">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
           <button type="button" class="btn btn-primary" (click)=" sendMail()" matTooltip="Send Gift card">Send
             Gift</button>
@@ -12,8 +14,10 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
-          <input class="form-control round" name="input" type="number" min="1" [(ngModel)]="quantity"
-            matTooltip="select how many quantities you want">
+          <label class="center-block">No of Copies: <input [formControl]="copies" type="number" />
+            <p *ngIf="copies.value <= 0 && copies.touched" style="color: red">Pease
+              enter valid copies</p>
+          </label>
         </div>
         <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
           <button mat-mini-fab color="primary" id="addBtn" matTooltip="Click here to give your valuable feedback"
@@ -21,9 +25,42 @@
             <mat-icon>add</mat-icon>
           </button>
         </div>
-      </div>
+      </div> -->
+      <form (ngSubmit)="onSubmit()" [formGroup]="giftSendForm">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
+            <div class="form-group"
+              [ngClass]="{ 'has-error': !giftSendForm.controls['copies'].valid && giftSendForm.controls['copies'].touched}">
+              <label class="center-block">No of Copies: <input formControlName="copies" type="number" /></label>
+              <mat-error
+                *ngIf="!giftSendForm.controls['copies'].valid && ((giftSendForm.get('copies').dirty ||giftSendForm.controls['copies'].touched))">
+                Pease
+                enter valid copies,</mat-error>
+              <mat-error
+                *ngIf="giftSendForm.get('copies').hasError('isSmaller') && ((giftSendForm.get('copies').dirty || giftSendForm.get('copies').touched))">
+                Low Balence </mat-error>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
+            <button type="button" class="btn btn-primary" (click)=" sendMail()" matTooltip="Send Gift card"
+              [disabled]='!giftSendForm.valid'>Send
+              Gift</button>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
+          <button mat-mini-fab color="primary" id="addBtn" matTooltip="Click here to give your valuable feedback"
+            (click)="addFeedback()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </form>
 
     </div>
+
+
+
   </div>
 </div>
 <div class="spacer">
