@@ -27,9 +27,7 @@ export class GiftsService {
   public getAllRecievedGifts(): Observable<GiftModel[]> {
     return Observable.create((observer: any) => {
       this.firebaseService
-        .getAllGifts()
-        .snapshotChanges()
-        .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))))
+        .getHistoryForReciever(sessionStorage.getItem('email'))
         .subscribe((data: GiftModel[]) => {
           observer.next(data);
           observer.complete();
