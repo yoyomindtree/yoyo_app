@@ -173,3 +173,9 @@ hr{
 .activeBottom {
     border-bottom: 3px solid pink;
 }
+
+.card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } 
