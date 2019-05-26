@@ -9,7 +9,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AuthGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: UserDashboardComponent},
+  { path: '', component: UserDashboardComponent },
   {
     path: 'history',
     component: UserHistoryComponent,
@@ -18,8 +18,12 @@ const routes: Routes = [
     path: 'order',
     component: UserGiftOrderComponent,
     resolve: {
-      gift: GiftResolverService
-    }
+      gift: GiftResolverService,
+    },
+  },
+  {
+    path: 'history',
+    component: UserHistoryComponent,
   },
   { path: 'profile', component: UserProfileComponent },
 ];
