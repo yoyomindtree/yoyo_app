@@ -214,10 +214,10 @@ export class LoginComponent implements OnInit {
       to_name: 'Raghavendra',
     };
     emailjs.send('yoyo', 'template_5bhTnqFg', templateParams, 'user_LqyB0x9nwHbehnc2Fp7G1').then(
-      function(response) {
+      function (response) {
         console.log('SUCCESS!', response.status, response.text);
       },
-      function(err) {
+      function (err) {
         console.log('FAILED...', err);
       },
     );

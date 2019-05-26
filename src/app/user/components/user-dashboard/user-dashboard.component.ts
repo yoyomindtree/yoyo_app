@@ -28,4 +28,11 @@ export class UserDashboardComponent implements OnInit {
       });
   }
   public onUserSelect(): void {}
+
+  public onClickActivateSend() {
+    
+  }
+  public onClickActivateReceived() {
+
+  }
 }

@@ -1,4 +1,175 @@
-.card-list{
+/* .card-list{
     margin-left: 20px;
     margin-right: 20px;
+} */
+
+#giftSearch{
+    padding:5px;
+    margin-bottom: 50px;
+    /* background: url("../../../../assets/images/gift-card_pink_1300x.gif"); */
+    background: rgb(104, 53, 138);
+    border-bottom: 2px solid rgb(104, 53, 138);
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+
+}
+.card {
+    max-width:20rem;
+}
+.row{
+    overflow: hidden;
+}
+
+#cardImage{
+    margin-top: -13rem;
+    height: 450px;
+    background: url("../../../../assets/images/gift-card_pink_1300x.gif");
+    background-size: cover;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.container {
+    padding: 1rem;
+}
+
+
+hr{
+    margin-top: -1px;
+    border-top: 2px solid gainsboro;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+#text{
+    text-align: center;
+    margin-top: -8rem;
+    color: rgb(82, 30, 44);
+}
+
+@media (max-width: 1716px) {
+    #cardImage{
+        object-fit: cover;
+        margin-top: -10rem;
+        height: 450px
+    }
+}
+
+@media (max-width: 980px) {
+    #cardImage{
+        object-fit: cover;
+        margin-top: -10rem;
+        height: 350px;
+    }
+    .h2 {
+        margin-bottom: 0rem;
+        font-weight: 500;
+        line-height: 0.5;
+        margin-top: 1rem;
+        font-size: 5px;
+    }
+    .h5 {
+        margin-bottom: .5rem;
+        font-weight: 500;
+        line-height: 1.5
+    }
+  }
+
+  @media (max-width: 1020px) {
+      #cardImage{
+        object-fit: cover;
+        margin-top: -6rem;
+        height: 300px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 0;
+      }
+      .h2 {
+        margin-bottom: 0rem;
+        font-weight: 500;
+        line-height: 0.5;
+        margin-top: 1rem;
+        font-size: 5px;
+    }
+      .h5 {
+        margin-bottom: .5rem;
+        font-weight: 500;
+        line-height: 1.5
+    }
+
+    @media (max-width: 790px) {
+        #cardImage {
+            object-fit: cover;
+            margin-top: -6rem;
+            height: 200px;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            margin-bottom: 0;
+        }
+    }
+    @media (max-width: 590px) {
+        #cardImage{
+            object-fit: cover;
+            margin-top: -6rem;
+            height: 200px;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            margin-bottom: 0;
+        }
+        .h2{
+            margin-bottom: 0;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top: 1.2rem;
+        }
+    }
+    @media (max-width: 360px) {
+        #cardImage{
+            object-fit: cover;
+            margin-top: -4rem;
+            height: 140px;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            margin-bottom: 0;
+        }
+        .h2, h2{
+            margin-bottom: 0;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top: 8rem;
+        }
+        .h5 {
+            margin-bottom: 0;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+    }
+    @media (max-width: 845px) {
+        #cardImage{
+            object-fit: cover;
+            margin-top: -4rem;
+            height: 140px;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            margin-bottom: 0;
+        }
+        .h2, h2{
+            margin-bottom: 0;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top: 9rem;
+        }
+        .h5 {
+            margin-bottom: 0;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+  }
+}
+
+/* #received.hover, #send.hover {
+    border-bottom: 2px solid rgb(255, 85, 113);
+} */
+
+.mat-button:active {
+    border-bottom: 2px solid pink;
+    border-radius: 0px;
+}
+.activeBottom {
+    border-bottom: 3px solid pink;
 }

@@ -25,14 +25,47 @@ input {
   border-radius: 2px;
   outline: none;
   padding: 6px 16px;
-
-  width: 100%;
-
-
+  width: 50%;
+  /* border-radius: 50px; */
+  margin: 5px;
   font-size: 16px;
   line-height: 34px;
+  /* border: 1px solid rgb(248, 142, 160); */
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+
 }
 
 .spacer {
   height: 200px;
+}
+
+.container {
+  margin-left: 30%;
+}
+
+@media (max-width: 835px) {
+  .container {
+    margin: 0;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+/* .mat-autocomplete-panel {
+  border: 24px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+} */
+
+#searchIcon{
+  color: white;
+}
+
+@media (max-width: 814px) {
+  #searchIcon
+    {
+      text-align: center;
+      display: none;
+    }
 }
