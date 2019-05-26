@@ -1,3 +1,4 @@
+import { UserModel } from 'src/app/shared/model/user.model';
 import { Guid } from 'guid-typescript';
 import { HistoryModel } from './../../../shared/model/history.model';
 import { FirebaseService } from './../../../shared/services/firebase.service';
@@ -38,7 +39,7 @@ export class UserMailComponent implements OnInit {
       message_html: this.mailForm.get('message').value,
       from_email: sessionStorage.getItem('email'),
       to_email: this.mailForm.get('to').value,
-      points: this.data.user.balance.forsending * this.data.copies,
+      points: this.data.gift.points * this.data.copies,
     };
     // mail send method.
     emailjs.send('yoyo', 'template_5bhTnqFg', templateParams, 'user_LqyB0x9nwHbehnc2Fp7G1').then(
@@ -60,11 +61,17 @@ export class UserMailComponent implements OnInit {
       Guid.create().toString(),
       this.data.gift,
       this.data.user,
-      this.data.user.balance.forsending * this.data.copies,
+      this.data.gift.points * this.data.copies,
     );
     this.firebaseService.addGiftHistory(transaction);
-    this.data.user.balance.forsending -= this.data.user.balance.forsending * this.data.copies;
+    this.data.user.balance.forSending -= this.data.gift.points * this.data.copies;
     this.updateUser(this.data.user.key, this.data.user);
+    this.firebaseService.getSingleUser(this.mailForm.get('to').value).subscribe((userdeatil: any) => {
+      if (userdeatil) {
+        userdeatil[0].balance.forRedeem += templateParams.points;
+        this.updateUser(userdeatil[0].key, userdeatil[0]);
+      }
+    });
     this.reset();
   }
 
