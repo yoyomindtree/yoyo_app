@@ -21,15 +21,12 @@
     </div>
     <div class="col-md-6" id="received">
       <button mat-button class="form-control" (click)="onClickActivateReceived()">RECEIVED</button>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3" *ngFor="let gift of giftsForSending">
-      <!-- <div> -->
-      <app-gift-card [gift]="gift" (onUserSelect)="onUserSelect($event)"></app-gift-card>
-      <!-- </div> -->
-    </div>
-  </div>
-</div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3" *ngFor="let gift of gifts$ | async" class="col-md-3">
+            <app-gift-card [gift]="gift"></app-gift-card>
+          </div>
+        </div>
+      </div>

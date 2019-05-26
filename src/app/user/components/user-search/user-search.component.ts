@@ -1,9 +1,12 @@
+import { AppState } from './../../../shared/store/state/app.state';
+import { GetSearchedGiftDetails } from './../../../shared/store/actions/gift.actions';
 import { GiftModel } from 'src/app/shared/model/gift.model';
 import { FirebaseService } from './../../../shared/services/firebase.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-user-search',
@@ -17,7 +20,7 @@ export class UserSearchComponent implements OnInit {
   filteredOptions: Observable<any[]>;
   // event emitter for sending the event.
   @Output() userSelect: EventEmitter<GiftModel[]> = new EventEmitter<GiftModel[]>();
-  constructor(private fireBaseSerive: FirebaseService) {
+  constructor(private fireBaseSerive: FirebaseService, private _store: Store<AppState>) {
     // providing debounce time.
     this.filteredOptions = this.giftControl.valueChanges.pipe(
       startWith(null),
@@ -50,24 +53,11 @@ export class UserSearchComponent implements OnInit {
       ),
     );
   }
+
   /**
    * method will get execute when user submitted the search.
    */
   public onSubmit(): void {
-    let subcription = this.fireBaseSerive.getGiftSearchResult().pipe(
-      map((response) =>
-        response.filter((option: GiftModel) => {
-          return (
-            option.name.toLowerCase().indexOf(this.giftControl.value.toLowerCase()) === 0 ||
-            option.vendor.toLowerCase().indexOf(this.giftControl.value.toLowerCase()) === 0 ||
-            option.category.toLowerCase().indexOf(this.giftControl.value.toLowerCase()) === 0 ||
-            option.points.toString().indexOf(this.giftControl.value) === 0
-          );
-        }),
-      ),
-    );
-    subcription.subscribe((data) => {
-      this.userSelect.emit(data);
-    });
+    this._store.dispatch(new GetSearchedGiftDetails(this.giftControl.value));
   }
 }

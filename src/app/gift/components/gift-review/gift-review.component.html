@@ -1,11 +1,12 @@
 <mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>User Name</mat-card-title>
+  <mat-card-header [style.backgroundColor]="'blue'">
+    <mat-card-title> {{review.displayName}}</mat-card-title>
   </mat-card-header>
-  <ngb-rating [(rate)]="rating"></ngb-rating>
+  <ngb-rating [(rate)]="review.rating"></ngb-rating>
   <mat-card-content>
     <p>
-      Comment
+      {{review.comment}}
     </p>
+    <span>{{review.reviewTime}}</span>
   </mat-card-content>
 </mat-card>

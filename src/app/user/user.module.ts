@@ -11,9 +11,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../shared/components/header/header.component';
 
 import { UserFeedbackComponent } from './components/user-feedback/user-feedback.component';
+import { UserMailComponent } from './components/user-mail/user-mail.component';
 
 @NgModule({
-  declarations: [userComponents, UserGiftOrderComponent, UserSearchComponent, UserFeedbackComponent],
+  declarations: [userComponents, UserGiftOrderComponent, UserSearchComponent, UserFeedbackComponent, UserMailComponent],
   imports: [
     CommonModule,
     GiftModule,
@@ -24,6 +25,6 @@ import { UserFeedbackComponent } from './components/user-feedback/user-feedback.
     FormsModule,
   ],
   providers: [GiftResolverService],
-  entryComponents: [UserFeedbackComponent]
+  entryComponents: [UserFeedbackComponent, UserMailComponent],
 })
-export class UserModule { }
+export class UserModule {}
