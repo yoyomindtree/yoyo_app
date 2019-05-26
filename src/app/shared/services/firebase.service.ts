@@ -50,7 +50,6 @@ export class FirebaseService {
   }
 
   /**
-   *
    * @param key : User Record Key
    * @param value : User complete detail which need to update
    * this method update the user
@@ -130,6 +129,17 @@ export class FirebaseService {
    */
   public addGiftHistory(transaction: HistoryModel): void {
     this.giftHistoryRef.push(transaction).catch((error) => console.log(error));
+  }
+
+  /**
+   * @param key : gift history Record Key
+   * @param value : gift history complete detail which need to update
+   * this method update the gift history
+   */
+  public updateGiftHistory(key: any, value: any): void {
+    this.giftHistoryRef.update(key, value).catch((error) => {
+      console.log(error);
+    });
   }
 
   /**
