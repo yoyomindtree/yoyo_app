@@ -80,9 +80,9 @@ export class UserMailComponent implements OnInit {
     }
   }
   /**
-   *
-   * @param key
-   * @param value
+   *method to update the user
+   * @param key -- key in firebase
+   * @param value -- userdeatil
    */
   public updateUser(key: string, value: any): void {
     this.firebaseService.updateUser(key, value);
