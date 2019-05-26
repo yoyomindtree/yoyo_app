@@ -107,4 +107,7 @@ p{
 #dashed {
   border: 1px dashed rgb(248, 99, 161);
 }
-
+.card-text:last-child {
+  margin-bottom: 0;
+  font-size: medium;
+}
