@@ -83,7 +83,7 @@ export class HeaderComponent implements OnInit {
    */
   public openEditDialog(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.height = '470px';
     dialogConfig.width = '600px';
