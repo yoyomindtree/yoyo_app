@@ -9,7 +9,7 @@ import { UserModel } from '../../model/user.model';
 @Component({
   selector: 'app-edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
-  styleUrls: ['./edit-user-dialog.component.css']
+  styleUrls: ['./edit-user-dialog.component.css'],
 })
 export class EditUserDialogComponent implements OnInit, OnDestroy {
   // property subscription
@@ -17,7 +17,7 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
   // property getCurrentUserEmail to get the currently logged in user email.
   public getCurrentUserEmail;
   // property getCurrentUserDetails to get the currently logged in user details.
-  public getCurrentUserDetails: UserModel;
+  public getCurrentUserDetails;
   public updatedUserDetails: any;
   public editDetailsForm: FormGroup;
   public pass: string;
@@ -33,50 +33,43 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
   private emailPattern = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
   private mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
 
-  constructor(private dialogRef: MatDialogRef<EditUserDialogComponent>,
+  constructor(
+    private dialogRef: MatDialogRef<EditUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fbService: FirebaseService,
     private formBuilder: FormBuilder,
-    private validService: LoginService) {
+    private validService: LoginService,
+  ) {
     this.getCurrentUserEmail = sessionStorage.getItem('email');
     this.editDetailsForm = this.formBuilder.group({
       email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(15),
-      ])),
-      confirmPassword: new FormControl('', Validators.compose([
-        Validators.required,
-        this.mismatchPassword.bind(this)
-      ])),
-      phone: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(10)
-      ]))
+      password: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
+      ),
+      confirmPassword: new FormControl('', Validators.compose([Validators.required, this.mismatchPassword.bind(this)])),
+      phone: new FormControl('', Validators.compose([Validators.required, Validators.minLength(10)])),
     });
   }
 
   ngOnInit() {
     // subscription to get the property whenever the input point filed will change.
-    this.subscription = this.fbService.getSingleUser(this.getCurrentUserEmail).subscribe(data => {
-      this.getCurrentUserDetails = data;
+    this.subscription = this.fbService.getSingleUser(this.getCurrentUserEmail).subscribe((data) => {
+      this.getCurrentUserDetails = data[0];
       // console.log("currentuser::::", this.getCurrentUserDetails);
       // to pre-populate the form
       this.editDetailsForm.patchValue({
-        'email': this.getCurrentUserDetails.userName,
-        'password': '******',
-        'confirmPassword': '******',
-        'phone': 'XXXXXXXXXX'
+        email: this.getCurrentUserDetails.userName,
+        password: this.getCurrentUserDetails.password,
+        confirmPassword: '******',
+        phone: this.getCurrentUserDetails.mobNo,
       });
-
     });
 
     // to receive the changed value from the password form input field
     this.editDetailsForm.get('password').valueChanges.subscribe((value) => {
       this.pass = value;
     });
-
   }
 
   ngOnDestroy() {
@@ -96,11 +89,11 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
 
   public onEditSubmit() {
     this.updatedUserDetails = {
-      'userName': this.editDetailsForm.value.email,
-      'phone': this.editDetailsForm.value.phone
+      userName: this.editDetailsForm.value.email,
+      phone: this.editDetailsForm.value.phone,
     };
     // console.log("edited form:::::", this.editDetailsForm)
-    this.fbService.updateUser(this.getCurrentUserDetails[0].key, this.updatedUserDetails);
+    this.fbService.updateUser(this.getCurrentUserDetails.key, this.updatedUserDetails);
     this.onCancel();
   }
 

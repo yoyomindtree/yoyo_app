@@ -78,11 +78,12 @@
         <div class="row">
           <div class="form-inline">
             <div class="col-md-5">
-              <button mat-raised-button color="primary" class="form-control" [disabled]="!editDetailsForm.valid || (!editDetailsForm.touched)">
+              <button mat-raised-button color="primary" class="form-control"
+                [disabled]="!editDetailsForm.valid || (!editDetailsForm.touched)">
                 <span>&nbsp;&nbsp;</span> SAVE <span>&nbsp;&nbsp;</span> </button>
             </div>
             <div class="col-md-4">
-              <button mat-raised-button class="form-control" (click)="onCancel()"> CANCEL</button>
+              <button mat-raised-button mat-dialog-close matTooltip="Close" class="form-control"> CANCEL</button>
             </div>
           </div>
         </div>

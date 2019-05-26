@@ -24,7 +24,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Balance </mat-header-cell>
       <mat-cell *matCellDef="let row" data-label="Balance">
         <input class="form-control round  col-md-3 col-lg-4" name="input" type="number" min="1"
-          [(ngModel)]="row.balance.forSending" />
+          [(ngModel)]="row.balance.forSending" pattern="[0-9]*" />
       </mat-cell>
 
     </ng-container>
