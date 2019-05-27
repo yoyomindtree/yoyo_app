@@ -20,7 +20,7 @@
                 <div class="col-md-6 col-lg-6 col-xs-4 col-sm-4">
                   <div class="form-group"
                     [ngClass]="{ 'has-error': !giftSendForm.controls['copies'].valid && giftSendForm.controls['copies'].touched}">
-                    <label class="center-block">No of Copies: </label> <input formControlName="copies" type="number" />
+                    <input formControlName="copies" type="number" placeholder="No. of Copies" />
                     <mat-error
                       *ngIf="!giftSendForm.controls['copies'].valid && ((giftSendForm.get('copies').dirty ||giftSendForm.controls['copies'].touched))">
                       Pease
