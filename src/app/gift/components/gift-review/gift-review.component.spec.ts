@@ -9,7 +9,6 @@ describe('GiftReviewComponent', () => {
   configureTestSuite();
   let component: GiftReviewComponent;
   let fixture: ComponentFixture<GiftReviewComponent>;
-  let review: ReviewModel;
   beforeAll((done) =>
     (async () => {
       TestBed.configureTestingModule({

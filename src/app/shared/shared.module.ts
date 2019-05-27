@@ -9,7 +9,6 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { TableComponent } from './components/table/table.component';
 import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user-dialog.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
@@ -20,7 +19,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
 }
 
 @NgModule({
-  declarations: [LoginComponent, FooterComponent, HeaderComponent, TableComponent, EditUserDialogComponent],
+  declarations: [LoginComponent, FooterComponent, HeaderComponent, EditUserDialogComponent],
   imports: [
     CommonModule, AngularMaterialModule, ReactiveFormsModule, FormsModule, HttpClientModule,
     TranslateModule.forRoot({
@@ -30,7 +29,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
         deps: [HttpClient]
       }
     })],
-  exports: [LoginComponent, HeaderComponent, FooterComponent, TableComponent],
+  exports: [LoginComponent, HeaderComponent, FooterComponent],
   entryComponents: [EditUserDialogComponent]
 })
-export class SharedModule { }
+export class SharedModule {}

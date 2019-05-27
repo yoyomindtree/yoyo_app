@@ -47,13 +47,13 @@ describe('AdminAddgiftpopupComponent', () => {
   });
   // points filed validity.
   it('points field validity', () => {
-    let points = component.giftForm.controls['points'];
+    const points = component.giftForm.controls['points'];
     expect(points.valid).toBeFalsy();
   });
   // points filed should not have begetive value.
   it('points feild invalid if you provide negetive value', () => {
     component.giftForm.controls['points'].setValue(-1);
-    let points = component.giftForm.controls['points'];
+    const points = component.giftForm.controls['points'];
     expect(points.errors).toBeTruthy();
   });
   // method
