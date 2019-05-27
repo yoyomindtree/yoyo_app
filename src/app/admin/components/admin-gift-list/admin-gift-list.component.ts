@@ -57,9 +57,9 @@ export class AdminGiftListComponent implements OnInit, OnDestroy {
   public onGiftAddClick(): void {
     // dialog configuration
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '400px';
+    dialogConfig.height = '600px';
     dialogConfig.width = '600px';
     // method for opening the dialog
     const dialogRef = this.dialog.open(AdminAddgiftpopupComponent, dialogConfig);

@@ -4,37 +4,37 @@ export class MockService {
   public LoginInWithGoogle(): string {
     return '';
   }
-  public group({ }): any {
+  public group({}): any {
     return {
       get: () => {
         return {
-          value: 'string' 
+          value: 'string',
         };
-      }
-    }
+      },
+    };
   }
-  
+  public addGift(): void {}
   public getAllGifts(): any {
     return {
       snapshotChanges: () => {
         return {
-          pipe: () => of(null)
+          pipe: () => of(null),
         };
-      }
-    }
+      },
+    };
   }
 
   public getUserList(): any {
     return {
       snapshotChanges: () => {
         return {
-          pipe: () => of(null)
+          pipe: () => of(null),
         };
-      }
-    }
+      },
+    };
   }
 
-  public list({ }): any {
+  public list({}): any {
     return '';
   }
 }

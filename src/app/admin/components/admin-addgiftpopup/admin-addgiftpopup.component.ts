@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 import { Subscription } from 'rxjs';
 import { Guid } from 'guid-typescript';
 import { GiftModel } from 'src/app/shared/model/gift.model';
+
 @Component({
   selector: 'app-admin-addgiftpopup',
   templateUrl: './admin-addgiftpopup.component.html',
@@ -12,11 +13,13 @@ import { GiftModel } from 'src/app/shared/model/gift.model';
 })
 export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
   // property subscription
-  subscription: Subscription;
+  private subscription: Subscription;
   // property points
-  public points: number;
+  private points: number;
   // giftform formgroup.
   public giftForm: FormGroup;
+  // giftDiscount
+  private giftDiscount: number;
   constructor(
     public dialogRef: MatDialogRef<AdminAddgiftpopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,7 +34,7 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
       discription: ['', [Validators.required]],
       category: ['', [Validators.required]],
       vendor: ['', [Validators.required]],
-      points: ['', [Validators.required, Validators.min(0)]],
+      points: ['', [Validators.required, Validators.min(0), this.validatePoints.bind(this)]],
       discount: ['', [Validators.required, Validators.min(0), this.validateDiscount.bind(this)]],
       quantity: ['', [Validators.min(1), Validators.required]],
       imagePath: ['', [Validators.required]],
@@ -42,6 +45,9 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
     // subscription to get the property whenever the input point filed will change.
     this.subscription = this.giftForm.get('points').valueChanges.subscribe((formValue) => {
       this.points = formValue;
+    });
+    this.subscription = this.giftForm.get('discount').valueChanges.subscribe((value) => {
+      this.giftDiscount = value;
     });
   }
   ngOnDestroy(): void {
@@ -77,8 +83,8 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
   }
   /**
    *
-   * @param control -FormControl
-   * Custome validator method
+   * @param control -FormControl.
+   * Custome validator method.
    */
   public validateDiscount(control: FormControl): { [s: string]: boolean } {
     if (this.points < control.value) {
@@ -88,9 +94,20 @@ export class AdminAddgiftpopupComponent implements OnInit, OnDestroy {
     }
   }
   /**
+   * method top validate the user input points.
+   * @param control :formcontrol.
+   */
+  public validatePoints(control: FormControl): { [s: string]: boolean } {
+    if (this.giftDiscount > control.value) {
+      return { isGreater: true };
+    } else {
+      return null;
+    }
+  }
+  /**
    * reset method for gift form
    */
-  public reset() {
+  public reset(): void {
     for (const name in this.giftForm.controls) {
       if (this.giftForm.controls.hasOwnProperty(name)) {
         this.giftForm.controls[name].setValue('');
