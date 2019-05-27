@@ -10,7 +10,7 @@ input {
 }
 
 h4 {
-  color: crimson
+  color: crimson;
 }
 
 app-gift-card {
@@ -48,4 +48,8 @@ mat-icon {
 
 #gift-image{
   text-align: center;
+}
+
+#details {
+  margin-top: 1rem;
 }

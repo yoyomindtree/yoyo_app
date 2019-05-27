@@ -1,44 +1,52 @@
 <div class="container">
-  <h3>Send Mail</h3>
   <div class="row">
-    <form [formGroup]=" mailForm" (ngSubmit)="onSubmit()">
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-        <mat-form-field appearance="outline">
-          <mat-label>To Name:</mat-label>
-          <textarea matInput formControlName="toName"></textarea>
-          <mat-error> To name field is required.</mat-error>
-          <mat-icon matSuffix>edit</mat-icon>
-        </mat-form-field>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-        <mat-form-field appearance="outline">
-          <mat-label>To Email:</mat-label>
-          <textarea matInput formControlName="to"></textarea>
-          <mat-error> To Email field is mandatory.</mat-error>
-          <mat-icon matSuffix>email</mat-icon>
-        </mat-form-field>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-        <mat-form-field appearance="outline">
-          <mat-label>Message:</mat-label>
-          <textarea matInput formControlName="message"></textarea>
-          <mat-error> Please enter your mail body.</mat-error>
-          <mat-icon matSuffix>view_headline</mat-icon>
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-8 col-lg-6 col-xs-8">
-
+    <div class="col-md-6">
+      <h3>Send Mail</h3>
+      <form [formGroup]=" mailForm" (ngSubmit)="onSubmit()">
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+          <mat-form-field appearance="legacy">
+            <mat-label>To Name:</mat-label>
+            <textarea matInput formControlName="toName"></textarea>
+            <mat-error> To name field is required.</mat-error>
+            <mat-icon matSuffix>edit</mat-icon>
+          </mat-form-field>
         </div>
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
-          <button mat-raised-button color="accent" [disabled]="!mailForm.valid">Send</button>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+          <mat-form-field appearance="legacy">
+            <mat-label>To Email:</mat-label>
+            <textarea matInput formControlName="to"></textarea>
+            <mat-error> To Email field is mandatory.</mat-error>
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
         </div>
-      </div>
-    </form>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+          <mat-form-field appearance="legacy">
+            <mat-label>Message:</mat-label>
+            <textarea matInput formControlName="message"></textarea>
+            <mat-error> Please enter your mail body.</mat-error>
+            <mat-icon matSuffix>view_headline</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-4 col-xs-4">
+            <button mat-raised-button color="accent" class="form-control" [disabled]="!mailForm.valid"
+              id="sendBtn">SEND</button>
+          </div>
+          <div class="col-md-6 col-sm-4 col-xs-4">
+            <button mat-raised-button mat-dialog-close matTooltip="Close" class="form-control" id="cancel">
+              CANCEL</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-5">
+      <img src="../../../../assets/images/ezgif.com-resize (11).gif" alt="">
+    </div>
   </div>
 </div>
-<mat-dialog-actions align="center" mat-dialog-title>
-  <button mat-mini-fab mat-dialog-close matTooltip="Close">
+
+<!-- <mat-dialog-actions mat-dialog-title>
+  <button mat-mini-fab mat-dialog-close matTooltip="Close" id="closeBtn">
     <mat-icon>clear</mat-icon>
   </button>
-</mat-dialog-actions>
+</mat-dialog-actions> -->

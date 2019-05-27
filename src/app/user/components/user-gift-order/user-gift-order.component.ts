@@ -94,8 +94,8 @@ export class UserGiftOrderComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '350px';
-    dialogConfig.width = '500px';
+    dialogConfig.height = '400px';
+    dialogConfig.width = '600px';
     dialogConfig.disableClose = false;
     dialogConfig.data = {
       gift: this.gift,
