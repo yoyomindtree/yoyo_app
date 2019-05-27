@@ -13,12 +13,13 @@ export class UserHistoryComponent implements OnInit {
   // gets or sets the data source.
   public dataSource = new MatTableDataSource();
   // colums config for the userlist table
-  displayedColumns = ['giftName', 'points', 'category', 'vendor', 'dateofissue'];
+  public displayedColumns = ['giftName', 'points', 'category', 'vendor', 'dateofissue'];
   // param to get or sets the paginator
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // param to gets or sets the sort
   @ViewChild(MatSort) sort: MatSort;
   // subscription variable
+  private subscriptionl;
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit() {
