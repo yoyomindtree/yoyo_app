@@ -10,6 +10,7 @@ import { UserFeedbackComponent } from '../user-feedback/user-feedback.component'
 import { ReviewModel } from 'src/app/shared/model/review.model';
 import { UserMailComponent } from '../user-mail/user-mail.component';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-user-gift-order',
@@ -40,6 +41,7 @@ export class UserGiftOrderComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private firebaseService: FirebaseService,
     private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
   ) {
     this.activatedRoute.data.pipe(map((data: any) => data.gift[0])).subscribe((res) => {
       this.gift = res;
@@ -78,9 +80,14 @@ export class UserGiftOrderComponent implements OnInit, OnDestroy {
    * method to get the reviews of the gift
    */
   private getGiftReviews() {
-    this.subscription = this.firebaseService.getGiftReviews(this.gift.giftId).subscribe((data) => {
-      this.reviewList = data;
-    });
+    this.spinner.show();
+    this.subscription = this.firebaseService.getGiftReviews(this.gift.giftId).subscribe(
+      (data) => {
+        this.reviewList = data;
+        this.spinner.hide();
+      },
+      (err) => this.spinner.hide(),
+    );
   }
   /**
    * method will get called once user submits the form

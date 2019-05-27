@@ -1,4 +1,8 @@
-import { GetGiftsDetails, GetSearchedGiftDetails, GetReceivedGiftDetails } from './../../../shared/store/actions/gift.actions';
+import {
+  GetGiftsDetails,
+  GetSearchedGiftDetails,
+  GetReceivedGiftDetails,
+} from './../../../shared/store/actions/gift.actions';
 import { GetGiftsDetailsSuccess } from '../../../shared/store/actions/gift.actions';
 import { AppState } from './../../../shared/store/state/app.state';
 import { GiftModel } from './../../../shared/model/gift.model';
@@ -16,7 +20,7 @@ import { selectGiftList } from 'src/app/shared/store/selectors/gift.selector';
 export class UserDashboardComponent implements OnInit {
   public gifts$ = this._store.pipe(select(selectGiftList));
   public giftsForSending: GiftModel[];
-  constructor(private firebaseService: FirebaseService, private _store: Store<AppState>) { }
+  constructor(private firebaseService: FirebaseService, private _store: Store<AppState>) {}
 
   ngOnInit() {
     this.getGifts();
