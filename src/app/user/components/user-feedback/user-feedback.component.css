@@ -11,3 +11,20 @@
     padding: 8px 8px 8px 0;
   }
   
+  #cancel{
+    margin-left: 2.3rem;
+}
+
+@media (max-width: 590px) {
+  #cancel{
+    margin-left: 0rem;
+  }
+}
+
+h4 {
+  color: crimson;
+}
+
+button{
+  margin-top: 0.5rem;
+}
