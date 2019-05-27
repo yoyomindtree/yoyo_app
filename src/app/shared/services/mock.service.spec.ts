@@ -1,4 +1,5 @@
 import { Observable, of } from 'rxjs';
+import { AngularFireList } from '@angular/fire/database';
 
 export class MockService {
   public LoginInWithGoogle(): string {
@@ -13,7 +14,8 @@ export class MockService {
       },
     };
   }
-  public addGift(): void {}
+  // mock method for add gift.
+  public addGift(value: any): void {}
   public getAllGifts(): any {
     return {
       snapshotChanges: () => {
@@ -22,6 +24,10 @@ export class MockService {
         };
       },
     };
+  }
+  // mock service for getting single user.
+  public getSingleUser(email: string): Observable<any> {
+    return new Observable(null);
   }
 
   public getUserList(): any {
@@ -34,8 +40,11 @@ export class MockService {
     };
   }
 
-  public list({}): any {
+  public list(value: string): any {
     return '';
+  }
+  public dispatch(value: any): any {
+    return new Observable(null);
   }
 }
 

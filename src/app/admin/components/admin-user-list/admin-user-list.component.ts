@@ -50,6 +50,8 @@ export class AdminUserListComponent implements OnInit, OnDestroy {
   }
   // on destroy for clean up
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

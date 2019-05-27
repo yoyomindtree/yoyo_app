@@ -87,7 +87,7 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  public onEditSubmit() {
+  public onEditSubmit(): void {
     this.updatedUserDetails = {
       userName: this.editDetailsForm.value.email,
       phone: this.editDetailsForm.value.phone,
@@ -97,7 +97,7 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
     this.onCancel();
   }
 
-  public onCancel() {
+  public onCancel(): void {
     this.dialogRef.close();
   }
 }
