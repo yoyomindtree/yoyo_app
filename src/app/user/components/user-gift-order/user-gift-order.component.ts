@@ -35,7 +35,7 @@ export class UserGiftOrderComponent implements OnInit, OnDestroy {
   // gets or sets the user entered value
   public points: number;
   // boolean value
-  public sendmail: boolean = false;
+  public sendmail = false;
   constructor(
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
