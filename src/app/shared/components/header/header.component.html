@@ -13,12 +13,21 @@
         <button mat-menu-item (click)="onLogoutClicked()">Logout</button>
       </mat-menu>
     </span>
+    &nbsp;
+    <span>
+      <button mat-button [matMenuTriggerFor]="languages" class="defaultLanguage">English</button>
+      <mat-menu #languages="matMenu">
+        <button mat-menu-item>German</button>
+      </mat-menu>
+    </span>
+    &nbsp;
     <span *ngIf="isLoggedIn">
       <button mat-icon-button (click)="onLogoutClicked()" matTooltip="Logout">
-
-        <mat-icon>exit_to_app</mat-icon>
-
+        Logout <mat-icon>exit_to_app</mat-icon>
       </button>
+    </span>
+    <span>
+    &nbsp;
     </span>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -181,7 +181,7 @@ button:active {
   } 
 
   button.activeBottom {
-      color: brown;
+      color:pink;
   }
   
   button:hover {
