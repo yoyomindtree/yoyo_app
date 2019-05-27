@@ -166,16 +166,24 @@ hr{
     border-bottom: 2px solid rgb(255, 85, 113);
 } */
 
-.mat-button:active {
-    border-bottom: 2px solid pink;
-    border-radius: 0px;
+button:active {
+    color: antiquewhite;
+    background: pink;
 }
-.activeBottom {
+/* .activeBottom {
     border-bottom: 3px solid pink;
-}
+} */
 
 .card-text {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   } 
+
+  button.activeBottom {
+      color: brown;
+  }
+  
+  button:hover {
+      background: pink;
+  }
