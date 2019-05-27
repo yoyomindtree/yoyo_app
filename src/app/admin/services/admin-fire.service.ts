@@ -24,7 +24,7 @@ export class AdminFireService {
    * @param gift - Type GiftModel
    *  adds the gift to firebase
    */
-  public addGift(gift: GiftModel) {
+  public addGift(gift: GiftModel): void {
     this.giftRef.push(gift);
   }
   /**

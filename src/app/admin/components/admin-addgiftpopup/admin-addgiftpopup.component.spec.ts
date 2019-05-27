@@ -8,7 +8,7 @@ import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AdminAddgiftpopupComponent } from './admin-addgiftpopup.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-fdescribe('AdminAddgiftpopupComponent', () => {
+describe('AdminAddgiftpopupComponent', () => {
   configureTestSuite();
   let component: AdminAddgiftpopupComponent;
   let fixture: ComponentFixture<AdminAddgiftpopupComponent>;
@@ -22,7 +22,6 @@ fdescribe('AdminAddgiftpopupComponent', () => {
         providers: [
           { provide: MatDialogRef, useClass: MockService },
           { provide: MAT_DIALOG_DATA, useClass: MockService },
-          { provide: FormBuilder, useClass: MockService },
           { provide: AdminFireService, useClass: MockService },
         ],
       });
@@ -32,19 +31,37 @@ fdescribe('AdminAddgiftpopupComponent', () => {
       .catch(done.fail),
   );
 
-  beforeEach(fakeAsync(() => {
-    fixture = TestBed.createComponent(AdminAddgiftpopupComponent);
-    component = fixture.componentInstance;
-    component.ngOnInit();
-  }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminAddgiftpopupComponent);
     component = fixture.componentInstance;
+    component.ngOnInit();
     fixture.detectChanges();
   });
-
+  // it should creates an  component.
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  // form validation when it is empty.
+  it('form invalid when empty', () => {
+    expect(component.giftForm.valid).toBeFalsy();
+  });
+  // points filed validity.
+  it('points field validity', () => {
+    let points = component.giftForm.controls['points'];
+    expect(points.valid).toBeFalsy();
+  });
+  // points filed should not have begetive value.
+  it('points feild invalid if you provide negetive value', () => {
+    component.giftForm.controls['points'].setValue(-1);
+    let points = component.giftForm.controls['points'];
+    expect(points.errors).toBeTruthy();
+  });
+  // method
+  it('should show aleart after submitting the form', () => {
+    // spyOn(AdminFireService, 'addGift').and.callFake(() =>)
+    spyOn(window, 'alert');
+    component.onSubmit();
+    fixture.detectChanges();
+    expect(window.alert).toHaveBeenCalledWith('Gift added Sucessfully');
   });
 });

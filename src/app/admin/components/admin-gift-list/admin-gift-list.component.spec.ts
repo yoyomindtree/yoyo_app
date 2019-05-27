@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminGiftListComponent } from './admin-gift-list.component';
+import { FirebaseService } from 'src/app/shared/services/firebase.service';
+import { AdminFireService } from '../../services/admin-fire.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AdminGiftListComponent', () => {
   let component: AdminGiftListComponent;
@@ -12,16 +15,14 @@ describe('AdminGiftListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        AngularMaterialModule,
-        FormsModule
-      ],
+      imports: [AngularMaterialModule, FormsModule, BrowserAnimationsModule],
       declarations: [AdminGiftListComponent],
       providers: [
-        { provide: AngularFireDatabase, useClass: MockService }
+        { provide: AngularFireDatabase, useClass: MockService },
+        { provide: FirebaseService, useClass: MockService },
+        { provide: AdminFireService, useClass: MockService },
       ],
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

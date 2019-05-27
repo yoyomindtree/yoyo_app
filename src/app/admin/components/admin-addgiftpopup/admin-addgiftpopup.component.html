@@ -34,7 +34,9 @@
         <mat-form-field appearance="outline">
           <mat-label>Points</mat-label>
           <input matInput formControlName="points" type="number" />
-          <mat-error> Please enter valid points </mat-error>
+          <mat-error *ngIf="giftForm.get('points').hasError('required')"> Please enter points </mat-error>
+          <mat-error *ngIf="giftForm.get('points').hasError('isGreater')"> Points can't be less than discount.
+          </mat-error>
           <mat-icon matSuffix>attach_money
           </mat-icon>
         </mat-form-field>
