@@ -1,3 +1,4 @@
+import { I18nService } from './services/i18n.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LANG_PATH, JSONBINDING } from './constant/app.constant';
 import { NgModule } from '@angular/core';
@@ -29,7 +30,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
         deps: [HttpClient]
       }
     })],
+  providers: [I18nService],
   exports: [LoginComponent, HeaderComponent, FooterComponent],
   entryComponents: [EditUserDialogComponent]
 })
-export class SharedModule {}
+export class SharedModule { }
