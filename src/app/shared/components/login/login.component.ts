@@ -12,6 +12,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { defaultLanguage } from '../../utils/app.i18n';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fbService: FirebaseService,
     private currentRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) {
     this.signupForm = this.formBuilder.group({
       username: ['', [Validators.required]],
@@ -61,6 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
+    this.translate.use(defaultLanguage);
     this.signupForm.get('password').valueChanges.subscribe((value) => {
       this.pass = value;
     });

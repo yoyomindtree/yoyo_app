@@ -3,6 +3,14 @@
       "EditProfile": "DE_Edit profile",
       "History": "DE_History",
       "Logout": "DE_Logout"
+    },
+    "Login": {
+      "SignIn": "DE_Sign in",
+      "Register": "DE_Register",
+      "AlreadyMember": "DE_Already a member?",
+      "NotMember": "DE_Not a member?",
+      "EmailAlreadyUsed": "DE_The email address is already in use by another account.",
+      "NoUserFound": "DE_There is no user record corresponding to this email address. Please register first."
     }
   }
   

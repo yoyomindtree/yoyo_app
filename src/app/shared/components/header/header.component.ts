@@ -1,3 +1,4 @@
+import { I18nService } from './../../services/i18n.service';
 import { defaultLanguage } from './../../utils/app.i18n';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -19,10 +20,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public isLoggedIn = false;
   // gets or sets the loggedin user name.
   public loggedInUsername: string;
+  public flag: string;
   // gets or sets the subscription.
-  private subscription: Subscription;
+  private subscription: Subscription[] = [];
   constructor(
     private fbService: FirebaseService,
+    private i18nService: I18nService,
     private loginService: LoginService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
@@ -33,16 +36,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.translate.use(defaultLanguage);
-    this.subscription = this.loginService.getLoggedInName.subscribe((email) => {
+    this.subscription.push(this.loginService.getLoggedInName.subscribe((email) => {
       if (email) {
         this.isLoggedIn = true;
         this.loggedInUsername = email;
       }
-    });
+    }));
+    this.subscription.push(this.i18nService.local.subscribe((lang: string) => {
+      this.translate.use(lang);
+      this.flag = lang;
+    }));
   }
   // method will get called once user clicked on logout
   public onLogoutClicked(): void {
-    this.subscription = this.fetchUser(sessionStorage.getItem('email')).subscribe(
+    this.subscription.push(this.fetchUser(sessionStorage.getItem('email')).subscribe(
       (userDetail) => {
         if (userDetail && userDetail.key) {
           userDetail.token = null;
@@ -55,7 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       (error) => {
         sessionStorage.clear();
       },
-    );
+    ));
     this.isLoggedIn = false;
     this.loginService.logOut();
   }
@@ -104,8 +111,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/user/history'], { relativeTo: this.currentRoute });
   }
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.subscription.length > 0) {
+      this.subscription.forEach((sub: any) => sub.unsubscribe());
     }
   }
 }

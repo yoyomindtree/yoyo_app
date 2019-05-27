@@ -3,5 +3,13 @@
     "EditProfile": "Edit profile",
     "History": "History",
     "Logout": "Logout"
+  },
+  "Login": {
+    "SignIn": "Sign in",
+    "Register": "Register",
+    "AlreadyMember": "Already a member?",
+    "NotMember": "Not a member?",
+    "EmailAlreadyUsed": "The email address is already in use by another account.",
+    "NoUserFound": "There is no user record corresponding to this email address. Please register first."
   }
 }

@@ -3,4 +3,4 @@ export const multilingualOptions = {
     german: 'de'
 };
 
-export const defaultLanguage = multilingualOptions.english;
+export const defaultLanguage = multilingualOptions.german;

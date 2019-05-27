@@ -9,12 +9,6 @@ export function giftReducers(state = initialGiftState, action: GiftActions): Gif
         gifts: action.payload,
       };
     }
-    // case GiftActionsEnum.GetGiftDetailsSuccess: {
-    //   return {
-    //     ...state,
-    //     selectedGift: action.payload
-    //   };
-    // }
 
     default:
       return state;
