@@ -1,6 +1,3 @@
-.spacer {
-  height: 10px;
-}
 
 input {
   border: solid 3px rgba(0, 0, 0, 0.1);
@@ -12,11 +9,43 @@ input {
   line-height: 30px;
 }
 
-.padtop {
-  padding-top: 20%;
-  padding-right: 0px;
-}
-
 h4 {
   color: crimson
+}
+
+app-gift-card {
+  width: max-content;
+}
+
+.container {
+  margin-top: 3rem;
+}
+
+/* input {
+  margin-bottom: 3rem;
+} */
+
+button {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+}
+
+.btn, .btn-warning {
+  margin-left: 0;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+}
+
+#addBtn {
+  text-align: center;
+}
+
+mat-icon {
+  padding: 0;
+}
+
+#gift-image{
+  text-align: center;
 }
