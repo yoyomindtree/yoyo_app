@@ -1,7 +1,8 @@
+import { GlobalErrorHandlerService } from './shared/services/global-error-handler.service';
 import { APP_ROUTING } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 // Firebase imports
@@ -43,7 +44,13 @@ import { GiftEffects } from './shared/store/effects/gift.effects';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ScrollingModule,
   ],
-  providers: [AngularFireAuth],
+  providers: [
+    AngularFireAuth,
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandlerService
+    }
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
