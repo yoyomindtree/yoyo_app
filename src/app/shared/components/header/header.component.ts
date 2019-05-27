@@ -1,3 +1,4 @@
+import { defaultLanguage } from './../../utils/app.i18n';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from './../../services/firebase.service';
@@ -6,6 +7,7 @@ import { LoginService } from '../../services/login.service';
 import { map } from 'rxjs/operators';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -24,9 +26,11 @@ export class HeaderComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private currentRoute: ActivatedRoute,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
+    this.translate.use(defaultLanguage);
     this.loginService.getLoggedInName.subscribe((email) => {
       if (email) {
         this.isLoggedIn = true;
