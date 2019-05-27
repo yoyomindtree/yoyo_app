@@ -8,10 +8,10 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-gift-card',
   templateUrl: './gift-card.component.html',
-  styleUrls: ['./gift-card.component.css']
+  styleUrls: ['./gift-card.component.css'],
 })
 export class GiftCardComponent implements OnInit {
-  @Input() public gift: GiftModel;
+  @Input() public gift: any;
   constructor(
     private router: Router,
     config: NgbRatingConfig,
@@ -22,10 +22,10 @@ export class GiftCardComponent implements OnInit {
     config.readonly = true;
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   public routingToOrder(key: string): void {
-    this.router.navigate(['/user/order'], {relativeTo: this.currentPath, queryParams: {giftKey: key} });
+    this.router.navigate(['/user/order'], { relativeTo: this.currentPath, queryParams: { giftKey: key } });
   }
 
   /**
@@ -35,5 +35,4 @@ export class GiftCardComponent implements OnInit {
     giftHistory.reedemed = true;
     this.firebaseService.updateGiftHistory(giftHistory.key, giftHistory);
   }
-
 }

@@ -1,15 +1,12 @@
 import { GiftActionsEnum, GiftActions } from '../actions/gift.actions';
 import { initialGiftState, GiftState } from '../state/gift.state';
 
-export const giftReducers = (
-  state = initialGiftState,
-  action: GiftActions
-): GiftState => {
+export function giftReducers(state = initialGiftState, action: GiftActions): GiftState {
   switch (action.type) {
     case GiftActionsEnum.GetGiftsDetailsSuccess: {
       return {
         ...state,
-        gifts: action.payload
+        gifts: action.payload,
       };
     }
     // case GiftActionsEnum.GetGiftDetailsSuccess: {
@@ -22,4 +19,4 @@ export const giftReducers = (
     default:
       return state;
   }
-};
+}
