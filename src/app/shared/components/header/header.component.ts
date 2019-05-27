@@ -1,22 +1,26 @@
+import { defaultLanguage } from './../../utils/app.i18n';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FirebaseService } from './../../services/firebase.service';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { map } from 'rxjs/operators';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
-  // gets or sets the loggedin property
+export class HeaderComponent implements OnInit, OnDestroy {
+  // gets or sets the loggedin property.
   public isLoggedIn = false;
-  // gets or sets the loggedin user name
+  // gets or sets the loggedin user name.
   public loggedInUsername: string;
+  // gets or sets the subscription.
+  private subscription: Subscription;
   constructor(
     private fbService: FirebaseService,
     private loginService: LoginService,
@@ -24,10 +28,12 @@ export class HeaderComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private currentRoute: ActivatedRoute,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
-    this.loginService.getLoggedInName.subscribe((email) => {
+    this.translate.use(defaultLanguage);
+    this.subscription = this.loginService.getLoggedInName.subscribe((email) => {
       if (email) {
         this.isLoggedIn = true;
         this.loggedInUsername = email;
@@ -36,7 +42,7 @@ export class HeaderComponent implements OnInit {
   }
   // method will get called once user clicked on logout
   public onLogoutClicked(): void {
-    this.fetchUser(sessionStorage.getItem('email')).subscribe(
+    this.subscription = this.fetchUser(sessionStorage.getItem('email')).subscribe(
       (userDetail) => {
         if (userDetail && userDetail.key) {
           userDetail.token = null;
@@ -89,14 +95,17 @@ export class HeaderComponent implements OnInit {
     dialogConfig.width = '600px';
 
     const dialogRef = this.dialog.open(EditUserDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-      // console.log("result from dialog : ", result);
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
   /**
    * method will get called on click of history.
    */
   public onHistoryClicked(): void {
     this.router.navigate(['/user/history'], { relativeTo: this.currentRoute });
+  }
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

@@ -8,9 +8,9 @@
       <button mat-mini-fab color="warn" [matMenuTriggerFor]="account" class="defaultProfileImage"></button>
       <mat-menu #account="matMenu">
         <button mat-menu-item> {{ loggedInUsername }}</button>
-        <button mat-menu-item (click)="openEditDialog()">Edit profile</button>
-        <button mat-menu-item (click)="onHistoryClicked()">History</button>
-        <button mat-menu-item (click)="onLogoutClicked()">Logout</button>
+        <button mat-menu-item (click)="openEditDialog()" translate>Header.EditProfile</button>
+        <button mat-menu-item (click)="onHistoryClicked()" translate>Header.History</button>
+        <button mat-menu-item (click)="onLogoutClicked()" translate>Header.Logout</button>
       </mat-menu>
     </span>
     &nbsp;

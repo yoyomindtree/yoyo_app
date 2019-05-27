@@ -74,7 +74,9 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // unsubscription
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   /**

@@ -6,15 +6,14 @@ import { of } from 'rxjs';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 
-
 describe('LoginService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [
-        LoginService, 
+        LoginService,
         { provide: AngularFireAuth, useValue: mockAngularFireAuth },
         { provide: HttpClient, useValue: MockService },
-        { provide: Router, useValue: MockService }
+        { provide: Router, useValue: MockService },
       ],
     }),
   );

@@ -2,20 +2,22 @@ import { UserModel } from 'src/app/shared/model/user.model';
 import { Guid } from 'guid-typescript';
 import { HistoryModel } from './../../../shared/model/history.model';
 import { FirebaseService } from './../../../shared/services/firebase.service';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as emailjs from 'emailjs-com';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { config } from 'rxjs';
+import { config, Subscription } from 'rxjs';
 import { database } from 'firebase';
 @Component({
   selector: 'app-user-mail',
   templateUrl: './user-mail.component.html',
   styleUrls: ['./user-mail.component.css'],
 })
-export class UserMailComponent implements OnInit {
+export class UserMailComponent implements OnInit, OnDestroy {
   // gets or sets the mailform.
   public mailForm: FormGroup;
+  // gets or sets the subscription.
+  private subscription: Subscription;
   constructor(
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -66,12 +68,14 @@ export class UserMailComponent implements OnInit {
     this.firebaseService.addGiftHistory(transaction);
     this.data.user.balance.forSending -= this.data.gift.points * this.data.copies;
     this.updateUser(this.data.user.key, this.data.user);
-    this.firebaseService.getSingleUser(this.mailForm.get('to').value).subscribe((userdeatil: any) => {
-      if (userdeatil) {
-        userdeatil[0].balance.forRedeem += templateParams.points;
-        this.updateUser(userdeatil[0].key, userdeatil[0]);
-      }
-    });
+    this.subscription = this.firebaseService
+      .getSingleUser(this.mailForm.get('to').value)
+      .subscribe((userdeatil: any) => {
+        if (userdeatil) {
+          userdeatil[0].balance.forRedeem += templateParams.points;
+          this.updateUser(userdeatil[0].key, userdeatil[0]);
+        }
+      });
     this.reset();
   }
 
@@ -93,5 +97,10 @@ export class UserMailComponent implements OnInit {
    */
   public updateUser(key: string, value: any): void {
     this.firebaseService.updateUser(key, value);
+  }
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
