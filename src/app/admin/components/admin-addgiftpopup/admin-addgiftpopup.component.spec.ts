@@ -7,7 +7,6 @@ import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminAddgiftpopupComponent } from './admin-addgiftpopup.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { prototype } from 'stream';
 
 fdescribe('AdminAddgiftpopupComponent', () => {
   configureTestSuite();
