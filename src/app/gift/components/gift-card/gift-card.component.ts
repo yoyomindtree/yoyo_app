@@ -24,8 +24,8 @@ export class GiftCardComponent implements OnInit {
 
   ngOnInit() {}
 
-  public routingToOrder(key: string): void {
-    this.router.navigate(['/user/order'], { relativeTo: this.currentPath, queryParams: { giftKey: key } });
+  public routingToOrder(id: string): void {
+    this.router.navigate(['/user/order'], { relativeTo: this.currentPath, queryParams: { giftid: id } });
   }
 
   /**

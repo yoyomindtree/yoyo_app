@@ -5,8 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class GiftResolverService implements Resolve<any> {
-
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private firebaseService: FirebaseService) {}
 
   /**
    * This is the method which will worker as a resolver for routing queryParams time.
@@ -15,7 +14,7 @@ export class GiftResolverService implements Resolve<any> {
    */
   public resolve(route: ActivatedRouteSnapshot, rstate: RouterStateSnapshot): Observable<any> {
     return Observable.create((observer: any) => {
-      this.firebaseService.getGiftByKey(route.queryParams['giftKey']).subscribe((giftDetail) => {
+      this.firebaseService.getGiftById(route.queryParams['giftid']).subscribe((giftDetail) => {
         observer.next(giftDetail);
         observer.complete();
       });

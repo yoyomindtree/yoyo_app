@@ -1,4 +1,4 @@
-<div *ngIf='gift.giftId' class="card card-cascade p-2" (click)="routingToOrder(gift.key)">
+<div *ngIf='gift.giftId' class="card card-cascade p-2" (click)="routingToOrder(gift.giftId)">
   <!-- Card image -->
   <div class="view view-cascade overlay">
     <img src="../../../../assets/images/55319431812T1MYN01_bg_1_1.jpg" class="card-img-top img-fluid" alt="">
@@ -16,36 +16,41 @@
     <p class="card-text">{{gift.description}}</p>
     <p id="gift-rating">
       <ngb-rating [(rate)]="gift.rating"></ngb-rating>
-    </p>   
-    <p id="gift-frequency" class="text-muted"><strong>{{gift.frequency}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-views"></button></p>
-    <p class="text-muted"><strong>{{gift.points}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
+    </p>
+    <p id="gift-frequency" class="text-muted"><strong>{{gift.frequency}}</strong>&nbsp;&nbsp;<button mat-mini-fab
+        class="gift-views"></button></p>
+    <p class="text-muted"><strong>{{gift.points}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button>
+    </p>
   </div>
 
 </div>
 
 <div *ngIf='gift.gift' class="card card-cascade p-2">
-    <!-- Card image -->
-    <div class="view view-cascade overlay">
-      <img src="../../../../assets/images/55319431812T1MYN01_bg_1_1.jpg" class="card-img-top img-fluid" alt="">
-      <a>
-        <div class="mask rgba-white-slight"></div>
-      </a>
-    </div>
-    <!-- Card content -->
-    <div class="card-body card-body-cascade text-center">
-      <!-- Title -->
-      <h4 class="card-title">{{gift.gift.name}}<span class="card-text">(x{{gift.totalPoints/gift.gift.points}})</span></h4>
-      <!-- Subtitle -->
-      <h6 class=" py-2">{{gift.gift.vendor}}</h6>
-      <!-- Text -->
-      <p class="card-text">{{gift.gift.description}}</p>
-      <p id="gift-rating">
-        <ngb-rating [(rate)]="gift.gift.rating"></ngb-rating>
-      </p>   
-      <p id="gift-frequency" class="text-muted"><strong>{{gift.gift.frequency}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-views"></button></p>
-      <p class="text-muted"><strong>{{gift.gift.points}}</strong>&nbsp;&nbsp;<button mat-mini-fab class="gift-points"></button></p>
-      <hr id="dashed">
-       <p class="card-text" (click)='reedemedCode(gift)' *ngIf="!gift.reedemed">REDEEM</p>
-       <p class="card-text" *ngIf="gift.reedemed">{{gift.giftCode}}</p>
-    </div>
+  <!-- Card image -->
+  <div class="view view-cascade overlay">
+    <img src="../../../../assets/images/55319431812T1MYN01_bg_1_1.jpg" class="card-img-top img-fluid" alt="">
+    <a>
+      <div class="mask rgba-white-slight"></div>
+    </a>
   </div>
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+    <!-- Title -->
+    <h4 class="card-title">{{gift.gift.name}}<span class="card-text">(x{{gift.totalPoints/gift.gift.points}})</span>
+    </h4>
+    <!-- Subtitle -->
+    <h6 class=" py-2">{{gift.gift.vendor}}</h6>
+    <!-- Text -->
+    <p class="card-text">{{gift.gift.description}}</p>
+    <p id="gift-rating">
+      <ngb-rating [(rate)]="gift.gift.rating"></ngb-rating>
+    </p>
+    <p id="gift-frequency" class="text-muted"><strong>{{gift.gift.frequency}}</strong>&nbsp;&nbsp;<button mat-mini-fab
+        class="gift-views"></button></p>
+    <p class="text-muted"><strong>{{gift.gift.points}}</strong>&nbsp;&nbsp;<button mat-mini-fab
+        class="gift-points"></button></p>
+    <hr id="dashed">
+    <p class="card-text" (click)='reedemedCode(gift)' *ngIf="!gift.reedemed">REDEEM</p>
+    <p class="card-text" *ngIf="gift.reedemed">{{gift.giftCode}}</p>
+  </div>
+</div>

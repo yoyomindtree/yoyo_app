@@ -68,6 +68,15 @@ export class FirebaseService {
   public getGiftByKey(key: string): Observable<any> {
     return this.db.list('/Gift-List', (ref) => ref.orderByKey().equalTo(key)).valueChanges();
   }
+
+  /**
+   *
+   * @param giftId : Gift Record id
+   * this method update the user
+   */
+  public getGiftById(giftId: string): Observable<any> {
+    return this.db.list('/Gift-List', (ref) => ref.orderByChild('giftId').equalTo(giftId)).valueChanges();
+  }
   /**
    * method to get all the users in the db
    */

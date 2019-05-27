@@ -9,7 +9,7 @@ import { MockService } from '../../services/mock.service.spec';
 import { LoginService } from '../../services/login.service';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 
-fdescribe('EditUserDialogComponent', () => {
+describe('EditUserDialogComponent', () => {
   let component: EditUserDialogComponent;
   let fixture: ComponentFixture<EditUserDialogComponent>;
   let form: FormBuilder;

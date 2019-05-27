@@ -19,7 +19,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class UserGiftOrderComponent implements OnInit, OnDestroy {
   // gets or sets the gift model
-  public gift: GiftModel;
+  public gift: any;
   // property subscription used for cleanup.
   private subscription: Subscription;
   // quantity
@@ -81,13 +81,23 @@ export class UserGiftOrderComponent implements OnInit, OnDestroy {
    */
   private getGiftReviews() {
     this.spinner.show();
-    this.subscription = this.firebaseService.getGiftReviews(this.gift.giftId).subscribe(
-      (data) => {
-        this.reviewList = data;
-        this.spinner.hide();
-      },
-      (err) => this.spinner.hide(),
-    );
+    if (this.gift.giftId) {
+      this.subscription = this.firebaseService.getGiftReviews(this.gift.giftId).subscribe(
+        (data) => {
+          this.reviewList = data;
+          this.spinner.hide();
+        },
+        (err) => this.spinner.hide(),
+      );
+    } else {
+      this.subscription = this.firebaseService.getGiftReviews(this.gift.gift.giftId).subscribe(
+        (data) => {
+          this.reviewList = data;
+          this.spinner.hide();
+        },
+        (err) => this.spinner.hide(),
+      );
+    }
   }
   /**
    * method will get called once user submits the form
